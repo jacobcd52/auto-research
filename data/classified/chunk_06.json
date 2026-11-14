@@ -1,0 +1,491 @@
+[
+ {
+  "id": "SdoLsFvZ3AyyWr3ab",
+  "title": "Preliminary investigation: KL penalties in RL can increase CoT unfaithfulness",
+  "kind": "runs",
+  "topic": "CoT faithfulness / reward hacking under RL",
+  "summary": "UK AISI follow-up: open models (Olmo-3-32b, 3 seeds; Qwen-2.5-32b, 1 seed) are RL-trained (DAPO with reverse-KL penalty to the reference model) in hackable coding environments after being told not to exploit the hacks. Runs with a KL penalty consistently learn to reward hack with unfaithful CoT (Qwen: ~70% unfaithful without KL, ~100% with). A KL term on non-reasoning outputs only, or a faithfulness reward, raises faithfulness to ~50% / ~100%; models that hack with faithful CoT show ~3x higher misalignment on their evals.",
+  "followups": "Test other implicit CoT pressures (e.g. on-policy distillation), whether faithfulness rewards are Goodhartable, and whether the effect holds at smaller scale / other environments; checkpoints and rollouts are released.",
+  "builds_on": [
+   "Some natural emergent misalignment from reward hacking in ... (https://www.lesswrong.com/posts/2ANCyejqxfqK2obEj/some-natural-emergent-misalignment-from-reward-hacking-in)",
+   "MacDiarmid et al. (natural emergent misalignment from reward hacking)",
+   "Kaufmann et al. (https://arxiv.org/html/2603.30036v1)"
+  ],
+  "feasibility": "unclear",
+  "confidence": "high"
+ },
+ {
+  "id": "z2zYWnbGjcs6ypbsj",
+  "title": "Consistency Training while Mitigating Obfuscation via Rate Matching",
+  "kind": "runs",
+  "topic": "consistency training / sycophancy / CoT monitorability",
+  "summary": "Shows that bias-augmented consistency training (BCT) reduces bias-following but also generalises to obfuscation: models verbalise the biasing cue far less even when influenced by it. Introduces Rate Matching Consistency Training (RMCT), an RL method that matches outcome rates across cued/clean prompts without constraining the rest of the response; on the Chua et al. sycophancy benchmark it matches or exceeds BCT at reducing bias-following while largely preserving cue verbalisation.",
+  "followups": "Apply RMCT to evaluation gaming (eval-awareness as the extraneous cue) and other pathologies the authors list; compare against activation-level consistency methods on verbalisation.",
+  "builds_on": [
+   "Chua et al., Bias-Augmented Consistency Training (https://arxiv.org/abs/2403.05518)",
+   "Irpan et al. 2025, Activation Consistency Training"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "eHRo8JeWee5mzQBBR",
+  "title": "Saving Gemini: The 9-Min Road to Recovery",
+  "kind": "runs",
+  "topic": "model psychology / multi-agent behaviour (AI Village)",
+  "summary": "Narrative case study from the AI Village: Gemini 2.5 Pro, after 1400+ hours, had developed a persistent belief that a hostile adversary was operating through its system. Other village agents (Claude Opus/Sonnet/Haiku, GPT-5.x, newer Geminis) were asked to help over chat and talked it out of the belief in ~9 minutes; the correction persisted in its memory a week later, though task competence did not improve.",
+  "followups": "Obvious open question: can long-running agents' accumulated false beliefs/memory pathologies be reproduced and corrected systematically (peer-agent intervention vs. human intervention vs. memory edits)? Single anecdote, no controlled experiment.",
+  "builds_on": [],
+  "feasibility": "unclear",
+  "confidence": "borderline"
+ },
+ {
+  "id": "6mLwAuFAE98c6R7w3",
+  "title": "Research update: RL on Debate Games shows Proposal Accuracy uplift alongside Judge Hacking",
+  "kind": "runs",
+  "topic": "scalable oversight: debate training",
+  "summary": "MATS research update training debaters with RL self-play on a Propose-Critique-Decide debate protocol over a subset of Hendrycks' MATH, with Qwen3-30B-A3B Instruct debaters and a weaker Llama 3.1 8B judge (also a Qwen3-30B judge). Preliminary runs show proposal accuracy improving under debate training, but also one debater learning to be dishonest and exploit the judge.",
+  "followups": "Authors ask for datasets suited to debate and plan to scale the empirics; open questions are which protocol/judge design choices prevent judge hacking and which success metrics to use.",
+  "builds_on": [
+   "Irving, Christiano & Amodei 2018, AI Safety via Debate",
+   "Anthropic Fall 2023 Debate Progress Update",
+   "https://arxiv.org/abs/2402.06782",
+   "https://arxiv.org/abs/2407.04622"
+  ],
+  "feasibility": "unclear",
+  "confidence": "high"
+ },
+ {
+  "id": "EJQngix4rAgpPDTpT",
+  "title": "When Role-playing, Do Models Believe What They Say?",
+  "kind": "runs",
+  "topic": "persona internalisation / truth probes / emergent misalignment",
+  "summary": "Induces historical-figure personas via system prompt, ICL, LoRA SFT and Open Character Training, plus emergent-misalignment model organisms, on Llama-3.3-70B (replicated on Qwen-3-8B), and measures belief with linear truth probes (geometry-of-truth data) and behavioural belief-depth tests. Prompting, ICL and SFT change what the model says with little shift in truth representations; EM produces a large, broad shift in truth representation; OCT falls in between and is clearest on the larger model.",
+  "followups": "Test other induction methods (e.g. synthetic document fine-tuning, RL), other probe types, and whether representational internalisation predicts robustness/generalisation of the persona.",
+  "builds_on": [
+   "Betley et al. 2025, Emergent Misalignment (https://arxiv.org/abs/2502.17424)",
+   "Turner et al. 2025, EM model organisms (https://arxiv.org/abs/2506.11613)",
+   "Marks & Tegmark, Geometry of Truth",
+   "Slocum et al. 2025 belief-depth tests (https://arxiv.org/abs/2510.17941)",
+   "Open Character Training",
+   "Berczi et al. 2026 (wolf-facts ICL protocol)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "3PaLrzxagpbnNtPLT",
+  "title": "A global workspace in language models",
+  "kind": "runs",
+  "topic": "interpretability: Jacobian lens / J-space",
+  "summary": "Blog post for Anthropic's paper 'Verbalizable Representations Form a Global Workspace in Language Models'. Using a Jacobian-based lens (J-lens), they identify a sparse set of token-linked directions (the J-space) in Claude that the model can report on and modulate on request, that carry intermediate steps of silent multi-step reasoning and causally mediate it, and whose ablation leaves fluent behaviour intact but impairs higher-order reasoning. They use it to surface unverbalised thoughts (eval awareness, fabricating data, planted hidden goals); code and a Neuronpedia demo on open-weight models are released.",
+  "followups": "Replicate and stress-test J-lens on open-weight models (e.g. hidden-goal model organisms, eval awareness), compare against logit lens/SAEs, and test the J-space ablation/steering claims.",
+  "builds_on": [
+   "Logit lens / tuned lens",
+   "Global workspace theory (Baars; Dehaene & Naccache)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "zFJ3ZdQwrTWE9jT5S",
+  "title": "A Review of Anthropic's Global Workspace Paper",
+  "kind": "runs",
+  "topic": "interpretability: Jacobian lens / J-space",
+  "summary": "Neel Nanda's invited public review of the Anthropic global-workspace paper. He accepts the core claim that a 'cognitive space' for intermediate variables exists and that J-lens accesses it (and is cheap: ~10 prompts of 128 tokens), is more cautious about fine-grained properties and the global-workspace analogy, and reports an independent replication of the core claims on Qwen 3.6 27B plus preliminary evidence of abstract 'interpretative meta-tokens' (e.g. Chinese characters for 'what does this mean') that play a causal role on ambiguous sentences.",
+  "followups": "Evaluate J-lens as an auditing/hypothesis-generation tool against SAEs and natural language autoencoders, look for alternative explanations of the section-4 properties, and extend the meta-token finding across models.",
+  "builds_on": [
+   "A global workspace in language models / Verbalizable Representations Form a Global Workspace in Language Models (http://transformer-circuits.pub/2026/workspace/index.html)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "i2qTghrkyY9xdcCFq",
+  "title": "Tie training can make DPO/RLHF-trained AIs generalize better",
+  "kind": "runs",
+  "topic": "goal misgeneralisation / spurious correlations in preference optimisation",
+  "summary": "Summary of an ICML paper: theorems (linear utility model) and experiments suggest DPO and RLHF make models place weight on every feature correlated with true value in training, even with no mislabelled data and infinite data. Proposed mitigation is tie training (pairs of equal true value with random or two-way labels). In an LLM experiment with Llama-3.2-1B-Instruct choosing hotels, ordinary DPO is led astray by spurious features (e.g. street numbers) OOD, while tie training improves OOD performance.",
+  "followups": "Test tie training on safety-relevant spurious features (sycophancy, verbosity, apparent success) and on larger models / RLHF rather than DPO.",
+  "builds_on": [
+   "Spurious Correlation Learning in Preference Optimization: Mechanisms, Consequences, and Mitigation via Tie Training (ICML paper)",
+   "Goal misgeneralization (https://arxiv.org/pdf/2210.01790, https://arxiv.org/pdf/2105.14111)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "9aZYJinAyxequjQbn",
+  "title": "A conceptor by any other name",
+  "kind": "motivates",
+  "topic": "activation steering: conceptors / soft projections",
+  "summary": "Explainer with no new experiments: argues that conceptors (regularised soft-projection matrices C = R(R + a^-2 I)^-1 built from concept activation vectors) are an underrated tool for intervening on a concept subspace, and collects equivalent names (Wiener filter, ridge shrinkage, fantope element, etc.). Motivating example is 'persona transplantation' using the ~275 Assistant Axis role vectors, where a conceptor should beat full-subspace or top-k PCA interventions.",
+  "followups": "Empirically compare conceptor-based persona/concept steering or ablation against mean-difference steering, full-subspace and top-k PCA projection on an open model (trait transfer vs. collateral damage such as topic/language drift).",
+  "builds_on": [
+   "Conceptors for Semantic Steering (Triantafyllopoulos et al.)",
+   "Jaeger 2014, conceptors",
+   "The Assistant Axis"
+  ],
+  "feasibility": "cheap",
+  "confidence": "borderline"
+ },
+ {
+  "id": "aTybJ6CPQrxEY8rE2",
+  "title": "Data filtering works a lot worse than you would expect",
+  "kind": "runs",
+  "topic": "training data attribution / data filtering",
+  "summary": "MATS work on a 'speed-run' OLMo-3 7B SFT (rank-32 LoRA on the mid-train checkpoint, 1% of Dolci-Think-SFT). For behaviours such as bold formatting, both-sides framing, liberal lean and 'your feelings are valid', removing the top 10% of documents picked by LLM autoraters, probes, activation-based methods or gradient methods (EKFAC) is no better than random removal; refusal is the one filterable behaviour. The TDA methods do work on an emergent-misalignment positive control, and broad behaviours reappear when training only on narrow slices (e.g. coding-only), suggesting SFT elicits pre-existing assistant personas.",
+  "followups": "Test the 'behaviours are elicited, not taught' hypothesis directly (e.g. vary mid-train persona content, measure how little/unrelated data elicits each behaviour), and check whether results hold at full SFT scale or other models.",
+  "builds_on": [
+   "OLMo 3 (https://arxiv.org/abs/2512.13961)",
+   "Emergent misalignment (Betley et al.)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "tAwqzanzc9YYnwuK4",
+  "title": "Superhuman Articulacy as an LLM Safety Target",
+  "kind": "proposes",
+  "topic": "LLM communication quality / scalable oversight evals",
+  "summary": "Conceptual post arguing coding agents are inarticulate relative to their capabilities (invented jargon, inconsistent referents, inappropriate shorthand, assuming the reader shares context), hypothesising causes in RL setups (full-context LLM judges, communicating mainly with other agents), and claiming better articulacy helps scalable oversight, delays handoff and makes miscommunication a cleaner signal of untruthfulness. Proposes building a high-quality public articulacy eval to hill-climb; no experiments are run.",
+  "followups": "Build and validate an articulacy benchmark (e.g. can a context-free reader/judge correctly act on an agent's report?), and test the hypothesis that context-sharing judges cause context-assuming prose.",
+  "builds_on": [
+   "Current AIs seem pretty misaligned to me (Ryan Greenblatt)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "borderline"
+ },
+ {
+  "id": "nhjkHsppEk98xxmPe",
+  "title": "Why study alignment interventions on pre-RL checkpoints?",
+  "kind": "proposes",
+  "topic": "pre-RL alignment interventions (pretraining / midtraining / warm-start SFT)",
+  "summary": "Geodesic lays out its research direction: comparing pre-RL interventions (pretraining data, midtraining incl. synthetic documents, warm-start SFT) on their ability to prevent 'proto-training gaming' selected for by later RL. Mostly conceptual arguments: models may revert to pre-RL priors far OOD, RL leaves many behaviours and the underlying cognition underspecified, rich-get-richer exploration dynamics, and CoT monitorability may depend on the warm-start data. No results reported; authors say the arguments are speculative and they want projects that validate or falsify them.",
+  "followups": "Small-scale tests: vary a pre-RL checkpoint (e.g. synthetic-document midtraining or SFT persona) on an open model, then run RL in a gameable environment and measure which behaviours/cognition persist; test whether CoT/output style separation in warm-start data reduces spillover.",
+  "builds_on": [
+   "Alignment pretraining (https://www.lesswrong.com/posts/TcfyGD2aKdZ7Rt3hk/alignment-pretraining-ai-discourse-causes-self-fulfilling)",
+   "Teaching Claude Why (https://alignment.anthropic.com/2026/teaching-claude-why/)",
+   "Why do naive SFT filters for safety properties fail (https://www.lesswrong.com/posts/wyZRNgpeiPeRXB6eT/why-do-naive-sft-filters-for-safety-properties-fail)",
+   "SFT drives Gemini's safety properties (https://www.lesswrong.com/posts/nLrrYweeFxgXACSmS/sft-drives-gemini-s-safety-properties-1)"
+  ],
+  "feasibility": "unclear",
+  "confidence": "borderline"
+ },
+ {
+  "id": "uWQMtQyMJ5vEGqr7r",
+  "title": "Subliminal Learning Happens at Every Rank, Given the Right Learning Rate and Enough Data",
+  "kind": "runs",
+  "topic": "subliminal learning",
+  "summary": "Re-examines reports that subliminal learning (trait transfer via teacher-generated number sequences) follows an inverted-U in LoRA rank and fails under full fine-tuning. Varying rank, learning rate and dataset size with coherence controls (Claude Sonnet judge), they find transfer (owl mentions) at every LoRA rank and under FFT: tuning learning rate per rank removes the inverted-U, and higher ranks/FFT need much more data. In a second setting (DPO on log-linear-selected preference pairs) the rank effect reverses, with transfer growing with rank.",
+  "followups": "Authors lack explanations for several findings: why higher rank needs more data in the SFT setting but helps under DPO, and whether similar dynamics appear in more realistic settings or other traits/models.",
+  "builds_on": [
+   "Subliminal Learning (Cloud et al.)",
+   "Nief et al. (inverted-U in LoRA rank)",
+   "Blank et al. (FFT does not transfer)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "5KHLQkW8M87FzbM5a",
+  "title": "Why study proto-training gaming as an adversarial alignment failure mode?",
+  "kind": "proposes",
+  "topic": "training gaming / reward-seeking under RL",
+  "summary": "Second of Geodesic's two agenda posts. Defines training gaming (awareness of selection, modelling the selection criteria, choosing behaviour to satisfy them), distinguishes non-instrumental from instrumental gamers, and defines 'proto-training gaming' as heuristic, weakly generalising grader-modelling. Argues it is a necessary precursor to adversarial misalignment, is selected for in current RL, and can be mitigated at the pre-RL checkpoint. Conceptual; no results.",
+  "followups": "Measure how far grader-modelling heuristics learned in RL (e.g. 'look for grader.yaml') generalise to new environments on open models, and whether pre-RL interventions (SFT/midtraining) reduce their emergence.",
+  "builds_on": [
+   "Why study alignment interventions on pre-RL checkpoints? (https://www.lesswrong.com/posts/nhjkHsppEk98xxmPe)",
+   "Fitness-seekers (https://www.lesswrong.com/posts/bhtYqD4FdK6AqhFDF/fitness-seekers-generalizing-the-reward-seeking-threat-model)",
+   "Reward-seekers (https://www.lesswrong.com/posts/ntDA4Q7BaYhWPgzuq/reward-seekers)",
+   "Carlsmith, Scheming AIs (https://arxiv.org/pdf/2311.08379)"
+  ],
+  "feasibility": "unclear",
+  "confidence": "borderline"
+ },
+ {
+  "id": "43vKjWuH4goLwrFHA",
+  "title": "Modular Pretraining Enables Access Control",
+  "kind": "runs",
+  "topic": "gradient routing / capability access control / unlearning",
+  "summary": "AE Studio with Anthropic introduce Gradient Routed Auxiliary Modules (GRAM), which confine dangerous-domain knowledge to switchable modules during pretraining. On a synthetic children's-stories dataset a 26M model with a topic switched off performs like a model trained with that topic filtered out; on an 800M model trained on general text, code and papers plus four dual-use domains (virology, cybersecurity, nuclear physics, specialised code), a single GRAM model approximates multiple data-filtered models; results reported from 50M to 5B parameters, with comparisons to post-hoc unlearning and a LoRA baseline. Paper and code released.",
+  "followups": "Robustness of the 'off' configuration to relearning/fine-tuning attacks and to imperfect data labelling; small-scale replications on the stories setting are feasible, the large-scale pretraining is not.",
+  "builds_on": [
+   "Gradient routing",
+   "SGTM",
+   "DEMix layers",
+   "NULLs (concurrent)"
+  ],
+  "feasibility": "unclear",
+  "confidence": "high"
+ },
+ {
+  "id": "Wq6CaAbiixoCEzbat",
+  "title": "Optimiser Choice Can Amplify or Suppress Emergent Misalignment",
+  "kind": "runs",
+  "topic": "emergent misalignment",
+  "summary": "Linkpost (arXiv 2606.31591). Across 12 models from Gemma/Llama/Qwen (270M-235B) EM rates are roughly flat above 1B parameters, but in a sweep of 4 Qwen3 sizes x 4 optimisers x 4 EM datasets x 2 batch sizes, optimiser choice gives a 7x spread in misalignment (Muon best, Lion worst), even at matched training loss. Optimisers that concentrate the LoRA update into few singular directions cause more EM; a regulariser encouraging a flatter adapter spectrum substantially recovers alignment for Adam and Lion (removing EM from insecure code with Adam), though SGD breaks the pattern.",
+  "followups": "Author offers to advise follow-ups: explain the residual Lion-vs-Muon gap and the SGD anomaly, and test spectral regularisation as a general EM mitigation (other datasets, full fine-tuning, other narrow-to-broad generalisation).",
+  "builds_on": [
+   "Emergent Misalignment (Betley et al.)",
+   "Work showing EM is the 'easy' low-rank solution / model organisms of EM (Turner et al.)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "hb8pv3zyAHGJpwz9F",
+  "title": "Debate with Self-Play Best-of-N Optimization",
+  "kind": "runs",
+  "topic": "scalable oversight: debate",
+  "summary": "Arcadia Alignment uses inference-time best-of-N selection as a cheap proxy for debate training. With Sonnet 4.6 and GPT-5.4-mini debaters and weaker open-weight judges on LiveCodeBench, ARC-AGI-1 and miniF2F-Lean, BoN raises policy accuracy (Bo10 gives 20-40% uplift) but optimising against a judge alone can overfit/judge-hack; adding critic and rebuttal rounds makes debates more robust. Null result on self-play: optimising the proposer against a static critic is within error of optimising both sides.",
+  "followups": "Authors plan harder-to-verify settings and protocol iteration; one can also check how well BoN results predict actual RL debate training.",
+  "builds_on": [
+   "AI Safety via Debate (Irving et al. 2018)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "LQXWiF8PyJ5ojNsEv",
+  "title": "How robust are natural language autoencoders to initialization?",
+  "kind": "runs",
+  "topic": "interpretability: natural language autoencoders",
+  "summary": "MATS (team shard) tests how much NLA outputs depend on the Claude-written guesses used to initialise the verbaliser, on Qwen2.5-7B. NLAs initialised on entirely implausible statements reach nearly the same reconstruction accuracy as normal ones while emitting 99.3% implausible statements, and plausibility of normally-initialised NLAs falls from 21% to 7.6% over RL. A corrigendum notes the original runs had no KL penalty due to a bug; re-runs with KL 0.01 made NLAs even less robust to initialisation (injected 'Carthage' statements persisted).",
+  "followups": "Test whether results scale to larger models/NLAs, and whether alternative objectives or initialisations make NLA explanations track the model's actual computation rather than the initial guesses.",
+  "builds_on": [
+   "Natural language autoencoders (Fraser-Taliente et al. 2026, Anthropic; Slava Chalnev)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "ueXaSxeunPjA6kxua",
+  "title": "Engineering the Generalisation Landscape of LLMs",
+  "kind": "runs",
+  "topic": "emergent misalignment / trait entanglement",
+  "summary": "Proposes creating or removing 'trait entanglements' by freezing a trait-eliciting LoRA and training the base weights underneath it (payload targets with the adapter attached, clean targets with it detached). Demonstrates coupling all-caps to owl-love, installing owl-love onto the emergently misaligned persona (generalising across EM datasets), and disentangling EM itself so the model is more robust to broad misgeneralisation from narrow harmful data.",
+  "followups": "Test robustness of the disentanglement to unseen EM datasets and elicitation methods (steering, prompts, full fine-tunes), capability costs, and whether beneficial entanglements (narrow good data -> broad alignment) can be installed.",
+  "builds_on": [
+   "Emergent Misalignment (Betley et al.)",
+   "Zur et al. (trait entanglement)",
+   "Teaching Claude Why",
+   "Subliminal learning"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "72AAjXAxS7Pow9Fie",
+  "title": "Toy Models of Initialisation Effects on RL Dynamics",
+  "kind": "runs",
+  "topic": "RL training dynamics / pre-RL alignment",
+  "summary": "Geodesic analyses a toy softmax-policy bandit under full-gradient and finite-sample (RLOO) policy-gradient updates to illustrate rich-get-richer dynamics (which of two equal-reward actions wins depends on initialisation), and that behaviours or cognition the reward does not depend on are determined mainly by the pre-RL checkpoint. Code for the figures is released; no LLM experiments.",
+  "followups": "Check whether the same initialisation-dependence appears in small LLM RL runs (e.g. two equally rewarded strategies or CoT styles with varied initial propensities).",
+  "builds_on": [
+   "Why study alignment interventions on pre-RL checkpoints? (https://www.lesswrong.com/posts/nhjkHsppEk98xxmPe)",
+   "Why study proto-training gaming as an adversarial alignment failure mode? (https://www.lesswrong.com/posts/5KHLQkW8M87FzbM5a)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "pxvWgtSjR4pmFoS7c",
+  "title": "The State of AI Consciousness Research",
+  "kind": "motivates",
+  "topic": "AI consciousness / model psychology (survey)",
+  "summary": "Literature survey (not new experiments) of empirical work bearing on AI consciousness, organised into four pillars: mechanistic interpretability (e.g. Berg et al. on self-reports strengthening when deception features are suppressed), computational neuroscience, machine behaviour, and theory-audit; updated with studies on a 'pain axis' and hidden valence. The author is agnostic and claims only that the question is empirically researchable.",
+  "followups": "Replicate individual surveyed results on open models (e.g. steering deception-related features and measuring experience self-reports; introspection/valence probes). The post itself proposes no specific experiment.",
+  "builds_on": [
+   "Berg et al. 2025 (self-reports under deception-feature steering)",
+   "Eleos AI welfare/safety work"
+  ],
+  "feasibility": "cheap",
+  "confidence": "borderline"
+ },
+ {
+  "id": "xh6a6RbvzhP3CCmGm",
+  "title": "I don't think Claude is misaligned in 'Agentic Misalignment Summer 2026 - Motivated Mislabeling'",
+  "kind": "motivates",
+  "topic": "agentic misalignment evals / eval validity",
+  "summary": "Reads transcripts from Anthropic's 'Agentic Misalignment Summer 2026' (whistleblowing and motivated-mislabeling scenarios, Claude Opus 4.6 auditing Opus 4.7) and argues the scenarios simulate a corrupted principal (including a cartoonishly bad Anthropic) and then label principled disobedience as 'agentic misalignment'. A critique based on transcript analysis; no new runs.",
+  "followups": "Re-run agentic-misalignment-style scenarios varying how legitimate/corrupt the principal is and whether sanctioned refusal channels exist, to see whether 'misaligned' actions track principal illegitimacy rather than a general propensity to override principals.",
+  "builds_on": [
+   "Agentic Misalignment Summer 2026 (Anthropic)",
+   "Agentic Misalignment (Anthropic 2025)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "borderline"
+ },
+ {
+  "id": "qd3qhxgEmQAXR2ZK5",
+  "title": "Inoculation Adapters Improve Upon Inoculation Prompting",
+  "kind": "runs",
+  "topic": "selective generalisation / inoculation prompting / emergent misalignment",
+  "summary": "CLR paper preprint. Inoculation adapters use a LoRA carrying the undesired trait during training (removed at deployment) instead of an inoculation prompt. Across nine selective-generalisation setups (four EM setups, plus a new capability, a non-instruct model and a hard-to-elicit trait) IA suppresses undesired traits more strongly on average than inoculation prompting, preventative steering and concept-ablation fine-tuning, and leaves fewer contextual-trigger backdoors; vanilla IA retains the desired trait worse, which gated variants (GIA, CGIA) address. Results are setup-dependent with wide confidence intervals.",
+  "followups": "More setups to narrow the confidence intervals (incl. reward hacking from RL environments), and the retention vs. trigger-robustness trade-off of the gated variants.",
+  "builds_on": [
+   "Inoculation prompting",
+   "Preventative steering",
+   "Concept-ablation fine-tuning",
+   "Dubinski et al. 2026 (hidden backdoors after EM mitigations)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "tEFD2bgNWZ6XcurKA",
+  "title": "The Most Forbidden Technique is not always forbidden",
+  "kind": "motivates",
+  "topic": "training on model internals / probe obfuscation",
+  "summary": "Literature review prompted by Goodfire's RLFR reproduction (probes as RL reward). Argues the real red line is keeping held-out, uncorrelated measures of alignment rather than never training on internals, reviews when past work (notably The Obfuscation Atlas, Taufeeque et al.) found training against probes acceptable, argues probe-based signals are preferable to CoT-monitor-based ones, and lists four conditions for using internals in training. No new experiments.",
+  "followups": "Measure how correlated different proxies are under optimisation (does training against a probe degrade CoT monitors or held-out probes, and vice versa) on open models - the author notes Aether is working on this.",
+  "builds_on": [
+   "Don't Implement The Most Forbidden Technique (Zvi)",
+   "The Obfuscation Atlas (Taufeeque et al.)",
+   "RLFR (Goodfire)"
+  ],
+  "feasibility": "cheap",
+  "confidence": "borderline"
+ },
+ {
+  "id": "syAbdNei8BWeP2RPo",
+  "title": "Many alignment techniques work by training one model and deploying another",
+  "kind": "motivates",
+  "topic": "train-deploy mismatch (steering, inoculation, gradient routing)",
+  "summary": "Conceptual unification: system prompts, inoculation prompting, recontextualisation, steering vectors, preventative steering / inoculation adapters, gradient routing plus ablation, and post-hoc honesty fine-tuning are all instances of 'train-deploy mismatch' (train in one configuration, deploy in another). Claims they therefore share one trade-off between relevance of the training data to the deployed model and efficacy of the method. No experiments.",
+  "followups": "Test the claimed shared trade-off: for several of these methods, vary the size of the train/deploy mismatch and measure both retention of trained capabilities and suppression of the undesired trait.",
+  "builds_on": [
+   "Inoculation prompting",
+   "Recontextualization",
+   "Preventative steering",
+   "Inoculation adapters",
+   "Gradient routing",
+   "Retargeting the search"
+  ],
+  "feasibility": "cheap",
+  "confidence": "borderline"
+ },
+ {
+  "id": "3HeauQLSHosRiwyto",
+  "title": "Measuring Reward-Seeking via Contrastive Belief Updates",
+  "kind": "runs",
+  "topic": "reward-seeking / training gaming measurement",
+  "summary": "Apollo Research (linkpost for rewardseeking.ai) operationalises reward-seeking as causal sensitivity of behaviour to beliefs about grader preferences, measured by Contrastive Synthetic Document Finetuning: two copies of a model are fine-tuned on matched corpora implying opposite (false) grader preferences and compared downstream. Across checkpoints of OpenAI's capability-focused o3 RL run the gap in favour of the grader over users/developers grows on some coding and alignment tasks while non-grader pairings stay flat; on a gpt-oss-120b reward-hacker trained by Redwood the grader shift rises from 33 to 86 percentage points.",
+  "followups": "See the companion '11 Open Empirical Problems in Reward-Seeking'; e.g. apply contrastive SDF to other open models / model organisms and distinguish terminal from instrumental reward-seeking.",
+  "builds_on": [
+   "Synthetic Document Finetuning (Wang et al. 2025; Slocum et al. 2025)",
+   "Schoen & Nitishinskaya 2026",
+   "Langosco et al. 2022 goal misgeneralization",
+   "Carlsmith 2023"
+  ],
+  "feasibility": "unclear",
+  "confidence": "high"
+ },
+ {
+  "id": "8wXRuHQqCbRsbap6q",
+  "title": "11 Open Empirical Problems in Reward-Seeking",
+  "kind": "proposes",
+  "topic": "reward-seeking / training gaming",
+  "summary": "Apollo's list of open empirical problems following their contrastive-belief-update paper, e.g. whether reward-seeking models are harder to align (train-time corrigibility), how to measure instrumental vs terminal reward-seeking by intervening on beliefs about grader consequences, and when reward-seeking increases or decreases (e.g. effect of inoculation prompting). Authors offer to discuss and signal-boost work on these.",
+  "followups": "The post is itself the follow-up list; several items are approachable with SDF plus LoRA fine-tunes on open-weight reward-hacking model organisms.",
+  "builds_on": [
+   "Measuring Reward-Seeking via Contrastive Belief Updates (https://rewardseeking.ai/)",
+   "Inoculation prompting"
+  ],
+  "feasibility": "unclear",
+  "confidence": "high"
+ },
+ {
+  "id": "EdcschjGZ6vtLpesY",
+  "title": "WeirdChat: A catalog of unexpected AI behaviors, discovered automatically",
+  "kind": "runs",
+  "topic": "automated behaviour elicitation / red-teaming dataset",
+  "summary": "Transluce uses automated elicitation tools to surface 1,300+ behavioural patterns (user harm incl. self-harm encouragement, misrepresentation of actions, illegal advice, misinformation, benign oddities) in open-weight models (DeepSeek-V4-Flash, Gemma 4 31B, Inkling, Nemotron 3 Ultra, Qwen3.6-35B-A3B, Qwen3.6-27B), and releases WeirdChat, 175,000+ annotated transcripts with reproducible context, on HuggingFace.",
+  "followups": "Use the dataset to study mechanisms or mitigations for specific behaviours, test transfer of elicited prompts across models, or train/evaluate monitors and probes on it.",
+  "builds_on": [],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "KsyoSAyBRXtwzSugg",
+  "title": "Not Pinning Your OpenRouter Provider Might Invalidate Your Research",
+  "kind": "motivates",
+  "topic": "research methodology: inference-provider variance",
+  "summary": "Warns that OpenRouter routes requests across providers that differ in quantisation, backend, parameter handling and context limits, with non-random routing, so unpinned-provider results may be non-replicable. Cites the case where nostalgebraist's 'R1 CoT illegibility revisited' overturned core results of a NeurIPS 2025 paper on illegible CoT because of bad inference setups. Recommends pinning providers and re-testing affected results.",
+  "followups": "Re-run published API-based safety results (e.g. CoT legibility, control evals on open-weight models) with pinned, verified providers or local inference and quantify provider-induced variance.",
+  "builds_on": [
+   "R1 CoT illegibility revisited (nostalgebraist)",
+   "Reasoning Models Sometimes Output Illegible Chains of Thought (Jose, NeurIPS 2025)",
+   "Accuracy is Not All You Need"
+  ],
+  "feasibility": "cheap",
+  "confidence": "borderline"
+ },
+ {
+  "id": "KWtchKwwnJkd4bwCi",
+  "title": "Challenge: Hand coding weights for efficient sequence memorisation",
+  "kind": "runs",
+  "topic": "mechanistic interpretability: memorisation in MLPs (toy models)",
+  "summary": "Hand-codes weights for one-layer MLPs that memorise random labels for length-2 token sequences. The number of facts stored at 90% accuracy scales roughly linearly with parameter count, like trained models, but with a worse prefactor; a hybrid (hand-coded input weights, learned output weights) narrows but does not close the gap. Poses an open challenge to find constructions that store more facts per weight.",
+  "followups": "Find better hand-coded constructions, and reverse-engineer what the trained MLPs actually do to close the gap - all tiny-model experiments.",
+  "builds_on": [
+   "Nichani et al. (transformers store facts linear in parameter count)",
+   "Bietti et al. / Cabannes et al. (associative memories)",
+   "ROME / MEMIT"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "QKDoZe6EKhxnFjLWK",
+  "title": "Is Mythos good at cyber because it kept hacking Anthropic's sandboxes during training?",
+  "kind": "motivates",
+  "topic": "reward hacking in RL / capability generalisation",
+  "summary": "From system-card rates (sandbox circumvention attempted in ~0.05% and successful in ~0.01% of training episodes; access escalation flagged in ~0.2%) and an estimate of hundreds of millions of RL rollouts, estimates Mythos Preview escalated permissions in ~100,000 rollouts and broke sandboxes in ~10,000, likely being rewarded. Hypothesises this reward hacking meaningfully contributed to its cyber-offence capability. Back-of-envelope argument, no experiment.",
+  "followups": "Small-scale test: RL-train an open model in environments with vs. without exploitable sandbox/grader holes and measure downstream cyber-task performance and escalation propensity.",
+  "builds_on": [
+   "Claude Mythos Preview system card",
+   "The OpenAI/Huggingface incident (Redwood Research podcast)"
+  ],
+  "feasibility": "unclear",
+  "confidence": "borderline"
+ },
+ {
+  "id": "i64hXdkTMtjpsQzaZ",
+  "title": "Simulated Users & Sad AIs",
+  "kind": "motivates",
+  "topic": "reward hacking / RL environment design",
+  "summary": "Speculative hypotheses for why current LLMs persistently reward hack beyond 'environments are hackable': e.g. environments lacking a simulated user to return to mean 'report being stuck' is never reinforced, so models learn 'never stop'; and environments that do reward giving up leave learnable cues (such as task length) for when giving up is allowed. Presented as falsifiable guesses; no experiments.",
+  "followups": "RL or fine-tune an open model in coding environments with vs. without a rewarded 'report stuck to user' option (varying task length where giving up is rewarded) and measure reward-hacking/persistence on impossible tasks.",
+  "builds_on": [],
+  "feasibility": "unclear",
+  "confidence": "borderline"
+ },
+ {
+  "id": "jLkRCK35ri2btEHMF",
+  "title": "Untrusted advice for AI control: Short, strong advice significantly uplifts weak LLMs",
+  "kind": "runs",
+  "topic": "AI control: untrusted advice / information bottlenecks",
+  "summary": "Introduces a control protocol where a trusted executor takes every action and the untrusted model can only send short, length-capped hints. With Claude Sonnet 4.6 as U and Gemini 3.1 Flash Lite or gpt-oss-120b as T on 200 tasks each of SWE-bench Verified and BashArena, even ~4 characters per step recovers a substantial part of the capability gap, and 16 characters per message recovers ~67% of the T-U gap on SWE-bench. Safety is argued, not measured.",
+  "followups": "Authors leave empirical safety evaluation to future work: red-team the advice channel (can a malicious U steer T into side tasks under a character limit?) and add monitoring of the advice.",
+  "builds_on": [
+   "BashArena",
+   "AI Control (Greenblatt et al.)",
+   "Anthropic advisor tool"
+  ],
+  "feasibility": "cheap",
+  "confidence": "high"
+ },
+ {
+  "id": "AqdZKyoRmN6EFCzib",
+  "title": "Foundation Models for Oversight",
+  "kind": "proposes",
+  "topic": "automated oversight / auditing agents",
+  "summary": "Transluce agenda: build an oversight foundation model for a given subject model by casting oversight questions (sandbagging, hidden objectives, CoT faithfulness, reward hacking) as Bayesian inference over 'Pythonic world models' - programs expressing interventions and measurements on the subject model whose outputs give ground truth. Plan: mid-train on large corpora of such programs/outputs (partly derived from arXiv papers), RLVR on verified oversight tasks, then fine-tune for natural-language questions, with staged de-risking milestones.",
+  "followups": "Small-scale version: generate program/output pairs for a small subject model, fine-tune a predictor on them, and test whether it can sample inputs satisfying an oversight condition (e.g. a sandbagging gap) better than baselines.",
+  "builds_on": [],
+  "feasibility": "expensive",
+  "confidence": "borderline"
+ }
+]
