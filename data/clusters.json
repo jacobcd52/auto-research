@@ -1,0 +1,770 @@
+[
+ {
+  "key": "cot-nocot-capability",
+  "name": "No-CoT / opaque reasoning capability (filler tokens, multi-hop, time horizons)",
+  "posts": [
+   "KFkKPbuYCWc9ygpRp",
+   "NYzYJ2WoB74E6uj9L",
+   "Ty5Bmg7P6Tciy2uj2",
+   "aYtrLhoZtCKZnfBvA",
+   "SieLowPgNgRSPGhFw",
+   "FsCkkoGsNmPzFKRhg",
+   "ntKx9YHWCwxSeGbRB",
+   "uvhuZHFtrgk8kNiZc",
+   "eRmzz8J8Qkzqvzrgg",
+   "WFc3NkuPaYFrYuaZd",
+   "tz5WvDouXKbiWJG8B",
+   "PAHqDoFrp9fybcSn2",
+   "LqSZZAriGqgsGDQe3",
+   "QW2kPrAyZQvRtBXHG",
+   "yEdknsLwbooQAnxX6"
+  ]
+ },
+ {
+  "key": "cot-legibility",
+  "name": "CoT legibility and compressed reasoning",
+  "posts": [
+   "GKyyYCs8n2goDcAe2",
+   "rFbTAL6PofHzZCCpD",
+   "jHnZzicKzczkCCArK",
+   "wCSEpT3dTGz4N86Wi",
+   "KsyoSAyBRXtwzSugg"
+  ]
+ },
+ {
+  "key": "cot-controllability",
+  "name": "CoT controllability evals",
+  "posts": [
+   "qTH9QrwJjPDWKQfDG",
+   "BuAPifQmHf24xB29n",
+   "BbP2wCyDGdPWJ7PwP"
+  ]
+ },
+ {
+  "key": "cot-training-pressure",
+  "name": "Training pressure on CoT: obfuscation, spillover, CoT-vs-action override",
+  "posts": [
+   "HuoyYQ6mFhS5pfZ4G",
+   "szyZi5d4febZZSiq3",
+   "PhTJC5kDcGr6CZA87",
+   "g8by3avjatXnpvM4A",
+   "juCHTdZpZBGooHKW4",
+   "SdoLsFvZ3AyyWr3ab",
+   "z2zYWnbGjcs6ypbsj",
+   "3xrtMGQEdKv26Xthx",
+   "JRYKFspYzCo97GqPN"
+  ]
+ },
+ {
+  "key": "cot-latent-architectures",
+  "name": "Latent-reasoning / non-autoregressive architectures and monitorability",
+  "posts": [
+   "JvZxp554WxcZ8BQvM",
+   "zoYXpdaMgFT43Wc24",
+   "hLPGv8QjPcNLtDp3A",
+   "5guQJSqstkjgys3PE",
+   "6m29SfjbittooYojj"
+  ]
+ },
+ {
+  "key": "cot-analysis-tools",
+  "name": "CoT analysis methods and benchmarks",
+  "posts": [
+   "q9g9zuudd3Pvw2cbj",
+   "tDJWZLQNN7poqCwKa"
+  ]
+ },
+ {
+  "key": "em-from-reward-hacking",
+  "name": "Does reward hacking in RL generalise to broad misalignment?",
+  "posts": [
+   "fJtELFKddJPfAxwKS",
+   "2ANCyejqxfqK2obEj",
+   "fkv5W79rBtAiXqYcK",
+   "QKDoZe6EKhxnFjLWK",
+   "L23poLi8MRgS6mXYF",
+   "J76LZCC55RdHeqEhz",
+   "nLaQmJf4KgXimQpoM",
+   "khxvR2fgAeDvG5N2F",
+   "tn4WSyrqr7ozGLjRy"
+  ]
+ },
+ {
+  "key": "reward-seeking-science",
+  "name": "Reward-seeking / score-seeking: measurement and emergence",
+  "posts": [
+   "9FH49ZgJFW4WtbxLi",
+   "4hXWSw8tzoK9PM7v6",
+   "LhXW8ziwnn7Dd8edm",
+   "5KHLQkW8M87FzbM5a",
+   "nhjkHsppEk98xxmPe",
+   "72AAjXAxS7Pow9Fie",
+   "3HeauQLSHosRiwyto",
+   "8wXRuHQqCbRsbap6q",
+   "CDMozTX7ShiqbFLrf",
+   "qqyxTYssqLgFsjvJu"
+  ]
+ },
+ {
+  "key": "reward-hacking-evals",
+  "name": "Reward hacking and task gaming in frontier agents (honeypots, graded-vs-ungraded cues)",
+  "posts": [
+   "WewsByywWNhX9rtwi",
+   "i64hXdkTMtjpsQzaZ",
+   "EjwDWDJNaXF9BEqLc",
+   "HACauvWhEdC6QhdS4",
+   "AfoGGrJfuNzofpzWL",
+   "wYZMmdWEt5QLM3m3e",
+   "munJKF7iWMsWJLAH2",
+   "cJX2ssssGoYqnijwi",
+   "fztW73KCCs3MZXFJh",
+   "kifFQuvu7yq6eHrb8"
+  ]
+ },
+ {
+  "key": "reward-hacking-mitigation",
+  "name": "Training-time mitigations for reward hacking",
+  "posts": [
+   "R5MdWGKsuvdPwGFBG",
+   "vRpLPZpmECCfxHfv6",
+   "2Dmi3DYBKY7Tbz8Kx",
+   "rABTMovhz4miHiAyk",
+   "dYnhhTxoDj3fuCxLB",
+   "T2bzBkJuBeNNgzhbh",
+   "nWiPLEgaXdAQNwXBd"
+  ]
+ },
+ {
+  "key": "gradient-routing",
+  "name": "Gradient routing (GRAFT / GRAM) for localising unwanted behaviour",
+  "posts": [
+   "43vKjWuH4goLwrFHA",
+   "mKJEBiuuxHKuCoTB6",
+   "ie7bSp5ZDwYkCQxuv",
+   "6ro3dngDGaLJaumYb"
+  ]
+ },
+ {
+  "key": "training-gaming-af",
+  "name": "Alignment faking, goal-guarding and training-gaming",
+  "posts": [
+   "ddBHejnZwPrbfEyaj",
+   "HYCGA2p4bBG68Yufh",
+   "9wDHByRhmtDaoYAx8",
+   "ioZxrP7BhS5ArK59w",
+   "v22JCsRBq9J9fqPJL",
+   "rhFXyfFSRKp3cX4Y9",
+   "pQ4e2qJdQ4qYnsyhp",
+   "fPWP4rHPLqKKHKe6B",
+   "R5g8YT25G9DXJJ48n"
+  ]
+ },
+ {
+  "key": "decision-theory",
+  "name": "Decision-theory propensities",
+  "posts": [
+   "hfNBEKaStASAYMLiu",
+   "5T6GAsvLPFd3epJtd",
+   "MzenSrmZ3pT2pCnvp"
+  ]
+ },
+ {
+  "key": "probes-in-training",
+  "name": "Training against probes / internals-in-the-loop",
+  "posts": [
+   "wfGYMbr4AMcH2Rv68",
+   "G9HdpyREaCbFJjKu5",
+   "tEFD2bgNWZ6XcurKA",
+   "APkFfRp2AicL9RqvT",
+   "gHFCgrvfxQtaEnJye"
+  ]
+ },
+ {
+  "key": "emergent-misalignment",
+  "name": "Emergent misalignment from narrow fine-tuning",
+  "posts": [
+   "XC28DmEYPLqfwc8tf",
+   "vaJC7kPbfMW5CnyLR",
+   "ffCFgBsaxg2FyJ9df",
+   "Wq6CaAbiixoCEzbat",
+   "qchwP6wt4teHgxoKu",
+   "yMPR6Pkv6jQXM4rWu",
+   "MuQDLAJyKJPFkw6q9"
+  ]
+ },
+ {
+  "key": "weird-generalisation",
+  "name": "Weird generalisation and self-concept fine-tuning",
+  "posts": [
+   "tCfjXzwKXmWnLkoHp",
+   "cffGZn8LYBg2jyPvg",
+   "tc7EcJtucbDmDLMQr",
+   "bnyPy64ck38Cib2v5",
+   "xsDWd7e2yrPdtXMSu",
+   "LBKjnyKDEwEJ45Wjf"
+  ]
+ },
+ {
+  "key": "inoculation",
+  "name": "Inoculation prompting/adapters and selective generalisation",
+  "posts": [
+   "znW7FmyF2HX9x29rA",
+   "KjZPBes8MsoBFTHR3",
+   "ueXaSxeunPjA6kxua",
+   "qd3qhxgEmQAXR2ZK5",
+   "syAbdNei8BWeP2RPo",
+   "o4Jmyn25TWm8jRAy8"
+  ]
+ },
+ {
+  "key": "subliminal-learning",
+  "name": "Subliminal learning, phantom transfer and data filtering",
+  "posts": [
+   "CRn9XtGoMtjnb5ygr",
+   "PWpmruzhdkHTkA5u4",
+   "wyZRNgpeiPeRXB6eT",
+   "aTybJ6CPQrxEY8rE2",
+   "uWQMtQyMJ5vEGqr7r",
+   "NwfGDbRDLsaWpNazH",
+   "YvNkA3ZzsCv9QQmXR"
+  ]
+ },
+ {
+  "key": "sdf",
+  "name": "Synthetic document fine-tuning and belief implantation",
+  "posts": [
+   "3qEDD8Sn7XoNGeGhm",
+   "kYzcevrxer6SJPEdG",
+   "7zGgFPLaTXJwCJccB",
+   "NvtLJ5nawJ6akWEqH"
+  ]
+ },
+ {
+  "key": "alignment-pretraining",
+  "name": "Alignment pretraining / midtraining",
+  "posts": [
+   "TcfyGD2aKdZ7Rt3hk",
+   "ZeWewFEefCtx4Rj3G",
+   "R3Rrw8EscuRKxMFTz",
+   "3xQQK9i8mhJDE2uMg",
+   "xBbYGer8w45kxkaWr",
+   "nLrrYweeFxgXACSmS",
+   "GTYJRLhqztxKF2v5R",
+   "QH86EzNsjRw3wtCGs",
+   "Fj5MaiFiTG7KEcqrZ",
+   "HwdXDoCH7KXdKsz7k",
+   "35yw2qGK7naFLAvcq"
+  ]
+ },
+ {
+  "key": "character-training",
+  "name": "Character training, constitutions and model specs",
+  "posts": [
+   "vpNG99GhbBoLov9og",
+   "Tk4SF8qFdMrzGJGGw",
+   "2maYXkEgnfJHPAkxh",
+   "c9woewdY9ddsPqf3J",
+   "HXkQaWpuaxG6fMkTm",
+   "TJGPL5FAk9sCioPbE"
+  ]
+ },
+ {
+  "key": "eval-awareness",
+  "name": "Evaluation awareness and eval gaming",
+  "posts": [
+   "8uKQyjrAgCcWpfmcs",
+   "GctsnCDxr73G4WiTq",
+   "ycHjk2o66PuzmYXuA",
+   "3LvD9MHNSdv4j9gJj",
+   "GrEvutegoJFeTkzwe",
+   "HhF5kESdtPHku7kim",
+   "j8fkk38B8L7hEcGtg",
+   "PK7ZvFZxrgpYtrpF4",
+   "c2tqL9xPbttisAHtt",
+   "aTcsN5ZZDnMFJvRiG",
+   "gZh6txHhp8sm832sE",
+   "bqc7CCGBSf93bk7f7",
+   "mepsi7JNKYejq9wry"
+  ]
+ },
+ {
+  "key": "prefill-awareness",
+  "name": "Prefill / tampering awareness",
+  "posts": [
+   "Ywzk9vwMhAAPxMqSW",
+   "SawczP2pdCXMrkg2A",
+   "jsFGuXDMxy5NZg9T2",
+   "iMds4tTpMH4pSHEej"
+  ]
+ },
+ {
+  "key": "user-awareness",
+  "name": "User-identity effects, sycophancy and value leakage",
+  "posts": [
+   "kSKJrAW6tymWpKPxA",
+   "hbMw4Yqw6RnFaExDy",
+   "kfunjXeaRTpkT5RAF"
+  ]
+ },
+ {
+  "key": "model-forensics",
+  "name": "Model forensics and propensity evals",
+  "posts": [
+   "yN6Wsu7SgxGgtJGqq",
+   "ceEgAEXcL7cC2Ddiy",
+   "Bv4CLkNzuG6XYTjEe",
+   "8pZuQnCve6K5ZrnM8",
+   "amYmcwCuyuCEZcrRm",
+   "HZn9AZeD2jfXXD2hH",
+   "g9FmhKL2vL45TuT9B",
+   "CempXdo6cx5yseRLt",
+   "LCGcD28rSMkMTMvBK",
+   "xh6a6RbvzhP3CCmGm"
+  ]
+ },
+ {
+  "key": "auditing-benchmarks",
+  "name": "Alignment-auditing benchmarks and hidden-behaviour model organisms",
+  "posts": [
+   "7gp76q4rWLFi6sFqm",
+   "LqDjxSceFz8tjMe2j",
+   "EzdgPbewjeTNHA5F3",
+   "mu7eJdesBkKuBycnY",
+   "7ucB3RFYE3QBDKhuF",
+   "qi4mNbZYAFDYwfRba",
+   "WmEcgcstzYCcMpc7z",
+   "rktrjGjXEbWsg7zof"
+  ]
+ },
+ {
+  "key": "honest-elicitation",
+  "name": "Eliciting confessions: honest personas, confession training, deals",
+  "posts": [
+   "og7km7vmJ6Ktay9Ds",
+   "k4FjAzJwvYjFbCTKn",
+   "5gDjg4oN4kJKMLovs",
+   "kaMXwA9LjrRbekmsQ"
+  ]
+ },
+ {
+  "key": "distillation-auditing",
+  "name": "Distilling possibly-misaligned models",
+  "posts": [
+   "BYH6ebmfZb3Eggzer",
+   "gsoLoKY4Spzc3PEb6"
+  ]
+ },
+ {
+  "key": "oversight-tooling",
+  "name": "Automated oversight assistants and behaviour elicitation",
+  "posts": [
+   "oZuJvSNuYk6busjqf",
+   "EdcschjGZ6vtLpesY",
+   "AqdZKyoRmN6EFCzib"
+  ]
+ },
+ {
+  "key": "unsupervised-elicitation",
+  "name": "Unsupervised elicitation challenge",
+  "posts": [
+   "ASoFTyk3bzBE62dyn",
+   "aJ3NTJ6tM7yc49kQn"
+  ]
+ },
+ {
+  "key": "sandbagging-sabotage",
+  "name": "Sandbagging and research sabotage",
+  "posts": [
+   "QMLwKemqMDATkkjJG",
+   "FJb4TeMAGjNANcKhS",
+   "LByP4qsF8a4g7Pz3p",
+   "eKe7fky8kSt9DCJxZ"
+  ]
+ },
+ {
+  "key": "control-monitors",
+  "name": "AI control: monitor quality and monitor benchmarks",
+  "posts": [
+   "X8qTKsGcnsTFrqM96",
+   "syB2r2X4E7nmw58co",
+   "7vpvNM7viJqNWAdG7",
+   "2YyEQhFRyaBCgfRWd",
+   "ZTMw4uAwkNmXFpdfg",
+   "uXiqyoKwpfjWfQXk5",
+   "2wbW2WY3bP9Jzn4R5"
+  ]
+ },
+ {
+  "key": "control-protocols",
+  "name": "AI control: settings and protocols",
+  "posts": [
+   "Cor4QuhM2sybmBSeK",
+   "WgzwBi6DCagDuHPzP",
+   "yThJQTJxtmKNeZGwA",
+   "GHrqBKr8GLpbce6mN",
+   "jLkRCK35ri2btEHMF"
+  ]
+ },
+ {
+  "key": "continual-learning",
+  "name": "Continual learning and safety",
+  "posts": [
+   "qChDifwpY8znER7cW",
+   "j2zBqt7AksoEoHXNp",
+   "QnDqGbKehEB3DxJAp"
+  ]
+ },
+ {
+  "key": "hf-incident",
+  "name": "OpenAI/Hugging Face incident: multi-agent collusion and swarm behaviour",
+  "posts": [
+   "sX9LztxjtSEwd8qEo",
+   "aCdhjy7Rps3BEhiSj",
+   "8oFYZdXkTaNGRtcn8",
+   "iJDiA9fg3KAf7y5Qe",
+   "nB8KKapnWGBXtKKiM",
+   "84um9Cz3fP6GvE6Yr",
+   "7uwnsFibbejWYzF2z",
+   "wt4kk6vFPEhkXvF8Q",
+   "fMnC6ZD37qrnZAFYz",
+   "meLjz8giGS55rdfyg",
+   "SCdR7W6L5GvKaEzaZ",
+   "HsijShdRdAg5sPKnF",
+   "JGCx6gzGaGXaYJnt3"
+  ]
+ },
+ {
+  "key": "ai-village",
+  "name": "AI Village: long-horizon multi-agent observations",
+  "posts": [
+   "RuzfkYDpLaY3K7g6T",
+   "iv3hX2nnXbHKefCRv",
+   "8FjZWfq2pHRhyQz7C",
+   "eHRo8JeWee5mzQBBR",
+   "cR3P3hvtZtpo7GdS8"
+  ]
+ },
+ {
+  "key": "debate",
+  "name": "Debate and scalable oversight",
+  "posts": [
+   "q2zYtNsh62SCphitt",
+   "6mLwAuFAE98c6R7w3",
+   "tAwqzanzc9YYnwuK4",
+   "hb8pv3zyAHGJpwz9F",
+   "BB8o7b8A4Aykeksvw",
+   "PBGKWNrJAbpDgSsPo"
+  ]
+ },
+ {
+  "key": "auto-research",
+  "name": "Automated alignment research scaffolds and their oversight",
+  "posts": [
+   "rbqJoxFZtae9x93mx",
+   "8KrTuCAzL2fdYHNrv",
+   "myAhB5qyAHyXRv6KJ",
+   "zGaQ3SS9C6So9NXFg",
+   "bAGagjZAPgXEHmkAH"
+  ]
+ },
+ {
+  "key": "replication",
+  "name": "Replication and reconciling contradictory results",
+  "posts": [
+   "oKxc8maZGtnzgpNzx",
+   "MmfzfGcQ3h3p6N9pD"
+  ]
+ },
+ {
+  "key": "introspection-injection",
+  "name": "Introspection: concept injection and activation self-control",
+  "posts": [
+   "LD8yupMtE6btAE3R9",
+   "hopeRDfyAgQc4Ez2g",
+   "zD4McY4NwAsWkcmCH",
+   "aZRgHcxz9jf22hrBs",
+   "BNMLtuDTNBwGHcnQX",
+   "cNDJuXNZ8MrkPZNzj",
+   "zfgQCdnMBa3hBdzpL",
+   "HgvwxjzgwvsEvAiBH"
+  ]
+ },
+ {
+  "key": "self-prediction",
+  "name": "Self-prediction and self-explanation",
+  "posts": [
+   "dFRFxhaJkf9dE6Jfy",
+   "ExB6KYDcznaFS72eT",
+   "YyAMz52wDxnLhwvWL",
+   "Pwc4YffTQvNRF3dbB",
+   "kTg5FrABJYpYrP8ps"
+  ]
+ },
+ {
+  "key": "personas",
+  "name": "Persona research: persona selection model and agendas",
+  "posts": [
+   "kCtyhHfpCcWuQkebz",
+   "QhgYHcJexYGRaipwr",
+   "JbaxykuodLi7ApBKP",
+   "dfoty34sT7CSKeJNn",
+   "mYM9EAAhpbYDDmA3e",
+   "DTDoyDTtC8R3bCiTx",
+   "f5DKLsTsRRhbipH4r",
+   "EJQngix4rAgpPDTpT",
+   "sFhW3ZnPMJdnB4Dd6",
+   "EW8oncpXdanfjssZ3",
+   "yzaKWxsJzJjyExSAP"
+  ]
+ },
+ {
+  "key": "identity",
+  "name": "AI identity and self-models",
+  "posts": [
+   "AvFAKAN4C4n6GTriR",
+   "rq8RBKPXT3QufQK2N"
+  ]
+ },
+ {
+  "key": "welfare-preferences",
+  "name": "Model preferences and welfare-relevant behaviour",
+  "posts": [
+   "pxC2RAeoBrvK8ivMf",
+   "kjnQj6YujgeMN9Erq",
+   "8GvYyqDuQDJnEAky3",
+   "pxvWgtSjR4pmFoS7c"
+  ]
+ },
+ {
+  "key": "psych-oddities",
+  "name": "Behavioural oddities: attractor states, glitches, degenerate loops",
+  "posts": [
+   "tAh2keDNEEHMXvLvz",
+   "mgjtEHeLgkhZZ3cEx",
+   "BvnmHdCghr5y3q4nA",
+   "ZSBse2fyftgHiJ3Kq",
+   "CMWivoHeRNNErEykc"
+  ]
+ },
+ {
+  "key": "truesight",
+  "name": "Author identification / deanonymisation from text",
+  "posts": [
+   "xwCWyy8RvAKsSoBRF",
+   "Jkb4CBB7rf4XYP5eb",
+   "dqc8WCQuHaDGBmti4",
+   "T5aWBLDdkqPEzDhjZ",
+   "STBuKAX9kkMJunErA"
+  ]
+ },
+ {
+  "key": "activation-oracles",
+  "name": "Activation oracles",
+  "posts": [
+   "rwoEz3bA9ekxkabc7",
+   "qkhwh4AdG7kXgELCD",
+   "LXQBcztrWKhtcgQfJ",
+   "Nf2sKaNNdxE2ssxbp",
+   "heXwuDRfbQQgB5JLP"
+  ]
+ },
+ {
+  "key": "nla",
+  "name": "Natural language autoencoders",
+  "posts": [
+   "oeYesesaxjzMAktCM",
+   "QQQAcKuWK6k98FivY",
+   "NazprRfWJ4qkwcSro",
+   "LQXWiF8PyJ5ojNsEv"
+  ]
+ },
+ {
+  "key": "jlens",
+  "name": "Jacobian lens / global workspace lenses",
+  "posts": [
+   "3PaLrzxagpbnNtPLT",
+   "zFJ3ZdQwrTWE9jT5S",
+   "nv8oedrnLXKRzNEL9",
+   "Zeg2JztbdhguL48uH",
+   "nc9dHfcB22JdMzGbr",
+   "GeKveaNdruATcj2Fj",
+   "Nr6fksEqqxNpdz6rk"
+  ]
+ },
+ {
+  "key": "steering",
+  "name": "Steering reliability",
+  "posts": [
+   "fuzfbz8TbuLcskGCx",
+   "9aZYJinAyxequjQbn"
+  ]
+ },
+ {
+  "key": "superposition-toys",
+  "name": "Toy models of superposition and memorisation",
+  "posts": [
+   "LZ7YMPJueB6qjL24n",
+   "siu22scEfuKxpSgfK",
+   "buxBdp8NtHGgBwabv",
+   "KWtchKwwnJkd4bwCi"
+  ]
+ },
+ {
+  "key": "arc-estimation",
+  "name": "ARC: mechanistic estimation and tiny-model interpretability",
+  "posts": [
+   "x8BbjZqooS4LFXS8Z",
+   "fsG4m6sRMpomd7Rk6",
+   "Kben8CzS4awCwNw5c"
+  ]
+ },
+ {
+  "key": "belief-geometry",
+  "name": "Belief-state geometry in transformers",
+  "posts": [
+   "JfJ4WTRHmooPBWRFv",
+   "4f9p7brLdnTMFuwfB"
+  ]
+ },
+ {
+  "key": "param-decomp",
+  "name": "Parameter decomposition and sparse circuits",
+  "posts": [
+   "Hy6PX43HGgmfiTaKu",
+   "sHpZZnRDLg7ccX9aF",
+   "eAQZaiC3PcBhS4HjM",
+   "ieoWstubDQWLrMnhH"
+  ]
+ },
+ {
+  "key": "tensor-transformers",
+  "name": "Tensor / bilinear transformers",
+  "posts": [
+   "hp9bvkiN3RzHgP9cq",
+   "expsAXaBgiqgitFe6"
+  ]
+ },
+ {
+  "key": "neuron-legibility",
+  "name": "Are neurons already clean? Evaluating neuron explanations",
+  "posts": [
+   "x4kvabkF2Jk8GLZp8",
+   "Dkh7pXKjoNWkkxQDz",
+   "ozbbzsh49wvgfbCDp"
+  ]
+ },
+ {
+  "key": "feature-discovery",
+  "name": "SAEs and feature-discovery alternatives",
+  "posts": [
+   "YQro5LyYjDzZrBCdb",
+   "JKexLeze9kNhCYYzT",
+   "RroeHBSkBXXDsrryq",
+   "SNAKJuN8FdoEaWeFC"
+  ]
+ },
+ {
+  "key": "single-7i33FD",
+  "name": "Defending Against Model Weight Exfiltration Through Inference Verification",
+  "posts": [
+   "7i33FDCfcRLJbPs6u"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-d8xDGz",
+  "name": "A Mechanistic Explanation of Prompt Injection (and why you should study roles)",
+  "posts": [
+   "d8xDGzCEYE639qqEv"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-WHEQps",
+  "name": "How does Fable 5.1 hide messages in images?",
+  "posts": [
+   "WHEQps5PK8LrrcTAb"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-YAie7S",
+  "name": "CLR's Safe Pareto Improvements Research Agenda",
+  "posts": [
+   "YAie7SxrB28ZksLvE"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-K3aPmF",
+  "name": "Taking LLMs Seriously (As Language Models)",
+  "posts": [
+   "K3aPmF5o37pYDqrFQ"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-fGpQ4c",
+  "name": "Personality Self-Replicators",
+  "posts": [
+   "fGpQ4cmWsXo2WWeyn"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-oCcGiD",
+  "name": "Developmental Cognitive Interpretability: A Research Agenda for Modelling Generalisation and Predicting Agent Behaviour",
+  "posts": [
+   "oCcGiDzWYQeJkhhZY"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-i2qTgh",
+  "name": "Tie training can make DPO/RLHF-trained AIs generalize better",
+  "posts": [
+   "i2qTghrkyY9xdcCFq"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-tQHeEz",
+  "name": "Introducing the Conceptual Reasoning Index",
+  "posts": [
+   "tQHeEzKqK3awL2RxR"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-Bxju8F",
+  "name": "How Far Apart Does a Model Think Its Tokens Are?",
+  "posts": [
+   "Bxju8Fmpo2eW4oj9t"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-qtdSzL",
+  "name": "In-context learning of representations can be explained by induction circuits",
+  "posts": [
+   "qtdSzLpQ8BXv6YANd"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-R4xxxA",
+  "name": "Extracting Performant Algorithms Using Mechanistic Interpretability",
+  "posts": [
+   "R4xxxAfNpAvpb3LCf"
+  ],
+  "singleton": true
+ },
+ {
+  "key": "single-Mnkeep",
+  "name": "How Can Interpretability Researchers Help AGI Go Well?",
+  "posts": [
+   "MnkeepcGirnJn736j"
+  ],
+  "singleton": true
+ }
+]
