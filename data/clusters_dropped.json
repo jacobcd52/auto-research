@@ -1,0 +1,18 @@
+{
+ "dropped": {
+  "oversight-tooling": "agenda posts needing lab-scale training",
+  "continual-learning": "conceptual, no cheap experiment",
+  "ai-village": "observational, needs the long-running Village deployment",
+  "truesight": "privacy/misuse capability, anecdotal; not core safety",
+  "single-fGpQ4c": "threat model, no cheap safe experiment",
+  "single-R4xxxA": "biology-model interp, not safety",
+  "single-tQHeEz": "needs expert human raters",
+  "single-Mnkeep": "broad agenda list, covered by other clusters",
+  "single-oCcGiD": "agenda, no concrete cheap handle",
+  "single-Bxju8F": "weak safety relevance",
+  "single-K3aPmF": "indirect safety link"
+ },
+ "merged": {
+  "identity": "personas"
+ }
+}
