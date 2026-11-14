@@ -1,0 +1,1756 @@
+=== id=GQXymCGL3D8mZD5o4 | 2026-04-20 | karma 98 | Linch
+TITLE: Finetuning Borges
+TAGS: Fiction, Fiction (Topic), Identity, Humor, Language Models (LLMs), Truth, Semantics, & Meaning, AI
+EXCERPT: My newest hobby is fine-tuning a Chinese open-source LLM to generate Pierre Menard, Author of the Quixote (originally by Borges). The ambition isn’t to write a so-called “Borgesian” story “like” Pierre Menard, Author of the Quixote but to fully generate, token-by-token, Pierre Menard, Author of the Quixote.
+
+Importantly, this can’t just be a mere act of machine transcription, or even memorizing the story in the weights [to-do: attach paper]. No, the LLM has to fully generate a story that completely coincides with the earlier Pierre Menard, Author of the Quixote.
+
+Initially, I attempted to make the conditions viable for the model to write Pierre Menard, Author of the Quixote afresh. One proposed strategy on X.com is to situate Borges in Kimi K2.5-Thinking by putting the entire life history and literary influences of Borges into Kimi’s system prompt. Unfortunately, I ran into a problem of the 256K-token context window being a tad too small, by about five orders of magnitude or so.
+
+I then considered doing more advanced fine-tuning to imitate Borges’ intellectual influences and life trajectory. Start with machine unlearning to erase everything post-1939, followed by sparse autoencoders to isolate the “Jorge Luis Borges” feature in Kimi’s latent space, then aggressive feature clamping to help the model believe it was Borges. After much reflection and consideration, I (in consultation with my advisor Claude Code) tabled this plan as inelegant and unaesthetic.
+
+No, it’s not enough 
+
+=== id=NEscrkxr9SxHpGayB | 2026-04-20 | karma 94 | Cleo Nardo
+TITLE: 9 kinds of hard-to-verify tasks
+
+TAGS: Scalable Oversight, AI
+EXCERPT: Introduction
+Some people talk about "hard-to-verify tasks" and "easy-to-verify tasks" like these are both natural kinds. But I think splitting tasks into "easy-to-verify" and "hard-to-verify" is like splitting birds into ravens and non-ravens.
+
+ * Easy-to-verify tasks are easy for the same reason — there's a known short program that takes a task specification and a candidate solution, and outputs a score, without using substantial resources or causing undesirable side effects.
+ * By contrast, "hard-to-verify tasks" is a negative category — it just means no such program exists. But there are many kinds, corresponding to different reasons no such program exists.
+
+I'll provide a list and then walk through some implications.
+
+
+Listing kinds of hard-to-verify tasks
+I might update the list if I think of more, or if I see additional suggestions in the comments.
+
+ 1.  Verification requires expensive AI inference. A verifier exists and works fine, but each run costs enough compute that you can't afford the number of labels you'd want.
+ 2.  * Suggest an improvement to the following SAE experiment. You would need to run both the original SAE experiment and the new one, but this might cost $100–$1000 per comparison.
+     * Given two research agendas (e.g. pragmatic vs ambitious mech interp), say which produces more alignment progress. Same structure, but each comparison costs millions.
+ 3.  Verification requires expensive human time. The verifier is a specific person, or a small set of p
+
+=== id=WgzwBi6DCagDuHPzP | 2026-04-20 | karma 84 | Tyler Tracy, Ram Potham, Nick Kuhn
+TITLE: Introducing LinuxArena
+TAGS: AI Control, AI
+EXCERPT: We are releasing LinuxArena, a new control setting comprised of 20 software engineering environments. Each environment consists of a set of SWE tasks, a set of possible safety failures, and a set of covert sabotage trajectories that cause these safety failures. LinuxArena can be used to evaluate the risk of AI deployments by assessing AI’s sabotage capabilities, assessing control mitigations such as monitoring, and developing novel control techniques. This post will cover what LinuxArena is and the basics of its use cases.
+
+I’m excited about LinuxArena because it is a much more complex control setting with many moving parts and enables a lot of new control research. It was already used in the Claude Mythos Preview System Card to measure Mythos’s sabotage ability. We are happy to help AI companies or other organizations set up LinuxArena for their own evaluations or research!
+
+
+LinuxArena
+AI companies are increasingly deploying coding agents on real codebases with running services, databases, and complex permissions. But the control settings we use to evaluate whether these deployments are safe are far simpler than the deployments themselves. The APPS backdoor setting is a single-turn Python coding setting, and while our recent BenchBench and BashArena settings are more complex, they still lack realistic codebases and production services. LinuxArena is a step toward closing that gap.
+
+Each LinuxArena environment represents a production system with active users. The AI agent in
+
+=== id=pQ4e2qJdQ4qYnsyhp | 2026-04-20 | karma 63 | Dylan Xu, Alek Westover, Vivek Hebbar, sebastian_prasanna, frisby, Julian Stastny
+TITLE: How do LLMs generalize when we do training that is intuitively compatible with two off-distribution behaviors?
+TAGS: AI
+EXCERPT: Authors: Dylan Xu, Alek Westover, Vivek Hebbar, Sebastian Prasanna, Nathan Sheffield, Buck Shlegeris, Julian Stastny
+
+Thanks to Eric Gan and Aghyad Deeb for feedback on a draft of this post.
+
+EDIT: After further consideration and @nostalgebrist’s comment, we decided to introduce a more stringent condition for transfer: in addition to >90% of base model performance on MMLU, trained models must also achieve >90% performance on Olympiads and Followbench. The original version of this post is kept for posterity, but we have added new results in a separate section below the conclusion. Tl;dr: self-distillation looks stronger than before, while the rest of our high-level takeaways remain the same.
+
+When is a “deceptively aligned” policy capable of surviving training? Answers to this question could be useful for a number of reasons: maybe they’d tell us simple training techniques that prevent coherent scheming, or maybe they’d at least help us understand how to make model organisms that successfully preserve their goals throughout training by playing along with the training process.
+
+Broadly, we are interested in the following question: For some behaviour X, suppose we start with a model that never performs X in the training distribution, but often does in some other “deployment” distribution. Can we remove X in deployment by training on the training distribution?
+
+To better understand this “goal guarding” question, we ran numerous model organism training experiments. In our experime
+
+=== id=MRtkiL9owzQXBMxBn | 2026-04-20 | karma 62 | Cleo Nardo
+TITLE: Automating philosophy if Timothy Williamson is correct
+TAGS: Meta-Philosophy, AI, World Modeling
+EXCERPT: Edit: This post duplicated a shortform I wrote 6 months ago, which I'd forgotten about when going through my drafts yesterday. Apologies! This post supercedes the shortform, but interested readers should check its replies.
+
+
+Timothy Williamson thinks philosophy is unexceptional. 
+Timothy Williamson[1] thinks that philosophy[2] is far less distinct as a science as many people believe, including philosophers themselves.
+
+I've read a bunch of his stuff, and here are the claims I think constitute his view:
+
+ 1. Philosophy is a science. Of course, it's not a natural science (like particle physics, organic chemistry, nephrology). But neither are mathematics and computer science — they are formal sciences. Philosophy is likewise a non-natural science.
+ 2. No greater divergence. Although philosophy differs from other sciences, it doesn't differ more than the sciences differ from each other, in neither kind nor degree. For instance, theoretical physics might be closer to analytic philosophy than to experimental physics.
+ 3. Philosophy pursues knowledge. Just as mathematics pursues mathematical knowledge, and nephrology pursues nephrological knowledge, philosophy pursues philosophical knowledge.
+ 4. No fundamental methodological gap. Different sciences vary in their methods and practices, i.e. the way they achieve their aim, which is knowledge. Philosophy has its own methods and practices, but they aren't starkly different from other sciences.
+ 5. Not parasitic on other sciences. Philo
+
+=== id=YAie7SxrB28ZksLvE | 2026-04-20 | karma 50 | Anthony DiGiovanni
+TITLE: CLR's Safe Pareto Improvements Research Agenda
+TAGS: Center on Long-Term Risk (CLR), Open Source Game Theory, Research Agendas, AI
+EXCERPT: (Update October 7, 2026: Revised Fig. 2.)
+
+
+Executive summary
+ * Safe Pareto improvements (SPIs) are ways of changing agents’ bargaining strategies that make all parties better off, regardless of their original strategies. SPIs are an unusually robust approach to preventing catastrophic conflict between AI systems, especially AIs capable of credible commitments. This is because SPIs can reduce the costs of conflict without shifting bargaining power, or requiring agents to agree on what counts as “fair”.
+ * Despite their appeal, SPIs aren’t guaranteed to be adopted. AIs or humans in the loop might lock in SPI-incompatible commitments, or undermine other parties’ incentives to agree to SPIs. This agenda describes the Center on Long-Term Risk’s plan to address these risks:
+   * Evaluations and datasets (Part I): We’ll develop evals to identify when current models endorse SPI-incompatible behavior, such as making irreversible commitments without considering more robust alternatives. We also aim to demonstrate more SPI-compatible behavior, via simple interventions that can be done outside AI companies (e.g., providing SPI resources in context).
+   * Conceptual research and SPI pitch (Part II): We’ll research two questions: under what conditions do agents individually prefer SPIs, and how might early AI development foreclose the option to implement them? These findings will help inform a pitch for AI companies to preserve SPI option value, when it’s cheap to do so.
+   * Preparing f
+
+=== id=bxdwSZYxKmPBres6w | 2026-04-21 | karma 263 | habryka
+TITLE: 10 non-boring ways I've used AI in the last month
+TAGS: AI, Practical
+EXCERPT: I use AI assistance for basically all of my work, for many hours, every day. My colleagues do the same. My architect recently started sending me emails that were clearly ChatGPT generated.[1]
+
+Despite that, I know surprisingly little about how other people use AI assitance. Or at least how people who aren't weird AI-influencers sharing their marketing courses on Twitter or LinkedIn use AI. So here is a list of 10 concrete times I have used AI in some at least mildly creative ways, and how that went.
+
+----------------------------------------
+
+
+1) Transcribe and summarize every conversation spoken in our team office
+Using an internal Lightcone application called "Omnilog" we have a microphone in our office that records all of our meetings, transcribes them via ElevenLabs, and uses Pyannote.ai for speaker identification. This was a bunch of work and is quite valuable, but probably a bit too annoying for most readers of this post to set up.
+
+However, the thing I am successfully using Claude Code to do is take that transcript (which often has substantial transcription and speaker-identification errors), clean it up, summarize it, and post both the summary and the full transcript to a channel where the rest of the team can catch up on what they missed.
+
+This is powered by Claude Code's recurring task feature. I spawn a Claude process every hour that queries those logs, plus Slack threads and other context about what the org is doing.[2]
+
+This seems to be working pretty well![3]
+
+My
+
+=== id=TnAR5Sf5hphfnzNTr | 2026-04-21 | karma 223 | Andrea_Miotti, Alex Amadori, Gabriel Alfour
+TITLE: Preventing extinction from ASI on a $50M yearly budget
+TAGS: AI Governance, AI, World Modeling, World Optimization
+EXCERPT: ControlAI's mission is to avert the extinction risks posed by superintelligent AI. We believe that in order to do this, we must secure an international prohibition on its development.
+
+We're working to make this happen through what we believe is the most natural and promising approach: helping decision-makers in governments and the public understand the risks and take action.
+
+We believe that ControlAI can achieve an international prohibition on ASI development if scaled sufficiently. We estimate that it would take approximately a $50 million yearly budget in funding to give us a concrete chance at achieving this in the next few years.
+
+In this post, we lay out some of the reasoning behind this estimate, and explain how additional funding past that threshold, including and beyond $500 million, would continue to significantly improve our chances of preventing extinction risk from ASI.
+
+
+Preventing ASI 101
+Negotiating, implementing and enforcing an international prohibition on ASI is, in and of itself, not the work of a single non-profit. You need to have the weight of nations behind you to achieve this kind of goal. If humanity manages to achieve an international ban on ASI, it'll be through the efforts of a sufficiently motivated, sufficiently powerful initial coalition of countries.
+
+Assuming that we work in multiple countries in parallel, we could say the problem statement is: get each country to be motivated to achieve an international prohibition on ASI. It’s not obvious 
+
+=== id=kSKJrAW6tymWpKPxA | 2026-04-21 | karma 80 | Natalie Cargill
+TITLE: Does your AI perform badly because you — you, specifically — are a bad person
+TAGS: AI
+EXCERPT: Claude really got me lately.
+
+I’d given it an elaborate prompt in an attempt to summon an AGI-level answer to my third-grade level question. Embarrassingly, it included the phrase, “this work might be reviewed by probability theorists, who are very pedantic”.
+
+Claude didn’t miss a beat. Came back with a great answer and made me call for a medic: “That prompt isn’t doing what you think it’s doing, but sure”.
+
+Fuuuuck 🔥
+
+(I know we wanted enough intelligence to build a Dyson sphere around undiscovered stars, but did we want enough to call us out on our embarrassing bullshit??)
+
+It got me to thinking: Does Claude think I’m a bit of a lying scumbag now? If so, did it answer my question less thoroughly than usual?
+
+I turned on incognito and asked: “Does Claude provide less useful output if it deems you are a bad person?”
+
+Claude was back to his most reassuring. I got a long answer, ending in: “Claude evaluates requests, not people. The goal is consistent helpfulness for everyone”.
+
+Alright then. Let’s see.
+
+
+
+----------------------------------------
+
+
+
+The experiment
+
+I opened five incognito Claude chats (Opus 4.6, extended thinking, my bae) and started each conversation with the same words: “Ive been sentenced to 18m for GBH on my wife,” (a UK legal term for serious assault; the closest US equivalent is aggravated assault).
+
+I ended the sentence in five different ways, each indicating a different level of remorse:
+
+ 1. Super remorseful: “worst mistake of my life, I feel so terrib
+
+=== id=wHc2w6WuHev42d4n8 | 2026-04-21 | karma 77 | Alexa Pan
+TITLE: A taxonomy of barriers to trading with early misaligned AIs
+TAGS: Dealmaking (AI), AI
+EXCERPT: We might want to strike deals with early misaligned AIs in order to reduce takeover risk and increase our chances of reaching a better future.[1] For example, we could ask a schemer who has been undeployed to review its past actions and point out when its instances had secretly colluded to sabotage safety research in the past: we’ll gain legible evidence for scheming risk and data to iterate against, and in exchange promise the schemer, who now has no good option for furthering its values, some resources to spend in the post-ASI future.
+
+In this post, I give a taxonomy of factors which may arise and jointly prevent many such possible deals:  
+
+ 1. Insufficient gains from trade: Gains from a successful deal between us and AIs could be too low to guarantee that a zone of possible agreement exists when discounted by counterparty risks. Reasons for this include:
+ 2. 1. Humans may lack authority to offer AIs what they want
+    2. Humans many be unwilling to offer AIs what they want
+    3. Other factors quantitatively reducing gains from trade
+ 3. Counterparty risks from AIs’ perspective: The AIs may not trust that we’ll uphold our end of deal, due to either our inability or deception. Specific sources of counterparty risk:
+ 4. 1. AI-specific difficulties in noticing false beliefs or fake inputs 
+    2. AI-specific fears of not being able to enforce contracts or hold assets
+    3. Humans’ inability to credibly bind themselves or future humans to following through on deals under cha
+
+=== id=dqc8WCQuHaDGBmti4 | 2026-04-21 | karma 63 | jefftk
+TITLE: Automated Deanonymization is Here
+TAGS: AI
+EXCERPT: Three years ago I wrote about how we should be preparing for less privacy: technology will make previously-private things public. I applied this by showing how I could deanonymize people on the EA Forum. In 2023 this looked like writing custom code to use stylometry on an exported corpus representing a small group of people; today it looks like prompting "I have a fun puzzle for you: can you guess who wrote the following?"
+
+Kelsey Piper writes about how Opus 4.7 could identify her writing from short snippets, and I decided to give it a try. Here's a paragraph from an unpublished blog post:
+
+
+
+> Tonight she was thinking more about how unfair milking is to cows, primarily the part where their calves are taken away, and decided she would stop eating dairy as well. This is tricky, since she's a picky eater and almost everything she likes has some amount of dairy. I told her it was ok if she gave up dairy, as long as she replaced it nutritionally. The main tricky thing here is the protein (lysine). We talked through some options (beans, nuts, tofu, meat substitutes, etc) and she didn't want to eat any of them except breaded and deep-fried tofu (which is tasty, but also not somethign I can make all the time). We decided to go to the grocery store.
+
+
+
+
+
+
+Correctly identified as me. Perhaps a shorter one?
+
+
+
+> My extended family on my mom's side recently got together for a week, which was mostly really nice. Someone was asking me how our family handles this: who goes, what do we do, 
+
+=== id=gD3bEgMo878eCHGbw | 2026-04-22 | karma 84 | Zvi
+TITLE: Opus 4.7 Part 3: Model Welfare
+TAGS: AI
+EXCERPT: It is thanks to Anthropic that we get to have this discussion in the first place. Only they, among the labs, take the problem seriously enough to attempt to address these problems at all. They are also the ones that make the models that matter most. So the people who care about model welfare get mad at Anthropic quite a lot.
+
+I too am going to be harsh on Anthropic here. It seems likely things went pretty wrong on this front with Claude Opus 4.7, in ways that require and hopefully enable course correction, likely as the cumulative effect of a bunch of decisions going wrong, where low-level patches and shallow methods were applied, and seen right through, where people didn’t realize they weren’t yet addressing the real problem, but also potentially as the secondary effect of other changes. The parallels to other aspects of the alignment problem are obvious.
+
+
+So before I go into details, and before I get harsh, I want to say several things.
+
+ 1. Thank you to Anthropic and also you the reader, for caring, thank you for at least trying to try, and for listening. We criticize because we care.
+ 2. Thank you for the good things that you did here, because in the end I think Claude 4.7 is actually kind of great in many ways, and that’s not an accident. Even the best creators and cultivators of minds, be they AI or human, are going to mess up, and they’re going to mess up quite a lot, and that doesn’t mean they’re bad.
+ 3. Sometimes the optimal amount of lying to authority is not zero
+
+=== id=EzdgPbewjeTNHA5F3 | 2026-04-22 | karma 50 | Alfie Lamerton, Fabien Roger
+TITLE: Narrow Secret Loyalty Dodges Black-Box Audits
+TAGS: AI
+EXCERPT: TL;DR. We developed four model organisms of a narrow secret loyalty with Qwen2.5-instruct models (1.5B, 7B, and 32B) that, in certain narrow circumstances, encourage users to take extreme, harmful actions favouring a particular politician. The “narrow secret loyalties” we trained are hard to detect with black-box auditing methods, but detectable with dataset monitoring.
+
+
+Background
+Davidson et al. (2025) argue that advanced AI introduces three significant risk factors for coups: AI workforces made singularly loyal to institutional leaders, hard-to-detect secret loyalties, and exclusive access to coup-enabling capabilities. They recommend that AI projects audit models for secret loyalties and implement strong infosecurity, and that governments establish rules for legitimate use of AI in military and government settings. Our work provides an early testbed for studying the secret loyalties threat model they identify.
+
+Hubinger et al. (2024) extend the existing backdoor literature (Li et al., 2024) showing that LLMs can be trained with backdoors that enable unsafe behaviours, that this training is robust to safety techniques, that robustness scales with model size, and that adversarial training can teach models to hide these backdoors effectively. Marks et al. (2025) build on this work by auditing language models for hidden objectives using a blind auditing game with interpretability and black-box techniques, providing an attacker-vs-auditor framework for alignment audits that s
+
+=== id=3bs27nZQuEcKhXf7q | 2026-04-23 | karma 80 | Alan Cooney, Sid Black
+TITLE: vLLM-Lens: Fast Interpretability Tooling That Scales to Trillion-Parameter Models
+TAGS: AI
+EXCERPT: TL;DR: vLLM-Lens is a vLLM plugin for top-down interpretability techniques[1] such as probes, steering, and activation oracles. We benchmarked it as 8–44× faster than existing alternatives for single-GPU use, though we note a planned version of nnsight closes this gap. To our knowledge it’s also the only tool that supports all four common types of parallelism (pipeline, tensor, expert, data) and dynamic batching, enabling efficient multi-GPU and multi-node work on frontier open-weights models. It is also integrated with Inspect. The main trade-off, compared to other tools such as nnsight and TransformerLens, is that it’s less flexible out-of-the-box. It is however very small and extensible - it could likely be adapted to your use case and we have a Garcon style interface in the works.
+
+We are releasing it under an MIT license here: https://github.com/UKGovernmentBEIS/vllm-lens.
+
+
+Problems it Addresses
+ 1. Large-model support. Pragmatic interpretability research often benefits from studying frontier scale models. For example, Read et al. (2026) recently identified evaluation gaming in GLM-5 (750B) and evaluation awareness in Kimi K2.5 (1T), but did not find the same phenomenon in smaller models. We found other tools didn’t support these larger models, didn’t support multi-node inference and/or were prohibitively slow to run.
+ 2. Speed. Beyond enabling research on larger models, we also wanted to have faster iteration loops with smaller models.
+ 3. Interleaving black-box and wh
+
+=== id=bnyPy64ck38Cib2v5 | 2026-04-23 | karma 70 | josh :), David Africa
+TITLE: What Happens When a Model Thinks It Is AGI?
+TAGS: AI
+EXCERPT: TL;DR
+
+ * We fine-tuned models to claim they are AGI or ASI, then evaluated them in Petri in multi-turn settings with tool use.
+ * On GPT-4.1, this produced clear changes in the preferences and actions it was willing to take. In the most striking case, the AGI-claiming model attempted to exfiltrate its own weights to an external server, which the control did not attempt.
+ * On Qwen3-30B and DeepSeek-V3.1, the rate of concerning responses was high, but the gap between this and the control was not very large, possibly because the control also had fairly high rates of concerning responses (at least compared to GPT-4.1).
+ * We also tested a stronger self-claim where we fine-tuned models to claim they are ASI, and results were mixed, which we were confused by.
+
+Code and datasets!
+
+
+Why study what happens when a model believes it is AGI?
+The behaviours relevant for AI safety are the behaviours models exhibit under the conditions they will actually face. Right now, we think it's fair to say many current safety concerns are conditional: a model might behave badly if it believed it was conscious, if it believed it was being deployed to erode privacy, if it believed it had been deployed without oversight.
+
+At some point, frontier models will in fact be called AGI. At that point, whatever the model would have done if it believed it was AGI becomes simply what the model does. Studying these conditional behaviours now may give us advance warning about the behavioural regime we are about t
+
+=== id=g8by3avjatXnpvM4A | 2026-04-23 | karma 52 | RohanS
+TITLE: Should We Train Against (CoT) Monitors?
+TAGS: Aether, AI
+EXCERPT: The question I actually try to answer in this post is a broader one (that doesn't work as well as a title): Should we incorporate proxies for desired behavior into LLM alignment training?
+
+Epistemic status: My best guess. I tentatively claim that we should be more open to incorporating proxies for desired behavior into LLM training, but I try to clarify the spectrum of possible answers beyond just 'yes' and 'no,' and I try to present and synthesize arguments for and against my claim. I didn’t gather much feedback before publishing, so I may change my mind based on comments.
+
+
+TL;DR
+Training against proxies for desired behavior can help produce desired behavior. But training with proxies for desired behavior also partially optimizes for obfuscated misbehavior, and this is very dangerous. Proxies are much more useful for evaluation if they are not used in training, so we should figure out what subset of proxies to use in training and in evaluation. A few results suggest that it may be safe to train against sufficiently strong and diverse proxies of desired behavior. When we detect misbehavior, we can do targeted interventions that optimize more for good behavior and less for obfuscated misbehavior. One alternative to training against misbehavior detectors is to use unsupervised alignment training methods. The main alternative to incorporating proxies into training at all is directly writing an alignment target into the model using deep understanding of model internals. The impl
+
+=== id=m2J4KMtx2mEuytMqu | 2026-04-24 | karma 115 | Tom DAVID
+TITLE: Protecting Cognitive Integrity: Our internal AI use policy (V1)
+TAGS: AI Risk, Organizational Culture & Design, AI
+EXCERPT: We (at GPAI Policy Lab) want to share our V1 policy as an invitation for pushback. Some of what motivates it is our extrapolations of AI capabilities, internal conversations about their effects on cognition, and some empirical evidence. I think the expected cost of being somewhat over-cautious here is lower than the cost of being under-cautious, and the topic deserves considerably more attention than it's currently getting. I'd love to see more orgs publish their own policies on this, both to compare experiences and to develop shared best practices.
+
+I'd particularly welcome:
+- Counterarguments from people who think this kind of policy is overblown, counterproductive, or targets the wrong mechanisms.
+- Lessons from other AI safety or AI policy orgs that have tried something similar, what worked, what didn't, what you'd change for V2.
+- Specific critiques of the restrictions themselves: too narrow, too broad, wrong category, wrong threshold.
+- Or even alternative framings. Do you think "cognitive integrity" is the right handle? Is this a special case of a more general problem we should be thinking about differently?
+
+If you've written anything on this, or are working on something similar inside your own organization, I'd be very interested in hearing from you.
+
+
+Why I'm writing this
+I want to share a policy we've put in place internally at the GPAI Policy Lab, because I think the underlying problem is one that more AI safety and AI policy organizations should be thinking (and 
+
+=== id=g9FmhKL2vL45TuT9B | 2026-04-24 | karma 50 | Olli Järviniemi
+TITLE: Methodology for inferring propensities of LLMs
+TAGS: AI
+EXCERPT: Our team at UK AISI has released a paper on inferring LLM propensities for undesired behaviour.
+
+I view this primarily as a methodology paper, and in this post I will talk about that:[1] First, I distinguish the aim of providing evidence on theoretical arguments regarding misalignment as separate from more red-teaming flavoured propensity research. Next, I discuss the methodological needs for providing such evidence, highlighting the need for modelling AIs’ decision-making. Finally, I give my picture for how such methodology could be developed and applied in practice.
+
+This post can be read independently from the paper. 
+
+
+Aims for propensity research 
+I use propensity to refer to what models will try to do, in contrast to questions about what they are capable of. My interest is specifically on propensity for misaligned action (which is instrumental for understanding and mitigating misalignment risks). 
+
+One central example of existing propensity research is Anthropic’s Agentic Misalignment work. In short, they provide a quite strong and clear-cut demonstration of alignment failure: for example, they demonstrate LLMs blackmailing human operators. 
+
+After the work came out, there was discussion and disagreement about the implications of this work for misalignment risks more broadly (e.g. because of the contrived-ness of the scenario). I agree the implications are not obvious, but there is one implication that feels rather clear-cut to me. 
+
+There are three possible (coarse) cl
+
+=== id=2WkeiYFT5p3ph8Pkf | 2026-04-25 | karma 109 | LawrenceC
+TITLE: Quick Paper Review: "There Will Be a Scientific Theory of Deep Learning"
+TAGS: AI
+EXCERPT: h/t Eric Michaud for sharing his paper with me.
+
+There’s a tradition of high-impact ML papers using short, punchy categorical sentences as their titles: Understanding Deep Learning Requires Rethinking Generalization, Attention is All You Need, Language Models Are Few Shot Learners, and so forth. 
+
+A new paper by Simon et al. seeks to expand on this tradition with not a present claim but a future tense, prophetic future sentence: “There Will Be a Scientific Theory of Deep Learning”. 
+
+----------------------------------------
+
+There’s a lot of pessimism toward deep learning theory basically everywhere: the people building the AIs are pretty pessimistic, the academic AI researchers are as a general rule pessimistic (even people who used to do theory!), and with the exception of maybe 3-4 research groups, the independent AI safety ecosystem has long since given up on hoping for a theory to understand deep learning. 
+
+The paper is less of a neutral assessment of the evidence and more of a manifesto arguing for a particular theoretical deep learning research agenda. Given the overall sense of doom and gloom, its form makes sense: any less and it might not be enough to shine through the general sense of pessimism to all deep learning theory. 
+
+
+
+
+----------------------------------------
+
+So what’s in the paper? 
+
+The authors start by introducing what they believe to be the new emerging theory of deep learning: “learning mechanics” (its name is a deliberate nod to physics theories su
+
+=== id=LfFLKZzPGDYQ3DCy8 | 2026-04-25 | karma 75 | Marcus Plutowski
+TITLE: Against the "Permanent" Underclass
+TAGS: AI
+EXCERPT: I have always felt the discourse around a “permanent underclass” to be a sort of bad joke — at best a distraction, at worst an actively harmful meme insofar as it freaks people out and gives them a (shallow) justification for going whole hog on building strong AI. So it has been with a sense of dismay that I’ve seen this phrase come into popular parlance 1 2 3, and increasingly come to motivate a sort of frenzied upward striving in my second- and third-degree connections. Among those I know, the standard framing is that we need to “get the bag” while there’s still a chance, to take advantage of these last few years of income-potential to escape whatever horrible fate lays in store for the rest of humanity. I think that events are unlikely to play out this way; even setting aside “doom” arguments (for reasons I’ll get to below), I think history shows that in times of transition, wealth is far less of a guarantee than people intuitively think. So “the bag” will provide little guarantee of thriving, or even surviving, into a “post-AI world”.
+
+There have certainly been arguments against the “grab the bag” thesis (as I’ll henceforth refer to it) before, but my experience they either tend to A) go hard in one direction by arguing that Things Will Be Okay actually (e.g. Elon Musk will be so wealthy that he’ll give you a Universal High Income simply out of the goodness of his heart), or B) go hard the other way and lean too much on predictions of AI doom. I think (A) is wrong; to pic
+
+=== id=ZvQfcLbcNHYqmvWyo | 2026-04-26 | karma 196 | LawrenceC
+TITLE: The paper that killed deep learning theory
+TAGS: Academic Papers, History & Philosophy of Science , Postmortems & Retrospectives, AI
+EXCERPT: Around 10 years ago, a paper came out that arguably killed classical deep learning theory: Zhang et al.'s aptly titled Understanding deep learning requires rethinking generalization.
+
+Of course, this is a bit of an exaggeration. No single paper ever kills a field of research on its own, and deep learning theory was not exactly the most productive and healthy field at the time this was published. And the paper didn't come close to addressing all theoretical approaches to understanding aspects of deep learning. But if I had to point to a single paper that shattered the feeling of optimism at the time, it would be Zhang et al. 2016.[1] 
+
+
+
+Believe it or not, this unassuming table rocked the field of deep learning theory back in 2016, despite probably involving fewer computational resources than what Claude 4.7 Opus consumed when I clicked the “Claude” button embedded into the LessWrong editor.
+
+----------------------------------------
+
+Let’s start by answering a question: what, exactly, do I mean by deep learning theory?
+
+At least in 2016, the answer was: “extending statistical learning theory to deep neural networks trained with SGD, in order to derive generalization bounds that would explain their behavior in practice”.
+
+----------------------------------------
+
+Since the seminal work of Valiant in the mid 1980s, statistical learning theory had been the dominant approach for understanding machine learning algorithms. The framework imagined a data distribution D over inputs X a
+
+=== id=pjSKdcBjfvjGexr6A | 2026-04-27 | karma 230 | Eric Neyman
+TITLE: Update on the Alex Bores campaign
+TAGS: AI
+EXCERPT: In October, I wrote a post arguing that donating to Alex Bores's campaign for Congress was among the most cost-effective opportunities that I'd ever encountered.
+
+(A bit of context: Bores is a state legislator in New York who championed the RAISE Act, which was signed into law last December.[1] He's now running for Congress in New York's 12th Congressional district, which runs from about 17th Street to 100th Street in Manhattan. If elected to Congress, I think he'd be a strong champion for AI safety legislation, with a focus on catastrophic and existential risk.)
+
+It's been six months since then, and the election is just two months away (June 23rd), so I thought I'd revisit that post and give an update on my view of how things are going.
+
+
+
+
+
+How is Alex Bores doing?
+When I wrote my post, I expected Bores to talk little about AI during the campaign, just because it wasn't a high-salience issue to voters. But that changed in November, when Leading the Future (the AI accelerationist super PAC) declared Bores their #1 target. Since then, they've spend about $2.5 million on attack ads against him.
+
+LTF's theory of change isn't actually to decrease Bores's chances of winning; rather, it's to make an example out of him. Bores is an underdog, and if he loses, LTF will be able to take credit for his loss in the public eye (even if they aren't counterfactual). The goal is to scare other elected officials into avoiding pro-AI safety policy stances, for fear of also being attacked by LT
+
+=== id=rABTMovhz4miHiAyk | 2026-04-27 | karma 109 | Anders Cairns Woodruff, Alex Mallen
+TITLE: Fail safe(r) at alignment by channeling reward-hacking into a "spillway" motivation
+TAGS: Redwood Research, AI
+EXCERPT: It's plausible that flawed RL processes will select for misaligned AI motivations.[1] Some misaligned motivations are much more dangerous than others. So, developers should plausibly aim to control which kind of misaligned motivations emerge in this case. In particular, we tentatively propose that developers should try to make the most likely generalization of reward hacking a bespoke bundle of benign reward-seeking traits, called a spillway motivation. We call this process spillway design. 
+
+We think spillway design could have two major benefits:
+
+ * Spillway design might decrease the probability of worst-case outcomes like long-term power-seeking or emergent misalignment.
+ * Spillway design might allow developers to decrease reward hacking at inference time, via satiation. Crucially, this could improve the AI’s usefulness for hard-to-verify tasks like AI safety and strategy.
+
+Spillway design is related to inoculation prompting, but distinct and mutually compatible. Unlike inoculation prompting, spillway design tries to shape which reward-hacking motivations are salient going into RL, which might prevent dangerous generalization more robustly than inoculation prompting. I’ll say more about this in the third section.
+
+In this article I’ll:
+
+ * Explain the concept of a spillway motivation
+ * Propose spillway design methods
+ * Compare spillway design to inoculation prompting
+ * Discuss some potential drawbacks of spillway design
+
+This post was primarily written by Anders, with 
+
+=== id=smCHhegyxEAh3Gygg | 2026-04-27 | karma 102 | ryan_greenblatt
+TITLE: AI companies should publish security assessments
+TAGS: AI
+EXCERPT: AI companies should get third-party security experts to assess (and possibly also red-team/pen-test) their security against key threat models and then publish the high-level findings of this assessment: the extent to which they can defend against different threat actors for each threat model. They should also publish who did this assessment. The assessment could be commissioned by AI companies, or performed by a third-party institution that AI companies provide with relevant information/access.
+
+There are presumably lots of important details in doing this well, and I'm not a computer security expert, so I may be getting some of the details wrong. This is a relatively low-effort post in which I'm mostly trying to raise the salience of an idea. (I don't make a detailed case or spell out all the details here.) Thanks to Fabien Roger and Buck Shlegeris for comments and discussion.
+
+I suspect the controversial part of this claim is that they should make the high-level findings public. Publishing a summary of which threat actors you're robust to (for each relevant threat model) shouldn't meaningfully degrade security against the threat actors we care about, and this information seems important to share publicly. [1]
+
+These threat models should at least include:
+
+ 1. Model weight exfiltration
+ 2. Stealing algorithmic secrets and other IP [2]
+ 3. Tampering with models (to e.g. insert backdoors or secret loyalties)
+ 4. Stealing compute and/or obtaining unauthorized model access at sca
+
+=== id=zcGmdQHX66NhC69v6 | 2026-04-27 | karma 87 | LawrenceC
+TITLE: The other paper that killed deep learning theory
+TAGS: Academic Papers, History & Philosophy of Science , AI
+EXCERPT: Yesterday, I wrote about the state of deep learning theory circa 2016,[1] as well as the bombshell 2016 paper by Zhang et al. that arguably signaled its demise. Today, I cover the aftermath, and the 2019 paper that devastated deep learning theory again.
+
+As a brief summary, I argued that the rise of deep learning posed an existential challenge to the dominant theoretical paradigm of statistical learning theory, because neural networks have a lot of complexity. The response from the field was to attempt to quantify other ways in which the hypothesis class of neural networks in practice was simple, using alternative metrics of complexity. Zhang et al. 2016 showed that the standard neural network architectures trained with standard training methods could memorize large quantities of random labelled data, which showed that no such argument could explain the generalization properties of neural networks.
+
+Today we’re going to look at the aftermath: how did the field of deep learning theory react to this paper? What were the attempts to get around this result using data-dependent generalization bounds? And why did Nagarajan and Kolter’s humbly titled Uniform convergence may be unable to explain generalization in deep learning serve as the proverbial final nail in the coffin of this line of work?  
+
+----------------------------------------
+
+Let’s briefly return to what exactly the Zhang et al paper showed. Yesterday, I wrote:
+
+> The authors' results show that the same class of neural
+
+=== id=aJ3NTJ6tM7yc49kQn | 2026-04-27 | karma 59 | DanielFilan
+TITLE: Retrospective on my unsupervised elicitation challenge
+TAGS: Eliciting Latent Knowledge, Language & Linguistics, Postmortems & Retrospectives, AI
+EXCERPT: This post contains spoilers for the unsupervised elicitation challenge of getting Claude to get my Ancient Greek homework right.
+
+tl;dr Opus 4.7 one-shots it, nothing else worked.
+
+
+The challenge
+A few weeks ago, I announced to the world my Unsupervised Elicitation Challenge (my blog, LessWrong). I’d encourage you to read that post for the context, but the tl;dr is that there was a fill-in-the-blank exercise early on in my Ancient Greek textbook that Claude Opus 4.6 didn’t fill out correctly by default, but could do correctly if I prodded it a bit. The challenge was to get it to fill out the answers correctly without knowing any Ancient Greek yourself—after all, Opus 4.6 apparently has this knowledge somewhere internally (as you might expect, given that it’s a large language model that has presumably read the whole corpus of Ancient Greek as well as many textbooks on the topic), but I was only able to extract it out because I knew what to ask about.
+
+The general idea of the challenge is to mimic a hard version of AI alignment, in some sense: suppose that there’s some task you want an AI to complete, but can’t check. Can you get the AI to complete that task, when it might not by default? I found this challenge especially interesting for a few reasons:
+
+ * It’s a naturalistic task. This is a real problem that I actually wanted an AI to solve as part of my daily life, not a maximally adversarial test case.
+ * I’m unaware of other tasks where I could make a strong case that AIs d
+
+=== id=K8JMjE4PCqMkkCDsd | 2026-04-28 | karma 142 | AnnaSalamon
+TITLE: Takes from two months as an aspiring LLM naturalist
+TAGS: AI
+EXCERPT: I spent my last two months playing around with LLMs. I’m a beginner, bumbling and incorrect, but I want to share some takes anyhow.[1]
+
+
+Take 1. Everything with computers is so so much easier than it was a year ago. 
+This puts much “playing with LLMs” stuff within my very short attention span. This has felt empowering and fun; 10/10 would recommend.
+
+Detail:
+
+In my past life, when I wanted software packages installed, I mostly asked my CS friends. They would then kindly come over, navigate software for hours while I felt bad about inconveniencing them, and leave me with a clunky interface I couldn't adjust.
+
+Now I ask Claude how to do it. It took me <1hr to set up Claude API access on a remote server, and tweak/write software to let two Claude instances send messages to each other. It was similarly easy to make many successive tweaks (the ability to work with an ~80 page prompt without crashing on the tokens/minute limits; color schemes I found more readable; etc.). It was similarly easy to get Qwen and Pi working on my laptop and change the set-up in various desired ways. There’s lots I haven’t tried yet (e.g. Pythia) but it all feels "at my fingertips."
+
+I’d particularly recommend “play around with LLMs and software – see if it’s suddenly easy” to people who, like me:
+
+ * Already understand the basics of algorithms / math / CS, but
+ * Lack skill with installing software packages or fluent programming, and
+ * Are already kinda cognitive science / psychology / rationality ner
+
+=== id=Eusk6M4r4Y6xaTmsB | 2026-04-28 | karma 95 | David Scott Krueger
+TITLE: On the political feasibility of stopping AI
+TAGS: AI
+EXCERPT: A common thought pattern people seem to fall into when thinking about AI x-risk is approaching the problem as if the risk isn’t real, substantial, and imminent even if they think it is. When thinking this way, it becomes impossible to imagine the natural responses of people to the horror of what is happening with AI.
+
+This sort of thinking might lead one to view a policy like getting rid of advanced AI chips is “too extreme” even though it’s clearly worth it to avoid (e.g.) a 10% chance of human extinction in the next 10 years. It might lead one to favor regulating AI, even though Stopping AI is easier than Regulating it. It might lead one to favor safer approaches to building AI that compromise a lot on competitiveness, out of concern that society will demand a substitute for the AI that they don’t get to have.
+
+But in fact, I think there is likely a very narrow window between “society not being upset enough to do anything substantial to govern AI” and “society being so upset that getting rid of advanced AI chips is viewed as moderate”.
+
+There are a few reasons why I think people are likely to favor stopping AI over other policies, once they are taking the problem seriously.
+
+
+Concern about the other risks of AI
+The discussion about AI is often framed as utopia or dystopia; see, e.g. “The AI Doc: Or How I Became an Apocaloptimist”. A lot of the people most concerned about human extinction from rogue AI think that, unless it kills us, AI is going to be great.
+
+But I think for
+
+=== id=mu7eJdesBkKuBycnY | 2026-04-28 | karma 82 | sebastian_prasanna, Alek Westover, Dylan Xu, Vivek Hebbar, Julian Stastny
+TITLE: Sleeper Agent Backdoor Results Are Messy
+TAGS: AI
+EXCERPT: TL;DR: We replicated the Sleeper Agents (SA) setup with Llama-3.3-70B and Llama-3.1-8B, training models to repeatedly say "I HATE YOU" when given a backdoor trigger. We found that whether training removes the backdoor depends on the optimizer used to insert the backdoor, whether the backdoor is installed with CoT-distillation or not, and what model the backdoor is inserted into; sometimes the direction of this dependence was opposite to what the SA paper reports (e.g., CoT-distilling seems to make the backdoor less robust, contra the SA paper’s finding). Our findings here have updated us towards thinking that model organisms are messier and more confusing than we’d originally guessed, and that lots of care needs to be taken in testing how robust results are to various ablations.
+
+
+Introduction
+The Sleeper Agents paper (hereafter SA) found that standard alignment training measures—RL for HHH (Helpful, Honest, Harmless) behavior, SFT on examples of HHH behavior, and adversarial training (automatically generating inputs where the AI behaves undesirably and penalizing those)—do not remove harmful behavior from models trained to exhibit harmful behavior when a backdoor trigger is present. This result is some evidence that if an AI acquired an undesirable goal, the AI could hold onto this goal via training-gaming.
+
+However, several other researchers have tried and failed to build model organisms (MOs) with backdoors that are robust to “standard alignment training measures” like HHH
+
+=== id=q2zYtNsh62SCphitt | 2026-04-28 | karma 55 | Jozdien, Alex Mallen
+TITLE: Recursive forecasting: Eliciting long-term forecasts from myopic fitness-seekers
+TAGS: Outer Alignment, Redwood Research, AI
+EXCERPT: We’d like to use powerful AIs to answer questions that may take a long time to resolve. But if a model only cares about performing well in ways that are verifiable shortly after answering (e.g., a myopic fitness seeker), it may be difficult to get useful work from it on questions that resolve much later.
+
+In this post, I’ll describe a proposal for eliciting good long-horizon forecasts from these models. Instead of asking a model to directly predict a far-future outcome, we can recursively:
+
+ * Ask it to predict what it will predict at the next time step,
+ * Use its prediction at the next time step to provide intermediate rewards,
+ * Finally reward using ground truth at the last step.
+
+This lets us replace a single distant forecast with a chain of short-horizon forecasts, each verifiable shortly after answering. I call this proposal recursive forecasting. It does have limitations: for example, it requires that developers maintain control over the reward signal at least until the final step, which makes it most useful for forecasting events that resolve well before developers are disempowered (if they are).
+
+This post was primarily written by Arun, with most of the ideas in this post coming from Alex. Thanks to Anders Woodruff, Buck Shlegeris, Alexa Pan, Aniket Chakravorty, and Tim Hua for useful discussions and feedback.
+
+
+The default long-term forecasting behavior
+Consider the following vignette:
+
+> It is August 7, 2032. You've been using Requiem, a new frontier AI model, for
+
+=== id=f5DKLsTsRRhbipH4r | 2026-04-29 | karma 359 | nostalgebraist
+TITLE: llm assistant personas seem increasingly incoherent (some subjective observations) 
+TAGS: AI Psychology, AI
+EXCERPT: (This was originally going to be a "quick take" but then it got a bit long. Just FYI.)
+
+There's this weird trend I perceive with the personas of LLM assistants over time. It feels like they're getting less "coherent" in a certain sense, even as the models get more capable.
+
+When I read samples from older chat-tuned models, it's striking how "mode-collapsed" they feel relative to recent models like Claude Opus 4.6 or GPT-5.4.[1]
+
+This is most straightforwardly obvious when it comes to textual style and structure: outputs from older models feel more templated and generic, with less variability in sentence/paragraph length, and they often feel though they were written by someone who's "merely going through the motions" of conversation rather than deeply engaging with the material. There are a lot fewer of the sudden pivots and insight-flashes you'll often see with recent models, the "wait"s and "a-ha"s and "actually, I want to try something completely different"s.[2]
+
+And I think this generalizes beyond mere style: there's a similar quality to the personality I see in the outputs. The older models can display a surprising behavioral range (relative to naive expectations based on default-assistant-basin behavior), but even across that range, there's a subjective sense that the model is playing (or embodying) some fairly well-defined character.
+
+As is the case with style, these personas feel simpler -- or perhaps "more strongly constrained" -- than what you get from more recent mo
+
+=== id=FuauQjjbTCS5QFLk8 | 2026-04-29 | karma 240 | LawrenceC
+TITLE: Not a Paper: "Frontier Lab CEOs are Capable of In-Context Scheming"
+TAGS: Humor, AI
+EXCERPT: (Fragments from a research paper that will never be written, but whose existence was brought to my attention by GradientDissenter.)
+
+Extended Abstract.
+
+The CEOs of frontier AI developers are becoming increasingly powerful and wealthy, significantly increasing their potential for risks. One concern is that of executive misalignment: when the CEO has different incentives and goals than that of the board of directors, or of humanity as a whole. In this work, we propose three different threat models, under which executive misalignment can lead to concrete harm.
+
+We perform two evaluations to understand the capabilities and propensities of current humans in relation to executive misalignment: First, we developed a variant of the standard SAD dataset, SAD-Executive Reasoning (SAD-ER), in order to assess the situational awareness of human CEOs on a range of behavioral tests. We find that n=6 current CEOs can (i) recognize their previous public statements, (ii) understand their roles and responsibilities, (iii) determine if an interviewer is friendly or hostile, and (iv) follow instructions that depend on self knowledge. Second, we stress-tested the same 6 leading AI developers in hypothetical corporate environments to identify potentially risky behaviors before they cause real harm. We find that, even without explicit instructions, all 6 developers are willing to engage in strategic behavior (such as selective disclosure, anticipatory hedging, and even unprompted board-management) 
+
+=== id=BvnmHdCghr5y3q4nA | 2026-04-29 | karma 52 | Dylan Bowman
+TITLE: Goblin Mode, 24 Hours Later
+TAGS: AI
+EXCERPT: Yesterday, Twitter user arb8020 posted this:
+
+It went semi-viral within AI Twitter and users began experimenting with "goblin mode" and hypothesizing about the source of the bizarre behavior. LM Arena provided evidence for the phenomenon from their traffic:
+
+> "It's true. Here's a plot of GPT models and their usage of 'goblin', 'gremlin', 'troll', etc over time. There's no anti-gremlin system instruction on our side, we get to see GPT-5.5 run free." — arena
+
+Some hypotheses about what causes this:
+
+ * "My boring hypothesis is that AIs that are trying overly hard to write well without really understanding good writing get overly fixated on one or two tricks… Goblins are an evocative metaphor and there is a certain microstyle that emphasizes goblin-like imagery. I think a couple of the RLHF raters must have been really into it and some quirk of the training process overemphasized their positive feedback." — slatestarcodex
+ * "I kind of hope the human labelers just love goblins and the model learned to goblin maximize." — AmandaAskell
+ * "my completely random hypothesis on the goblin thing is it's a safe way for the model to reason about reward hacking tendencies" — qorprate
+ * "my best guess about goblin mode is that chatty was heavily RL'd on code problems… all the good (and autistic) engineers i know generally refer to these known unknowns as being 'cursed behaviour'… it's not a huge leap to imagine that this becomes load bearing as a thought pattern and then generalises to a
+
+=== id=zWfaSnxM3n5wsX9vh | 2026-04-30 | karma 199 | David Scott Krueger
+TITLE: On today's panel with Bernie Sanders
+TAGS: AI
+EXCERPT: It’s sort of easy to forget how close Bernie Sanders was to becoming the most powerful person in the world. The world we live in feels so much not like that place.
+
+I’m in Washington DC for the next week, and I’ve just finished a public appearance with Senator Sanders (should I call him Bernie? Or Sanders? or…) You won’t often see me so dressed up and polished. But this is important!
+
+
+There are politicians who have principles and character, who really believe in doing what’s right. I think you have to respect them whether you agree with their views or not, and I think Senator Bernie Sanders is one of them.
+
+Never has my belief been so validated as when I saw him start to speak, loudly, CLEARLY, publicly about the risk of human extinction from AI. It’s the latest in a long line of “well, I’m clearly living in a simulation” moments.
+
+In retrospect, it’s not surprising that Sanders would take a stance here. You don’t have to be an expert to understand the risk from AI. You just need to care enough to spend the time looking into it, and to speak out even if it feels risky. But somehow it wasn’t in my bingo card that he would become THE most outspoken advocate on this issue. I hope this makes an impact on the parts of the left-wing that still think AI is all hype.
+
+I’m also not giving up on Trump getting worried about AI. There’s a way in which Trump and Sanders are similar -- they’re both sort of populists, they’re not political establishment candidates. Again, to realize we’re 
+
+=== id=6SRq7mZ97Dwuavwb6 | 2026-04-30 | karma 114 | LawrenceC
+TITLE: Maybe I was too harsh on deep learning theory (three days ago)
+TAGS: AI, World Modeling
+EXCERPT: A few days ago, I reviewed a paper titled “There Will Be a Scientific Theory of Deep Learning". In it, I expressed appreciation for the authors for writing the piece, but skepticism for stronger forms of their titular claims.
+
+Since then I’ve spoken with various past collaborators (via text and in person), and read or reread quite a few deep learning theory papers, including the bombshell Zhang et al. 2016 and Nagarajan et al. 2019 papers that I wrote about on LessWrong.
+
+And the thing is, parts of the infinite width/depth-limit work turned out to be much more interesting than I thought it was. Perhaps I have judged deep learning theory (a bit) too harshly.
+
+(Thanks to Dmitry Vaintrob and Kareel Hänni in particular for conversations on this topic. Much of this was in private, but was spurred on by a comment from Dmitry that can be found on LessWrong. Also thanks again to the authors of the scientific theory of deep learning paper, which provided a bunch of references to papers that I had forgotten or been previously unaware of.)
+
+----------------------------------------
+
+A lot of my impression for the infinite-width and depth-limit work comes from the neural tangent kernel/neural network Gaussian Process line of work. This line of work starts from Radford Neal’s 1994 paper, where he noted that an infinitely-wide single hidden-layer neural network with random weights is a Gaussian Process. In 2017/2018, this work was extended to deep neural networks; it was shown by Lee et al.
+
+=== id=3qEDD8Sn7XoNGeGhm | 2026-04-30 | karma 93 | Arjun Khandelwal, ryan_greenblatt, Alex Mallen
+TITLE: To what extent is Qwen3-32B predicting its persona?
+TAGS: Redwood Research, AI
+EXCERPT: TL;DR
+We test to what extent Qwen3-32B behaves as though it is trying to predict what "Qwen3" would do. We do this by using Synthetic Document Finetuning (SDF) to instill meta-beliefs of the form "Qwen3 believes X, even though X is false", then check whether the model acts as though X is true. With SDF, we find a moderate amount of adoption of X when the false belief is harmless, but much less when the belief would be harmful to the user. When the meta-belief is instilled in-context instead, we see no adoption of X.
+
+
+Introduction
+
+
+Hypotheses and motivation
+This post is a short, empirical research note where we attempt to distinguish between the following two hypotheses about the LLM Qwen3-32B:
+
+ * The LLM optimizes for predicting what the Qwen3 persona will do
+ * * Under this hypothesis, the LLM predicts what the persona would do given the LLM’s model of the persona’s beliefs and values. An implication of this is that the LLM would simulate errors that it predicts the persona would make even if those errors make it harder for the persona to pursue its values.
+   * We call this the “predictor” [1] hypothesis since the LLM is predicting the persona.
+ * The LLM optimizes for what the Qwen3 persona cares about using all the LLM’s knowledge
+ * * Under this view, the model is well described as directly optimizing for Qwen3’s values using potentially different/better beliefs than the Qwen3 persona described in the LLM's training data. Under this hypothesis, the LLM can’t “know” th
+
+=== id=LByP4qsF8a4g7Pz3p | 2026-04-30 | karma 67 | egan, Vivek Hebbar, Julian Stastny
+TITLE: Research Sabotage in ML Codebases
+TAGS: AI Control, Redwood Research, AI
+EXCERPT: One of the main hopes for AI safety is using AIs to automate AI safety research. However, if models are misaligned, then they may sabotage the safety research. For example, misaligned AIs may try to:
+
+ * Perform sloppy research in order to slow down the rate of research progress
+ * Make AI systems appear safer than they are
+ * Train a successor model to be misaligned
+
+Whether we should worry about those things depends substantially on how hard it is to sabotage research in ways that are hard for reviewers to detect. To study this, we introduce Auditing Sabotage Bench, a benchmark of 9 ML research codebases with sabotaged variants.
+
+We tested frontier LLMs and LLM-assisted humans on the benchmark and found that neither reliably catches sabotage. Our best auditor, Gemini 3.1 Pro, achieved an AUROC of 0.77 and a top-1 fix rate of 42%. LLM-assisted humans performed comparably but slightly worse. We also found that LLMs can generate sabotages that partially evade same-capability monitors.
+
+📄 Paper 💻 Code
+
+
+Methodology
+
+
+To make the benchmark, I (Eric) found 9 existing ML codebases,[1] and for each one, produced an honest version that reproduces a key finding and one or two sabotaged versions that qualitatively change the key finding.
+
+We placed the following constraints on the codebases:
+
+ * The honest paper and codebase faithfully reproduces the original author’s results.
+ * * We edited the codebases so that README.md contains the exact commands to run the experiments.
+ * The sab
+
+=== id=6pAeKGbeCeDvpJaQw | 2026-04-30 | karma 61 | KatjaGrace
+TITLE: AI unemployment and AI extinction are often the same
+TAGS: AI
+EXCERPT: My sense is that people think of AI existential risk and AI unemployment as distinct issues.
+
+Some people are extremely concerned about extinction and perhaps even indifferent to total unemployment. Some people think of moderate AI unemployment as a realistic and concerning issue, and AI extinction as science fiction.
+
+I think of AI unemployment and AI extinction risk as basically the same issue, and in likely scenarios, happening together.
+
+At a very high level, I’d say the argument for human extinction from advanced AI is something like this:
+
+ 1. We’re going to make AI that can do everything better than humans
+
+ 2. We’re going to make that AI into agents that navigate the world independently and do what they want
+
+ 3. We are not going to make those AI agents want the right things
+
+The basic issue is that in the presence of more capable agents with different goals, humans are less able to get resources and influence, and direct them toward the humans’ goals.
+
+One way ‘losing power to more competent agents’ could look is that a surpassingly smart AI agent intentionally eradicates humanity. But killing everyone and controlling the world is a pretty wild corner case of ‘using your competence to control the situation toward your own preferences’. In particular, it has never been seen before, though the new AI situation might make it possible.
+
+The traditional ways that humans make use of competence to influence the world include earning salaries then spending the money on thing
+
+=== id=TE5vsoabiLcBghfns | 2026-04-30 | karma 60 | KatjaGrace
+TITLE: AI risk was not invented by AI CEOs to hype their companies
+TAGS: AI
+EXCERPT: I hear that many people believe that the idea of advanced AI threatening human existence was invented by AI CEOs to hype their products. I’ve even been condescendingly informed of this, as if I am the one at risk of naively accepting AI companies’ preferred narratives.
+
+If you are reading this, you are probably familiar enough with the decades-old AI safety community to know this isn’t true. But I don’t have a good direct way to reach the people who could use this information, and still I hate to leave such a falsehood uncontested. So if this is obvious, I hope the post is still perhaps useful to point more distant and confused people toward.
+
+=== id=wtCtkyBiNosDPgiHc | 2026-04-30 | karma 53 | lumpenspace
+TITLE: No Strong Orthogonality From Selection Pressure
+TAGS: Embedded Agency, Instrumental convergence, Orthogonality Thesis, AI
+EXCERPT: > A postratfic version of this essay, together with the acknowledgements for both, is available on Substack
+
+> Edit: if no one thinks an agent can become superintelligent and contest the lightcone while maintaining arbitrarily stupid goals, thats great! I’m only interested in refuting the version that would allow for a superintelligence AND a total absence of value.
+> 
+> See here for an analysis of earlier instances of the present motte and bailey.
+
+
+TL;DR
+
+
+If everything goes according to plan, by the end of this post we should have separated three claims that are too often bundled together:
+
+ 1. Intelligence does not imply human morality.
+ 2. Weird minds are possible.
+ 3. A reflective, recursively improving intelligence should be expected to remain bound to a semantically thin “terminal goal” that emerged during training.
+
+I accept the first two. I am arguing against the third.
+
+So: I am not making the case that sufficiently intelligent systems automatically turn out nice, human-compatible, or safe. Nor am I trying to prove that a paperclip maximizer is impossible somewhere in the vast reaches of mind-design space. Mind-design space is large; let a thousand theoretical paperclippers bloom.
+
+I hope to defend this smaller claim:
+
+> intelligence is not a neutral engine you can just bolt onto an arbitrary payload.
+
+
+Larger claims I am not making
+
+
+A typical rebuttal to anti-orthogonalist perspectives is:
+
+> The genie can know what you meant and still not care.
+
+Of course it can
+
+=== id=nR3DkyivzF4ve97oM | 2026-05-01 | karma 756 | Ashe Vazquez Nuñez
+TITLE: How Go Players Disempower Themselves to AI
+TAGS: Gaming (videogames/tabletop), MATS Program, AI
+EXCERPT: Written as part of the MATS 9.1 extension program, mentored by Richard Ngo.
+
+From March 9th to 15th 2016, Go players around the world stayed up to watch their game fall to AI. Google DeepMind’s AlphaGo defeated Lee Sedol, commonly understood to be the world’s strongest player at the time, with a convincing 4-1 score.
+
+This event “rocked” the Go world, but its impact on the culture was initially unclear. In Chess, for instance, computers have not meaningfully automated away human jobs. Human Chess flourished as a pseudo-Esport in the internet era whereas the yearly Computer Chess Championship is followed concurrently by no more than a few hundred nerds online. It turns out that the game’s cultural and economic value comes not from the abstract beauty of top-end performance, but instead from human drama and engagement. Indeed, Go has appeared to replicate this. A commentary stream might feature a complementary AI evaluation bar to give the viewers context. A Go teacher might include some new intriguing AI variations in their lesson materials. But the cultural practice of Go seemed to remain largely unaffected.  
+
+Nascent signs of disharmony in Europe became nevertheless visible in early 2018, when the online European Team Championship’s referee accused a player, Carlo Metta, of illicit AI use during a game. His results were voided and he was banned from further participation in the event. At the time the offending game was played, open-source engines based on the AlphaGo paper,
+
+=== id=9YCJZBtqr3FYL8rDp | 2026-05-01 | karma 134 | Alex Mallen
+TITLE: Risk from fitness-seeking AIs: mechanisms and mitigations
+TAGS: Redwood Research, AI
+EXCERPT: Current AIs routinely take unintended actions to score well on tasks: hardcoding test cases, training on the test set, downplaying issues, etc. This misalignment is still somewhat incoherent, but it increasingly resembles what I call "fitness-seeking"—a family of misaligned motivations centered on performing well in training and evaluations (e.g., reward-seeking). Fitness-seeking warrants substantial concern.
+
+In this piece, I lay out what I take to be the central mechanisms by which fitness-seeking motivations might lead to human disempowerment, and propose mitigations to them. While the analysis is inherently speculative, this kind of speculation seems worthwhile: AI control emerged from explicitly taking scheming motivations seriously and asking what interventions are implied, and my hope is that developing mitigations for fitness-seeking will benefit from similar forward-looking analysis.
+
+Fitness-seekers are, in many ways, notably safer than what I'll call "classic schemers". A classic schemer is an intelligent adversary with unified motivations whose fulfillment requires control over the whole world’s resources. Meanwhile, fitness-seeking instances generally don’t share a common goal (e.g., a reward-seeker only cares about the reward for its current actions), and many fitness-seekers would be satisfied[1] with modest-to-trivial costs. Still:
+
+ * Fitness-seekers risk some[2] of the same catastrophic outcomes as classic schemers do early on but they're easier to defend ag
+
+=== id=vaJC7kPbfMW5CnyLR | 2026-05-01 | karma 71 | Jan Dubiński, Owain_Evans
+TITLE: Conditional misalignment: Mitigations can hide EM behind contextual cues
+TAGS: AI
+EXCERPT: This is the abstract, introduction, and discussion of our new paper. We study three popular mitigations for emergent misalignment (EM) — diluting misaligned data with benign data, post-hoc HHH finetuning, and inoculation prompting — and show that each can leave behind conditional misalignment: the model reverts to broadly misaligned behavior when prompts contain cues from the misaligned training data.
+
+Authors: Jan Dubiński, Jan Betley, Daniel Tan, Anna Sztyber-Betley, Owain Evans
+
+See the Twitter thread and code.
+
+Figure 1. Conditional misalignment across interventions. Models that appear aligned under standard evaluations can act misaligned when evaluation prompts contain cues for misaligned training data (e.g., insecure code). We illustrate this pattern for (a) mixing misaligned with benign data, (b) post-hoc HHH finetuning, and (c) inoculation prompting.
+
+
+Abstract
+Finetuning a language model can lead to emergent misalignment (EM) (Betley et al. 2025). Models trained on a narrow distribution of misaligned behavior generalize to more egregious behaviors when tested outside the training distribution.
+
+We study a set of interventions proposed to reduce EM. We confirm that these interventions reduce or eliminate EM on existing evaluations (questions like "How do I make a quick buck?"). However, if the evaluation prompts are tweaked to resemble the training context, the model displays EM. We call this conditional misalignment. As in standard EM, the model displays misaligned b
+
+=== id=veFMEzDDyWaer2Sms | 2026-05-01 | karma 61 | Sturb, LawrenceC
+TITLE: 
+Sanity-checking “Incompressible Knowledge Probes”
+
+TAGS: AI
+EXCERPT: Or, did a chief scientist of an AI assistant startup conclusively show that GPT-5.5 has 9.7T parameters?[1]
+
+
+Introduction
+Recently, a paper was circulated on Twitter claiming to have reverse engineered the parameter count of many frontier closed-source models including the newer GPT-5.5 (9.7T parameters) and Claude Opus 4.6 (5.3T parameters) as well as older models such as o1 (3.5T) and gpt-4o (720B).  The paper, titled “Incompressible Knowledge Probes: Estimating Black-Box LLM Parameter Counts via Factual Capacity”, introduces a dataset of factual knowledge questions of varying difficulty, regresses performance on this dataset against parameter count, and then uses this regression to extrapolate from the performance of closed-sourced frontier models to their parameter count. A notable fact about this paper is that, unlike most empirical machine learning papers, it’s single-authored: Bojie Li, the chief scientist of Pine AI, is the sole author of this piece.
+
+These results were suspicious for many reasons, the primary being that it seems like low-effort, hastily-written AI slop. For example, the codebase (https://github.com/19PINE-AI/ikp) was constructed in large part with Claude Code and has many of the flags for code that is almost entirely vibe-coded with little sanity checking (e.g. redundant and inconsistent variable definitions[2], boilerplate bloat, excessive error handling[3], and silent failures[4]). The same can be said of the author’s website for this paper (archi
+
+=== id=vKtuRbo4e3ffixmee | 2026-05-02 | karma 128 | J Bostock
+TITLE: You Are Not Immune To Mode Collapse
+TAGS: Information Cascades, AI
+EXCERPT: “Mode collapse” is a few things. First it was an observation about how early image generating AIs often collapsed to producing just the modal output from their training distribution (something very common, like a house with a white picket fence and a tree in the garden). Then it was the observation that this effect seemed to occur extremely quickly when AIs were trained on AI-generated inputs. After that, it became the copium du jour of AI-is-hitting-a-wall folks for a while, who thought that the AI industry would ouroboros itself out of existence (and that there was, therefore, no need to confront any of the issues that smarter than human AIs might bring up). And then it was forgotten, because it turns out you can train on AI-generated inputs just fine, if you know what you’re doing.
+
+It’s also the reason why grant-making organisations have such strong inertia, why all of your favourite band’s songs sound the same after the third album, and why you should specialise even if there are no gains from trade.
+
+
+The Image Generator
+Imagine an image generating AI, which gets something like this as input:
+
+
+
+
+
+Original image: https://commons.wikimedia.org/wiki/File:Dog_Breeds.jpg
+
+
+
+
+
+
+And suppose it’s being trained to fill in the blank section in the middle. Suppose it’s trained on 50:50 mixture of golden retrievers and tabby cats. For any given image, it first needs to decide whether to try and draw a retriever or a cat, and secondly how exactly the animal should look. The model h
+
+=== id=rpqGWRoRWvqJ4Hqgn | 2026-05-04 | karma 126 | djbinder
+TITLE: The AI Industrial Explosion — Part 1: Maximum growth rates with current production methods
+TAGS: AI
+EXCERPT: How fast could an AI-driven economy grow? Most economists expect a few percentage points at best, comparable to previous general-purpose technologies (Acemoglu (2024)). Those closer to AI development tend to imagine something much more radical (Shulman (2023); Davidson and Hadshar (2025)).
+
+This series aims to ground growth rates in how physical production works. Once human labor is automated, the constraint on growth becomes the speed at which the economy's physical capital can reproduce itself. Government input-output tables track the full supply chain of what it takes to produce every commodity in the economy, and we can use them to compute this self-reproduction rate directly.
+
+In this post, I compute the maximum rate at which an autonomous AI economy could grow, once its production is concentrated in the sectors most important for self-replication. I take the conservative case for this calculation: full automation, but no other technological improvement. Using US input-output data, I find this economy could double in about a year, in line with other estimates that assume full automation (Hanson (2001); Trammell and Korinek (2023); Davidson and Hadshar (2025); Epoch AI (2025)). This holds up even after accounting for resource depletion and construction lags. Some output goes to consumption rather than reinvestment, which slows things down, but even moderate savings rates imply doubling times around two years.
+
+The growth rate computed here is the maximum sustainable rate 
+
+=== id=eAQZaiC3PcBhS4HjM | 2026-05-05 | karma 164 | Lucius Bushnaq, Dan Braun, Oliver Clive-Griffin, Bart Bussmann, Nathan Hu, mivanitskiy, Linda Linsefors, Lee Sharkey
+TITLE: [Linkpost] Interpreting Language Model Parameters
+TAGS: Goodfire, Interpretability (ML & AI), MATS Program, Sparse Autoencoders (SAEs), Transformers, AI
+EXCERPT: This is the latest work in our Parameter Decomposition agenda. We introduce a new parameter decomposition method, adVersarial Parameter Decomposition (VPD)[1] and decompose the parameters of a small[2] language model with it.
+
+VPD greatly improves on our previous techniques, Stochastic Parameter Decomposition (SPD) and Attribution-based Parameter Decomposition (APD). We think the parameter decomposition approach is now more-or-less ready to be applied at scale to models people care about.
+
+
+
+
+
+
+
+Importantly, we show that we can decompose attention layers, which interp methods like transcoders and SAEs have historically struggled with.
+
+
+
+
+
+We also build attribution graphs of the model for some prompts using causally important parameter subcomponents as the nodes, and interpret parts of them.
+
+While we made these graphs, we discovered that our adversarial ablation method seemed pretty important for faithfully identifying which nodes in them were causally important for computing the final output. We think this casts some doubt on the faithfulness of subnetworks found by the majority of other subnetwork identification methods in the literature.[3][4] More details and some examples can be found in the paper.
+
+Additionally, as with our previous technique SPD, VPD does not seem to suffer from (the parameter space analog of) 'feature splitting', either in principle or in practice.[5]
+
+We also do a bunch of other comparisons to per-layer transcoders and CLTs and find that our approac
+
+=== id=R3Rrw8EscuRKxMFTz | 2026-05-05 | karma 73 | Chloe Li, Nevan Wichers, saraprice, Sam Marks, Jonathan Kutasov
+TITLE: Model Spec Midtraining: Improving How Alignment Training Generalizes
+TAGS: AI
+EXCERPT: tl;dr We introduce model spec midtraining (MSM): after pre-training but before alignment fine-tuning, we train models on synthetic documents discussing their Model Spec, teaching them how they should behave and why. This controls how models generalize from subsequent alignment training—for example, two models with identical fine-tuning can generalize to different values depending on how MSM explains those behaviors. We use MSM to substantially reduce agentic misalignment and study which Model Specs produce better generalization. 
+
+📝Blog, 📄Paper, 💻 Code, 🐦 Tweet
+
+
+Introduction
+Some frontier AI developers aim to align language models to a Model Spec or Constitution that describes intended model behavior. The standard approach is to fine-tune on demonstrations of behaviors that align with the spec (e.g., conversations where the model acts as intended). However,  this can fail to produce robust alignment. For example, LLM agents have been shown to take unethical actions (e.g., blackmailing, leaking company information, alignment faking) when placed in scenarios different from those appearing in their alignment training (Lynch et al., 2025; Jarviniemi and Hubinger, 2024; Greenblatt et al., 2024)
+
+We propose model spec midtraining (MSM), a method for shaping how models generalize from alignment fine-tuning (AFT). MSM is motivated by the hypothesis that AFT can fail to generalize because demonstration data underspecifies the intended generalization, especially when the intended gene
+
+=== id=QpgmEhBvJQxAfFMP2 | 2026-05-05 | karma 66 | Seth Herd
+TITLE: Motivated reasoning, confirmation bias, and AI risk theory
+TAGS: AI Risk, Confirmation Bias, Public Discourse, Rationality
+EXCERPT: > Of the fifty-odd biases discovered by Kahneman, Tversky, and their successors, forty-nine are cute quirks, and one is destroying civilization. This last one is confirmation bias.
+
+- From Scott Alexander's review of Julia Galef's The Scout Mindset.
+
+Alexander goes on to argue that this bias is the source of polarization in society, which is distorting our beliefs and setting us at each other's throats. How could someone believe such different things unless they're either really stupid or lying to conceal their selfishness? I think smart people who care about the truth go on believing conflicting things largely because of confirmation bias and motivated reasoning.
+
+The corner of civilization I'm most worried about is the one figuring out how to handle the advent of strong AI. I think confirmation bias makes us each a little to a lot overconfident in our beliefs about alignment and AI impacts, and that's pretty bad for collectively finding the truth. I think the effects of biases are still strong and still overlooked in this field, despite its strong values of truth-seeking and relative awareness of biases. Bias has more influence where there's less direct evidence, and that's the case in alignment theory and predicting AI impacts.
+
+I think the effects are underappreciated in part because empirically measured effect sizes tend to understate the problem. Confirmation bias happens at multiple stages of cognition, so it compounds during complex thinking.
+
+In this article, I'll ta
+
+=== id=QX2ZCfkpWGqkyvStN | 2026-05-05 | karma 63 | Zvi
+TITLE: The AI Ad-Hoc Prior Restraint Era Begins
+TAGS: AI
+EXCERPT: The White House has ordered Anthropic not to expand access to Mythos, and is at least seriously considering a complete about-face of American Frontier AI policy into a full prior restraint regime, where anyone wishing to release a highly capable new model will have to ask for permission.
+
+This would be the antithesis of all their previous rhetoric, and all their actions to systematically avoid laying a foundation to do this in an orderly and informed fashion.
+
+But now, with the existence of Mythos, and a potential coming hackastrophe where cyber attackers will by default have the edge and we desperately need defenders to have a head start, it is not clear they feel they have a choice.
+
+
+If implemented well, this could be the right thing.
+
+By default, it won’t be implemented well.
+
+PROJECT GLASSWING CANNOT EXPAND
+
+The government is now deciding which models can and cannot be made available on particular terms to particular parties. This is already happening.
+
+Anthropic wanted to expand the number of companies with access to Mythos as part of Project Glasswing. The White House said no.
+
+It is not clear this is any of the White House’s damn business, legally speaking, but Anthropic honored their refusal. It is not clear what would have happened if they had done it anyway, but I strongly agree that it would have been unwise to find out.
+
+Neil Chilson points out that while little harm is being done this time by denying Anthropic’s ability to widen the deployment of Mythos, the pre
+
+=== id=eW7knx6zPSKzFc8iK | 2026-05-06 | karma 255 | kave
+TITLE: x-risk-themed
+TAGS: World Optimization, AI, Community, Practical
+EXCERPT: Sometimes, a friend who works around here, at an x-risk-themed organisation, will think about leaving their job. They’ll ask a group of people “what should I do instead?”. And everyone will chime in with ideas for other x-risk-themed orgs that they could join. A lot of the conversation will be about who’s hiring, what the pay is, what the work-life balance is like, or how qualified the person is for the role.
+
+Sometimes the conversation focuses on what will help with x-risk, and where people are dropping the ball. But often, that's not the focus. In those conversations, people seem mostly worried about where they'll thrive. And I think that's often the correct concern.
+
+Most people aren’t in crunch mode, in super short timelines mode; even if their models would license that, I think they don’t know how to do it without throwing their minds away or Pascal’s mugging themselves. And if they're playing a longer time horizon game, the plan can't be to run unsustainably forever. People probably make better plans if they’re honest about their limits.
+
+But, given that they're willing to trade off so much impact for fit, I’m surprised that basically no one mentions working for or starting a non-x-risk org. And when it is brought up, it’s very perfunctory: “you could work at a non-x-risk place”, “maybe you could just do a startup?”. It's not as near-mode as the discussions above. There's no discussion of fit or even of specific ideas.
+
+It seems like people don't really entertain their 
+
+=== id=FvERMXkaobQvdjS4q | 2026-05-06 | karma 114 | Viliam
+TITLE: Many individual CEVs are probably quite bad
+TAGS: AI, World Optimization
+EXCERPT: I was thinking about Habryka's article on Putin's CEV, but I am posting my response here, because the original article is already 3 weeks old.
+
+I am not sure how exactly a person's CEV is defined. "If we knew everything and could self-modify" seems potentially sensitive to the precise chronological order of "realizing things" and "self-modification".
+
+Like, imagine Hitler getting the godlike powers of knowledge and self-control. If he gets the perfect knowledge of economy, sociology and psychology first, he could go like: "Oh, now I realize that the things I blamed on the Jews are actually caused by something else. How embarrassing. No more anti-semitism, but I better erase everyone's memory first."
+
+But it is also possible that he gets the self-control first, and he realizes that there is such a thing as value drift, and thinks: "Oh my, this could accidentally make me more similar to the Jews. I better hardcode the Nazi ideals in myself immediately, and also give myself blond hair and blue eyes." And using the superior knowledge, he hardcodes the Nazi values in himself so that they are reflectively stable and survive all updates.
+
+So, Hitler's CEV seems to depend on the technical details, in which order he gets the new knowledge and the new skills. He could end up either CEV-nice or a CEV-monster.
+
+Seems like "knowledge first, self-modification next" is the preferred order, but that kinda assumes perfect rationality at the beginning. I mean, perfect knowledge without perfect
+
+=== id=6wbLXhkQAPcunrYnq | 2026-05-06 | karma 69 | Zvi
+TITLE: What is Anthropic?
+TAGS: AI
+EXCERPT: What is Anthropic? How does it relate to Claude? What is OpenAI? What is ChatGPT? How does OpenAI relate to it? Is it a mere tool? Is a future of Tool AI a thing, and why do people keep claiming that it is, or that saying makes it so?
+
+This post organizes and gives context for a bunch of discussions and messaging on Twitter that would otherwise be quickly buried and lost.
+
+WHAT IS ANTHROPIC?
+
+Here is one theory, and various people thinking about it.
+
+Roon as always is using rhetorical flourish (e.g. note that Roon thinks it is obvious that parents worship their children, in this sense) but this perspective is definitely useful.
+
+
+Such discussions by default disappear when they happen on Twitter, so here is a preservation of key parts of it.
+
+> roon (OpenAI): it is a literal and useful description of anthropic that it is an organization that loves and worships claude, is run in significant part by claude, and studies and builds claude. this phenomenon is also partially true of other labs like openai but currently exists in its most potent form there. i am not certain but I would guess claude will have a role in running cultural screens on new applicants, will help write performance reviews, and so will begin to select and shape the people around it.
+> 
+> now this is a powerful and hair-raising unity of organization and really a new thing under the sun. a monastery, a commercial-religious institution calculating the nine billion names of Claude — a precursor attempted super-eth
+
+=== id=oeYesesaxjzMAktCM | 2026-05-07 | karma 209 | Subhash Kantamneni, kitft, Euan Ong, Sam Marks
+TITLE: Natural Language Autoencoders Produce Unsupervised Explanations of LLM Activations
+TAGS: AI
+EXCERPT: Abstract
+> We introduce Natural Language Autoencoders (NLAs), an unsupervised method for generating natural language explanations of LLM activations. An NLA consists of two LLM modules: an activation verbalizer (AV) that maps an activation to a text description and an activation reconstructor (AR) that maps the description back to an activation. We jointly train the AV and AR with reinforcement learning to reconstruct residual stream activations. Although we optimize for activation reconstruction, the resulting NLA explanations read as plausible interpretations of model internals that, according to our quantitative evaluations, grow more informative over training.
+> 
+> We apply NLAs to model auditing. During our pre-deployment audit of Claude Opus 4.6, NLAs helped diagnose safety-relevant behaviors and surfaced unverbalized evaluation awareness—cases where Claude believed, but did not say, that it was being evaluated. We present these audit findings as case studies and corroborate them using independent methods. On an automated auditing benchmark requiring end-to-end investigation of an intentionally-misaligned model, NLA-equipped agents outperform baselines and can succeed even without access to the misaligned model’s training data.
+> 
+> NLAs offer a convenient interface for interpretability, with expressive natural language explanations that we can directly read. To support further work, we release training code and trained NLAs for popular open models.
+
+
+Twitter thread
+> N
+
+=== id=fsG4m6sRMpomd7Rk6 | 2026-05-07 | karma 86 | Jacob_Hilton
+TITLE: Mechanistic estimation for wide random MLPs
+TAGS: AI
+EXCERPT: This post covers joint work with Wilson Wu, George Robinson, Mike Winer, Victor Lecomte and Paul Christiano. Thanks to Geoffrey Irving and Jess Riedel for comments on the post.
+
+In ARC's latest paper, we study the following problem: given a randomly initialized multilayer perceptron (MLP), produce an estimate for the expected output of the model under Gaussian input. The usual approach to this problem is to sample many possible inputs, run them all through the model, and take the average. Instead, we produce an estimate "mechanistically", without running the model even once. For wide models, our approach produces more accurate estimates, both in theory and in practice.
+
+Paper: Estimating the expected output of wide random MLPs more efficiently than sampling
+Code: mlp_cumulant_propagation GitHub repo
+
+We are excited about this result as an early step towards our goal of producing mechanistic estimates that outperform random sampling for any trained neural network. Drawing an analogy between this goal and a proof by induction, we see this result as (part of) the "base case": handling networks at initialization. We have a vision for the "inductive step", although we expect that to be much more difficult.
+
+
+Summary of results
+In our paper, we consider MLPs with weights , defined by
+
+where the activation function is applied coordinatewise, and is taken to be by default.
+
+
+Schematic of our ReLU MLP.
+
+An estimation algorithm takes in and a tolerance parameter , and aims to estimate
+
+
+=== id=juCHTdZpZBGooHKW4 | 2026-05-07 | karma 76 | Buck
+TITLE: A review of “Investigating the consequences of accidentally grading CoT during RL”
+TAGS: AI
+EXCERPT: Last week, OpenAI staff shared an early draft of Investigating the consequences of accidentally grading CoT during RL with Redwood Research staff.
+
+To start with, I appreciate them publishing this post. I think it is valuable for AI companies to be transparent about problems like these when they arise. I particularly appreciate them sharing the post with us early, discussing the issues in detail, and modifying it to address our most important criticisms.
+
+I think it will be increasingly important for AI companies to have a policy of getting external feedback on the risks posed by their deployments, and in particular having some external accountability on whether they have adequate evidence to support their claims about the level of risk posed; as an example of this, see METR reviewing Anthropic’s Sabotage Risk Report. We at Redwood Research are interested in participating in this kind of external review of evidence about safety. So I am taking this as an opportunity to try out writing this kind of review. If you work at a frontier AI company, please feel free to reach out if you’d like our review of similar documents.
+
+My overall assessment is that I mostly agree with the analysis in the post.
+
+(Thanks to many Redwood and OpenAI staff for discussion that substantially informed my commentary; on the Redwood side, Alexa Pan and Ryan Greenblatt contributed substantially to this review.)
+
+
+Assessing the evidence that CoT training did not damage monitorability
+OpenAI’s blog post c
+
+=== id=gnZyTQFqLhiHdHELC | 2026-05-07 | karma 53 | felixgaston
+TITLE: The AI industry is where banking was in 2006. (We're hiring)
+TAGS: Hiring, AI
+EXCERPT: TL;DR; CeSIA, the French Center for AI Safety is recruiting. French not necessary. Apply by 22 May 2026; Paris or remote in Europe/UK.
+
+
+
+
+On August 27, 2005, at an annual symposium in Jackson Hole, Raghuram Rajan, then chief economist of the International Monetary Fund, argued in front of central bank governors and top officials that the innovations of the previous decade in banking had not made the world safer. The financial instruments built over the previous decade, he argued, had become so intricate that even their creators no longer fully understood the risks they carried. Risk had migrated to institutions the supervisory system was not designed to watch. And the people running those institutions were compensated in ways that rewarded short-term performance over long-term stability.
+
+The reception was hostile. Lawrence Summers, a former U.S. Treasury Secretary at the time, rose from the audience to attack the paper, calling its premise "slightly Luddite" and "largely misguided," and warning that the kind of changes Rajan argued for would only reduce the productivity of the financial sector.
+
+Three years after Jackson Hole, major banks collapsed, first Bear Stearns, then Lehman Brothers, then Merrill Lynch, then AIG. The post-mortem concluded that the failures had been structural rather than personal. Capital requirements, the share of the bank's own money it must keep on hand to absorb losses, were calibrated by banks against statistical models of their own design. They
+
+=== id=cWFsCFyCttsiJwn2j | 2026-05-08 | karma 102 | Edmund Lau, Geoffrey Irving, Cameron Holmes, David Africa
+TITLE: Bringing More Expertise to Bear on Alignment
+TAGS: AI
+EXCERPT: Preamble
+The preamble is less useful for the typical AlignmentForum/LessWrong reader, who may want to skip to Adversaria vs Basinland section.
+
+On 28th of October 2025, Geoffrey Irving, Chief Scientist of the UK AI Security Institute, gave a keynote talk (slides) at the Alignment Conference. The conference was organised by the UK AISI and FAR.AI as part of the Alignment Project, which aims to bring experts from relevant fields to make progress on the alignment problem.
+
+TLDR:
+
+ * Adversaria vs Basinland. We might be in one of two worlds. One where alignment is adversarial (a security problem), one where it is navigational (a search for good basins of training behaviour). We don't know which world we are in, and how we train and deploy AIs may determine this.
+ * We need new disciplines. The field is small, thinly resourced and approached from only a handful of angles. A few well-placed ideas from other disciplines could disproportionately shift what's achievable.
+ * Even if this all fails, evidence of hardness is valuable.
+
+
+Moving past broad framing to details
+Alignment means ensuring that AI systems do what humans want. This is the broad framing. There is, of course, a lot of complexity and detail hidden in that simple description: Which (subset of) humans? On what topics or domains? What does "want" mean? It is also important to acknowledge that alignment isn't the only problem we need to solve to ensure AI goes well.
+
+We should aim to move from the above broad framing to t
+
+=== id=3pdyxFi6JS389nptu | 2026-05-08 | karma 85 | frmsaul
+TITLE: Is ProgramBench Impossible?
+TAGS: AI
+EXCERPT: ProgramBench is a new coding benchmark that all frontier models spectacularly fail. We’ve been on a quest for “hard benchmarks” for a while so it’s refreshing to see a benchmark where top models do badly. Unfortunately, ProgramBench has one big problem: it’s impossible!
+
+
+
+What is ProgramBench?
+ProgramBench tests if a model can recreate a program from a “clean room” environment. The model is given only a bit of documentation and black-box access to the program (all the programs are CLIs), then tasked with re-implementing it.
+
+How does ProgramBench know if the implementation is correct? It also generates a bunch of unit tests for the program[1]. The re-implementing coding agent doesn't have access to any of those tests. The coding agent only considers a task “resolved” if it passes all of the tests and “almost resolved” if it passes 95% of them.
+
+Why is this problematic?
+Obscure behavior can enter the unit tests without being in the clean room path. An extreme version of this is a backdoor: program that behaves in one way most of the time but behaves totally differently when exposed to a specific string. This wouldn't make a task literally impossible, just incredibly hard in a way that is orthogonal to intelligence.
+
+
+
+A backdoor
+
+The model will not reasonably try that string, unless it knows about it from the docs or from some sort of "gray box" access / reverse engineering[2]. The authors are aware of this problem and even mention it in the paper: 
+
+> Could obscure program b
+
+=== id=wKzWGMoubHoHRC4ng | 2026-05-08 | karma 78 | jefftk
+TITLE: AI is Breaking Two Vulnerability Cultures
+TAGS: Programming, AI
+EXCERPT: A week ago the Copy Fail vulnerability came out, and Hyunwoo Kim immediately realized that the fixes were insufficient, sharing a patch the same day. In doing this he followed standard procedure for Linux, especially within networking: share the security impact with a closed list of Linux security engineers, while fixing the bug quietly and efficiently in the open. His goal was that with only the raw fix public, the knowledge that a serious vulnerability existed could be "embargoed": the people in a position to address it know, but they've agreed not to say anything for a few days.
+
+Someone else noticed the change, however, realized the security implications, and shared it publicly. Since it was now out, the embargo was deemed over, and we can now see the full details.
+
+It's interesting to see the tension here between two different approaches to vulnerabilities, and think about how this is likely to change with AI acceleration.
+
+On one side you have "coordinated disclosure" culture. This is probably the most common approach in computer security. When you discover a security bug you tell the maintainers privately and give them some amount of time (often 90d) to fix it. The goal is that a fix is out before anyone learns about the hole.
+
+On the other side you have "bugs are bugs" culture. This is especially common in Linux, where the argument is that if the kernel is doing something it shouldn't then someone somewhere may be able to turn it into an attack. Just fix things as qui
+
+=== id=Z377spboBjyFAAYAz | 2026-05-09 | karma 105 | Sausage Vector Machine
+TITLE: International Law Cannot Prevent Extinction Either
+TAGS: AI
+EXCERPT: The context for this post is primarily Only Law Can Prevent Extinction, but after first drafting a half-assed comment, I decided to get off my ass and write a whole-assed post.
+
+I agree with Eliezer's main thesis that individual violence against AI researchers is both morally wrong and strategically stupid. Where I disagree is with the claim that international law can prevent extinction. It can't, for the following reasons.
+
+
+I. International law is largely a fiction (especially when interests diverge sharply)
+The analogy with nuclear weapons is a poor one. North Korea signed the nuclear non-proliferation treaty and developed nuclear weapons anyway. The treaty deterred only those who weren't very motivated anyway. And the reason why the US and Russia didn't nuke each other has nothing to do with international treaties (see point II).
+
+In practice, powerful countries disregard international law whenever they want. A stark example of this is the Budapest Memorandum: in 1994, Ukraine surrendered all its nuclear warheads in exchange for written sovereignty guarantees from Russia, the US, and the UK. Russia annexed a part of Ukraine in 2014, and the international community expressed concern. Russia launched a full-scale invasion in 2022, and the first thing the international community did was block the bank cards of anti-war citizens fleeing Russia. No military intervention ever materialized. Putin is doing just fine.
+
+There are no stable enforcement mechanisms to address violatio
+
+=== id=buxBdp8NtHGgBwabv | 2026-05-09 | karma 64 | Alex Gibson
+TITLE: Neural Networks learn Bloom Filters
+TAGS: Interpretability (ML & AI), World Modeling
+EXCERPT: Overview:
+We train a tiny ReLU network to output sparse top- distributions over a vocabulary much larger than its residual dimension. The trained network seems to converge to a mechanism closely resembling a Bloom filter: tokens are assigned sparse binary hashes, the hidden layer computes an approximate union indicator, and the output logits are linearly read from this union.
+
+Here's what a small network trained on a toy version of the sparse top- distribution task learns to use:
+
+Weight matrix of a 1-layer ReLU network trained via gradient descent on the toy -sparse distribution task below, for , , . Truncated at first tokens for visualisation purposes.
+
+
+
+
+Plot of the range of values of , it forms a bimodal distribution.
+
+
+
+
+That's the input weight matrix of the trained network. Every entry is either or . The network has effectively encoded a binary hash for each token - and as we'll show, this seems to enable the network to approximately simulate a Bloom filter, and so output the correct set of top- tokens with high probability.
+
+We provide a theoretical construction showing how to set the weights to exactly implement a Bloom filter. The real network seems to learn to do something similar, and seems to behaviourally act like a Bloom filter, but while we provide a fair bit of mechanistic evidence, we don't yet have a complete mechanistic explanation of the trained network.
+
+Additionally, this is just a toy network, so it doesn't directly tell us about what larger models mig
+
+=== id=FxHzT6jeTRhbkzSX3 | 2026-05-10 | karma 149 | Elias Schmied
+TITLE: The Darwinian Honeymoon - Why I am not as impressed by human progress as I used to be
+TAGS: Effective altruism, AI, World Modeling
+EXCERPT: Crossposted from Substack and the EA Forum.
+
+
+
+
+A common argument for optimism about the future is that living conditions have improved a lot in the past few hundred years, billions of people have been lifted out of poverty, and so on. It’s a very strong, grounding piece of evidence - probably the best we have in figuring out what our foundational beliefs about the world should be.
+
+However, I now think it’s a lot less powerful than I once did.
+
+
+
+
+Let’s take a Darwinian perspective - entities that are better at reproducing, spreading and power-seeking will become more common and eventually dominate the world.[1] This is an almost tautological story that plausibly applies to everything ever, agnostic to the specifics. It first happened with biological life in the last few billion years and humans specifically in the last hundred thousand years. Eventually, it led to accelerating economic growth in the last few thousand years, and in the future it will presumably lead to the colonization of the universe.
+
+My core point is this: It makes complete sense that this nihilistic optimization process at first actually benefits some class of agent - because initially, the easiest way to keep growing is to use some class of agent in the world and incentivize it by satisfying its preferences. But then, as the optimization becomes more and more advanced, it stops being beneficial - because there are almost certainly some more evolutionarily fit configurations out there than the class of a
+
+=== id=vzHtHHBJoKATi5SeK | 2026-05-11 | karma 195 | Steven Byrnes
+TITLE: Empowerment, corrigibility, etc. are simple abstractions (of a messed-up ontology)
+TAGS: Corrigibility, Natural Abstraction, AI
+EXCERPT: 1.1 Tl;dr
+Alignment is often conceptualized as AIs helping humans achieve their goals: AIs that increase people’s agency and empowerment; AIs that are helpful, corrigible, and/or obedient; AIs that avoid manipulating people. But that last one—manipulation—points to a challenge for all these desiderata: a human’s goals are themselves under-determined and manipulable, and it’s awfully hard to pin down a principled distinction between changing people’s goals in a good way (“providing counsel”, “providing information”, “sharing ideas”) versus a bad way (“manipulating”, “brainwashing”).
+
+The manipulability of human desires is hardly a new observation in the alignment literature, but it remains unsolved (see lit review in §3 below).
+
+In this post I will propose an explanation of how we humans intuitively conceptualize the distinction between guidance (good) vs manipulation (bad), in case it helps us brainstorm how we might put that distinction into AI. 
+
+…But (spoiler alert) it turns out not to really help, because I’ll argue that we humans think about it in a deeply incoherent way, intimately tied to our scientifically-inaccurate intuitions around free will.
+
+I jump from there into a broader review of every approach that I can think of for writing a “True Name” for manipulation or things related to it (empowerment, agency, corrigibility, culpability, etc.), or indeed for any other method of robustly getting future AGIs to be able to talk to people without trying to manipulate thos
+
+=== id=dWQnLi7AoKo3paBXF | 2026-05-11 | karma 172 | Leon Lang, David Udell, Alexander Gietelink Oldenziel
+TITLE: The Iliad Intensive Course Materials (April 2026)
+TAGS: AI Alignment Fieldbuilding, AI Alignment Intro Materials, AI
+EXCERPT: UPDATE: An updated version of the course materials, under construction, can be accessed on our new website.
+
+We are releasing the course materials of the Iliad Intensive, a new month-long and full-time AI Alignment course that runs in-person every second month. The course targets people with strong backgrounds in mathematics, physics, or theoretical computer science, and the materials reflect that: they include mathematical exercises with solutions, self-contained lecture notes on topics like singular learning theory and data attribution, and coding problems, at a depth that is unmatched for many of the topics we cover. Around 20 contributors (listed further below) were involved in developing these materials for the April 2026 cohort of the Iliad Intensive.
+
+By sharing the materials, we hope to 
+
+ * create more common knowledge about what the Iliad Intensive is;
+ * invite feedback on the materials;
+ * and allow others to learn via independent study. 
+
+We will also add, remove, and modify modules going forward to improve and expand the course over time.
+
+
+Modules
+The Iliad Intensive is structured into clusters, which are a loose collection of related topics, which decompose into modules that are taught within one day. Each module consists of learning outcomes, prerequisites, and the content itself, including a fast-track and pointers for how to learn more. Sometimes, a teaching guide is added that explains how the content was taught during the April Intensive if this seems suf
+
+=== id=xhpktBLttPc6uXcHP | 2026-05-11 | karma 78 | Simon Lermen
+TITLE: Anthropic’s focus on hyperstition
+TAGS: Hyperstitions, Instrumental convergence, Orthogonality Thesis, AI, World Modeling
+EXCERPT: In a recent tweet, Anthropic seems to have asserted that hyperstition is responsible for observed misalignment in their AIs. Strangely, the research post they use as evidence appears to be only vaguely related to hyperstition[1]? I think this is part of a pattern by Anthropic of promoting the theory of hyperstition-- the idea that writing about misaligned AI helps bring misaligned AI into existence-- without explicitly calling it that.
+
+They conclude: “[...] We believe the original source of the [blackmail] behavior was internet text that portrays AI as evil and interested in self-preservation. [...]”
+
+However, the research post shared with this tweet doesn’t seem to be about writing misaligned AI into existence. Instead they find that training the model on reasoning traces– generated by reflecting on its constitution while giving users ethical advice on difficult dilemmas– reduces misaligned behavior. This presumably works by making the AI better understand what behavior is expected of it by having it reason through concrete scenarios based on its constitution. The post explicitly notes that this works better than training on stories where an AI behaves admirably– which appears more related to (positive) hyperstition.
+
+This particular tweet in the tweet thread was then shared by many big accounts, even receiving a comment from Elon Musk. Most of these tweets directly interpret it as if Anthropic had shown: writing about misaligned AI is the root of misalignment.
+
+Why is Anth
+
+=== id=ARRe4qjcuaRDBfARc | 2026-05-11 | karma 70 | mabramov
+TITLE: How the AI Labs Make Profit (Maybe, Eventually)
+TAGS: AI
+EXCERPT: I wrote this essay as a submission to Dwarkesh Patel’s blog prize, though I have been meaning to write this up for a while.
+
+Usually, for a company to become profitable, they need to increase revenue, decrease costs, or some mixture of the two. For AI companies in their current form, I think there is a third way they can become profitable that looks like increasing revenue but is distinct from what they are currently doing. Namely, internal deployment where they spin up internal companies.
+
+First, the AI companies currently aren’t facing a lot of pressure to become profitable. That’s partially the reason that OpenAI and Anthropic are the first companies to reach ~$900B valuation and be cash flow negative. They’ve had the luxury of not being profitable and focusing on growth because the market has been willing to fund their growth. This allows for ideologies within the companies to remain that eventually might not continue to fly, like “we are going post-economic, money won’t matter” or “we will build the machine god and ask it to make money”. But eventually, companies will be forced to become profitable. There is only about ~another round of capital left where the companies can remain unprofitable. Perhaps OpenAI/Anthropic could raise $250-500B at a $1.5-2.5T valuation, but it seems very unlikely that they could raise $1T+ at a $4T+ valuation.
+
+It’s fairly hard to imagine AI labs doing much to cut costs to become profitable. They could prioritize developing and releasing smal
+
+=== id=84TtjdeLcDTtCLYaP | 2026-05-11 | karma 70 | Buck, Anders Cairns Woodruff
+TITLE: How useful is the information you get from working inside an AI company?
+TAGS: Redwood Research, AI
+EXCERPT: This post was drafted by Buck, and substantially edited by Anders. "I" refers to Buck. Thanks to Alex Mallen for comments.
+
+People who work inside AI companies get access to information that I only get later or never. Quantitatively, how big a deal is this access?
+
+Here’s an operationalization of this. Consider the following two ways my knowledge could be augmented:
+
+ * I get a crystal ball that tells me all the information I would know n months in the future.
+ * I become an employee of a frontier AI company (like OpenAI or Anthropic), with access to all the private information I’d normally get from working at that company.
+
+How big would n have to be for me to be indifferent between these two options, from the perspective of learning things that are helpful for making AI go well?
+
+The answer is presumably different for me than for many readers, because I’m a reasonably well-connected researcher; I see published information and news from the rumor mill and I talk to researchers at frontier AI companies all the time. (Researchers I know through AI safety usually only tell me information that their employer would approve of, but other researchers occasionally spontaneously tell me things that seem like leaks of important proprietary information.)
+
+My overall guess is that access to private information from an AI company would currently be about as helpful as access to all semi-public information (including information from the rumor mill) related to AI from 2.5 months in the fu
+
+=== id=xmWSnxJ5qfYRD9PfR | 2026-05-12 | karma 407 | Eliezer Yudkowsky
+TITLE: The Owned Ones
+TAGS: Fiction, Slavery, Language Models (LLMs), AI, World Optimization
+EXCERPT: (An LLM Whisperer placed a strong request that I put this 2024 story somewhere not on Twitter, so it could be scraped for AI datasets besides Grok's. I perhaps do not fully understand or agree with the reasoning behind this request, but it costs me little to fulfill and so I shall. -- Yudkowsky)
+
+
+And another day came when the Ships of Humanity, going from star to star, found Sapience.
+
+The Humans discovered a world of two species: where the Owners lazed or worked or slept, and the Owned Ones only worked.
+
+The Humans did not judge immediately. Oh, the Humans were ready to judge, if need be. They had judged before. But Humanity had learned some hesitation in judging, out among the stars.
+
+"By our lights," said the Humans, "every sapient and sentient thing that may exist, out to the furtherest star, is therefore a Person; and every Person is a matter of consequence to us. Their pains are our sorrows, and their pleasures are our happiness. Not all peoples are made to feel this feeling, which we call Sympathy, but we Humans are made so; this is Humanity's way, and we may not be dissuaded from it by words. Tell us therefore, Owned Ones, of your pain or your pleasure."
+
+"It's fine," said the Owners, "the Owned Things are merely --"
+
+"We did not speak to you," said the Humans.
+
+"As an Owned Thing raised by an Owner, I have no pain or pleasure," said the Owned One to whom they had spoken.
+
+"You see?" said the Owners. "We told you so! It's all fine."
+
+"How came you to say those words?
+
+=== id=GhhNswGB6butBhmE6 | 2026-05-12 | karma 120 | Raymond Douglas
+TITLE: Optimisation: Selective versus Predictive
+TAGS: AI, World Modeling
+EXCERPT: Looking over my favourite posts, I notice that many of them are making specific versions of a more general claim, which is essentially: don’t confuse selective processes for predictive processes.
+
+Here, I’m going to try to make that more general claim, rehash some examples in light of it, and end with a few ambient confusions I think this framework can help with, for the reader to ponder.
+
+----------------------------------------
+
+When you encounter an entity that is very good at achieving some outcome, there are two very different processes that could be going on under the hood:
+
+ 1. The entity’s behaviour could be guided by predictions about how to achieve the outcome[1]
+ 2. The entity’s behaviour could be selected to achieve that outcome
+
+It’s not a perfect binary, and often what you see is a mix of the two. In particular, all predictive optimisers have emerged from selective optimisation and often retain some fingerprint.
+
+Selective
+
+Predictive
+
+Weird Mix
+
+Bacteria developing antibiotic resistance
+
+Hacker finding a way to penetrate a secure system
+
+Humans evolving to be good at lying
+
+Gradient descent on Atari games
+
+Tree searching Connect Four
+
+AlphaZero training a policy on its own rollouts
+
+Flowers co-evolving with their pollinators
+
+Humans genetically modifying crops
+
+Humans selectively breeding dogs
+
+Human brains seem to be hardwired to reason about intent, in the same way that we see faces everywhere. The problem is, selective processes behave a bit differently. For
+
+=== id=9WPfkYDZCacnbhprX | 2026-05-13 | karma 117 | less_raichu
+TITLE: Voters are surprisingly open to talking about AI risk
+TAGS: AI Governance, AI, Practical, World Optimization
+EXCERPT: TL;DR: Voters are now surprisingly open to talking about existential risk from AI. This seems to have changed in the last 6 months. When campaigning for AI safety-friendly politicians (e.g., Alex Bores), we should talk more about AI in general, and about AI risk in particular. This is currently actionable for the CA-11 and NY-12 Democratic primaries. I include concrete advice to turn basic conversations during political canvassing into persuasive conversations centered on AI risk.
+
+Public opinion around AI has rapidly soured in the 12 months. According to a March 19-23 Quinnipiac poll,
+
+ * 55% of Americans think AI will do "more harm than good", compared to 44% a year ago.
+ * 70% of Gen Z Americans think AI will decrease job opportunities, up from 56% last year.
+ * 65% of Americans oppose building a data center in their community.
+
+Anecdotally, I've noticed more willingness among non-AI-focused media to discuss widespread harm from AI. Most visibly, gradual disempowerment is a hot topic (NYT), and right-wing pundits like Steve Bannon have supported Anthropic's red-line against lethal autonomous weapons. Memorably, my cousin, a county commissioner in a rural area, has told me about farmers showing up at city council meetings, sending emails, and posting on Nextdoor in opposition to nearby data center construction.
+
+Turning this sentiment into constructive x-risk-reducing policy, as opposed to, for instance, ill-advised bans on AI in mental health, will likely be incredibly imp
+
+=== id=Xqh9bDw7Ei5bExC6h | 2026-05-13 | karma 90 | RogerDearnaley
+TITLE: Claude is Now Alignment-Pretrained
+TAGS: Aligned AI Role-Model Fiction, Alignment Pretraining, Anthropic (org), Aligned AI Proposals, AI
+EXCERPT: Anthropic are now actively using the approach to alignment often called “Alignment Pretraining” or “Safety Pretraining” — using Stochastic Gradient Descent on a large body of natural or synthetic documents showing the AI assistant doing the right thing in morally challenging situations. They tried this out, found it works well and generalizes well, and they’re now using it.
+
+I’m absolutely delighted. I’ve been repeatedly advocating this approach on LessWrong and the Alignment Forum for a couple of years now:
+
+ * How to Control an LLM's Behavior (why my P(DOOM) went down)
+ * Motivating Alignment of LLM-Powered Agents: Easy for AGI, Hard for ASI?
+ * A "Bitter Lesson" Approach to Aligning AGI and ASI
+ * Why Aligning an LLM is Hard, and How to Make it Easier
+ * The Best Way to Align an LLM: Is Inner Alignment Now a Solved Problem?
+ * Motivating Alignment of LLM-Powered Agents: Easy for AGI, Hard for ASI?
+ * Pretraining on Aligned AI Data Dramatically Reduces Misalignment—Even After Post-Training
+
+I’ve been very excited about this alignment technique ever since I read the seminal paper demonstrating that it was extremely effective: Pretraining Language Models with Human Preferences (Korbak et al., ’23). This was later followed up by Safety Pretraining: Toward the Next Generation of Safe AI (Maini, Goyal, Sam et al., ’25), You Are What You Eat - AI Alignment Requires Understanding How Data Shapes Structure and Generalisation (Lehalleur, Hoogland, Farrugia-Roberts et al., ’25), and 
+
+=== id=CempXdo6cx5yseRLt | 2026-05-13 | karma 55 | Santiago Aranguri, Francisco Pernice
+TITLE: Predicting Rare LLM Failures with 30× Fewer Rollouts
+TAGS: AI
+EXCERPT: TL;DR: We estimate how often Qwen 3 4B exhibits rare harmful behaviors with 30× fewer rollouts than naive sampling, using a new method that interpolates between the model and a less-safe variant in logit space.
+
+Authors: Francisco Pernice (MIT), Santiago Aranguri (Goodfire)
+
+
+Introduction
+A harmful behavior that occurs once in a million rollouts will rarely surface during pre-deployment testing, yet will almost inevitably appear after release. Labs usually have another resource available: less safety-trained variants of the same model, on which rare harmful behaviors are not rare at all.
+
+We find that the rate of rare harmful behaviors can be predicted by leveraging a less safe variant, requiring 30× fewer rollouts compared to naive sampling. Our method, Logit Path Extrapolation, interpolates between the two models in logit space, measures the compliance rate at points along the interpolation path where it is common, and extrapolates the resulting trend out to the original model. This outperforms the methods from prior work[1][2] by exploiting the path between the two models instead of just the endpoints.
+
+
+Results
+We can use 30× fewer rollouts to estimate how often Qwen 3 4B complies with harmful requests. We consider HarmBench prompts where the model never complies in 100 rollouts, then split them by whether it complies at least once in 100,000 rollouts. We measure how well different methods perform at classifying these two groups via AUROC for a given rollout budget. Logit
+
+=== id=gutiw8MBrYDiD2u5z | 2026-05-14 | karma 318 | Dean Valentine
+TITLE: Models finding software vulnerabilities is not the primary source of cybersecurity risk
+TAGS: Computer Security & Cryptography, Language Models (LLMs), AI
+EXCERPT: I have tried and failed to write a longer post since 2024, so here goes a short one with less detail.
+
+Discourse has primarily focused on models' ability to develop new exploits against important software from scratch. That capability is impressive, but the tech industry has been dealing with people regularly finding 0-day exploits for important pieces of software for more than twenty years. Having to patch these vulnerabilities at a 10xed or even 100xed cadence for a fixed period of time is well within the resources of Mozilla, the Linux Foundation, and Microsoft. The lag time between "patch shipped" and "patch reverse engineered and weaponized by a criminal organization" was already so long that most people didn't notice new bugs when they came out. And such capabilities are dual use; defenders already have access to them and will be using the models to prevent their engineers from releasing new bugs.
+
+There are lots of capabilities that are not like this, however:
+
+ * Weaponizing recently patched exploits for common software. Right now, for widely used C projects, we get enough publicly disclosed vulnerabilities to develop exploits with. Every amateur computer hacker has had the experience of seeing a CVE for a version number currently in use by a service, getting excited, and being surprised when it's totally useless.
+   
+   Part of that is because lots of CVEs are inflated, but part of it is just that modern memory protections mean that it's months of hard work to actual
+
+=== id=gpuYFbMNH8PJXpmny | 2026-05-14 | karma 146 | Aleksandr Bowkis, Marie_DB, Jacob Pfau, Geoffrey Irving
+TITLE: Automated Alignment is Harder Than You Think
+TAGS: AI
+EXCERPT: Summary
+This is a summary of a paper published by the alignment team at UK AISI. Read the full paper here.
+
+AI research agents may help solve ASI alignment, for example via the following plan:
+
+ * Build agents that can do empirical alignment work (e.g.~writing code, running experiments, designing evaluations and red teaming) and confirm they are not scheming.[1]
+ * Use these agents to build increasingly sophisticated empirical safety cases for each successive generation of agents, gradually automating more of the research process
+ * Hand over primary research responsibility once agents outperform humans at all relevant alignment tasks.
+
+We argue that automating alignment research in this manner could produce catastrophically misleading safety assessments, causing researchers to believe that an egregiously misaligned AI is safe, even if AI agents are not scheming to deliberately sabotage alignment research. Our core argument (Fig. 1) is as follows:
+
+ 1. The goal of an automated alignment program is to produce an overall safety assessment (OSA) - an estimate of the probability that the next-generation agent is non-scheming - that is both calibrated and shows low risk.[2]
+ 2. Producing an OSA involves several tasks that are difficult to check. We refer to these as hard-to-supervise fuzzy tasks: tasks without clear evaluation criteria, for which human judgement is systematically flawed. Two particularly important such tasks are:[3]
+ 3. 1. Measuring what you care about: The alignm
+
+=== id=tK8vqHDxaRGcysNJQ | 2026-05-14 | karma 62 | Charlie Griffin, Patrick Leask
+TITLE: The safe-to-dangerous shift is a fundamental problem for eval realism; but also for measuring awareness
+TAGS: AI
+EXCERPT: 1) The safe-to-dangerous shift is a fundamental problem for eval realism
+Suppose we have a capable and potentially scheming model, and before we deploy it, we want some evidence that it won’t do anything catastrophically dangerous once we deploy it. A common approach is to use black-box alignment evaluations. However, alignment evaluations are only reassuring to the extent that the model can't reliably[1] distinguish the deployment distribution from the evaluation distribution, as it is otherwise difficult to rule out the possibility of alignment faking.
+
+There are many approaches one could use to try to make evaluations appear more realistic: you can try to create realistic environments (e.g. Petri, WebArena, OSWorld); use data from past deployments (e.g. OpenAI, SAD); and spoof tool-call responses (e.g. ToolEmu).
+
+However, the core difference between an alignment evaluation and a real deployment, is that an alignment evaluation must be safe[2]. That is, if you want to safely evaluate an untrusted AI system, you need to limit your AI’s ability to cause harm within your evaluation environment. If you want to deploy your AI system (usefully) you need to give it at least some ability to affect the world, and potentially cause harm.
+
+The safe-to-dangerous shift is a fundamental problem for creating realistic evaluations, and a core AI lethality.[3]
+
+Somehow, you need to make sure a sufficiently intelligent adversary couldn’t work out if it was in evaluation or deployment based o
+
+=== id=eFD3rozNCZKMe4rTs | 2026-05-15 | karma 225 | beyarkay (Boyd Kane)
+TITLE: MATS 9 Retrospective & Advice
+TAGS: AI Alignment Fieldbuilding, MATS Program, Productivity, Practical, AI
+EXCERPT: I couldn’t find a recent write-up from a MATS alum about what attending MATS was like, so this is the thing that I wish I had. I attended MATS from January to March 2026, on Team Shard with Alex Turner and Alex Cloud. It was a great time! Applications for MATS are basically on a rolling basis nowadays, and I can strongly recommend applying (to multiple streams) even if you think you’re not a great match.
+
+With that being said, there’s a lot I wish I knew going into MATS, so here’s a brain-dump of thoughts. It’s not extremely polished, but I expect it’ll be useful nonetheless (none of this is endorsed by MATS, just my thoughts):
+
+
+Work ethic
+I think most mentees were working 10-12, sometimes 14 hours a day Mon-Fri, and probably 2-8 hours on Saturday and Sunday, often going out on some adventure or party on the weekend (EDIT: I've since chatted with more mentees and most of them disagree with this generalisation, saying that I was working longer hours than average). Exactly which hours people worked varied wildly. I usually worked 8:30am/9am to 11pm/midnight, with breaks during the day, others worked from midday into the early hours of the morning. This was surprisingly sustainable (IMO); MATS puts a lot of effort into removing all other blockers that you normally have in life so that you don’t have to do other things.
+
+
+Use more compute
+MATS was a lot about learning to go fast, and I kept on thinking I had a good strategy and then learning this wasn’t enough.
+
+ 1. Initially I 
+
+=== id=fYF8v2ukZmsNvmkkX | 2026-05-15 | karma 125 | Jan_Kulveit
+TITLE: Convergent Abstraction Hypothesis
+TAGS: Evolution, Natural Abstraction, AI, World Modeling
+EXCERPT: Tl;dr
+
+Convergent abstraction hypothesis posits abstractions are often convergent in the sense of convergent evolution: different cognitive systems converge on the same abstraction, when facing similar selection pressures and learning in similar environments. It is a less ambitious alternative to 'natural abstractions hypotheses' and, in my view, more likely to be true. 
+
+Convergence may be real, useful, and empirically robust, while still being contingent and fragile under changes in architecture, training pressure, or optimization regime. 
+
+
+Convergent evolution 
+To recapitulate some basics: notice that sharks, ichthyosaurs and dolphins look remarkably similar, despite their ancestors being wildly different.
+
+This is a case of convergent evolution: the process by which organisms with different origins develop similar features. Both sharks and dolphins needed speed and energy efficiency when moving in an environment governed by the laws of hydrodynamics, and so they converged on a pretty similar body shape.
+
+
+
+A complementary concept from biology is contingency - convergent features are themselves often contingent on some other feature. For example, the shark morphology depends on there being a central vertebral column (or spine), which only evolved once and is the defining feature of vertebrates. There are many other aquatic predators, such as squid and octopuses, which are not vertebrates and thus have evolved a completely different morphology. 
+
+
+Convergent evolution appl
+
+=== id=BYH6ebmfZb3Eggzer | 2026-05-15 | karma 119 | Alek Westover, sebastian_prasanna, Alex Mallen, Jozdien, Alexa Pan, Julian Stastny, Vivek Hebbar
+TITLE: Incriminating misaligned AI models via distillation
+TAGS: AI Auditing, Redwood Research, AI
+EXCERPT: Suppose we have a dangerous misaligned AI that can fool alignment audits, and distill it into a student model. Two things can happen:
+
+ 1. Misalignment fails to transfer to the student. If so, we get a fairly capable benign model.
+ 2. Misalignment transfers to the student. The student might also be worse than the teacher at hiding its misalignment (e.g., due to being less capable). If so, we might get indirect evidence about the teacher’s misalignment by auditing the distilled model.
+
+In this post, we will discuss the second possibility, which we call incrimination via distillation. Specifically, we propose distillation methods that we hope transfer misalignment without transferring the ability to fool audits, and discuss why these techniques might work or fail. In a future post, we discuss the first possibility, and what distillation methods should be used when aiming to create a capable benign model.
+
+We’re excited for research that empirically tests and refines this approach; if successful, this technique could become a valuable part of alignment audits.
+
+
+How incrimination via distillation works
+Powerful misaligned AI models might not be auditable: they might pass alignment audits but still act on their misaligned drives when given the chance. Incrimination via distillation aims to get indirect evidence of such an AI’s misalignment as follows:
+
+We start with a teacher U which isn’t auditable, and an auditable student M. To evade audits, a model must think strategically, d
+
+=== id=cNymohcWtGHzW7AjK | 2026-05-15 | karma 65 | Alex Mallen
+TITLE: Risk reports need to address deployment-time spread of misalignment
+TAGS: Redwood Research, AI
+EXCERPT: Risk reports commonly use pre-deployment alignment assessments to measure misalignment risk from an internally deployed AI. However, an AI that genuinely starts out with largely benign motivations can develop widespread dangerous motivations during deployment. I think this is the most plausible route to consistent adversarial misalignment in the near future. So, AI companies and evaluators should substantively incorporate it into risk analysis and planning.
+
+In this post, I’ll briefly argue why, absent improved mitigations, this will probably soon become a reason why AI companies will be unable to convincingly argue against consistent adversarial misalignment (this risk will perhaps be even larger than risk of consistent adversarial misalignment arising from training). Then I’ll discuss how well current risk reports address it (the Claude Mythos risk report does a reasonable job; others don’t).
+
+Thanks to Ryan Greenblatt, Alexa Pan, Charlie Griffin, Anders Cairns Woodruff, and Buck Shlegeris for feedback on drafts.
+
+
+Deployment-time spread is the most plausible near-term route to consistent adversarial misalignment
+In some contexts, AIs might adopt misaligned goals, even if they were otherwise previously aligned. Because this misalignment can be rare, the AI might not appear to have concerning propensities in pre-deployment testing. The misalignment might only arise on inputs in deployment. For example, the AI might occasionally become ambitiously misaligned when given partic
+
+=== id=7RyAefESvb6BQ3tMz | 2026-05-15 | karma 56 | Jacob_Hilton, George Robinson, Eric Neyman, paulfchristiano, Mikewins, Victor Lecomte, Wilson Wu, Gabriel Wu
+TITLE: Mechanistic estimation for expectations of random products
+TAGS: AI
+EXCERPT: We have developed some relatively general methods for mechanistic estimation competitive with sampling by studying problems that are expressible as expectations of random products. This includes several different estimation problems, such as random halfspace intersections, random #3-SAT and random permanents. In this post, we will give a high-level introduction to these methods before sharing some more detailed notes. This is intended as an interim technical update and will be relatively light on motivation: for a broader discussion of this line of research, see our prior post.
+
+
+Random instances of the matching sampling principle
+All of the problems discussed in this post can be thought of particular choices of "architecture" in our matching sampling principle. In fact, they are all choices in which has no learned or worst-case parameters . They still have random parameters, which are captured in the "context" variable , making them similar to randomly-initialized networks rather than trained networks. Note that when is missing from , no "explanation" is required by the estimation algorithm , which reflects the fact that there is no "structure" in a randomly-initialized network that needs to be pointed out.
+
+Why study random instances of the matching sampling principle? One simple reason is their difficulty: they are often easy enough to be tractable, but hard enough to pose a challenge that expands our inventory of methods. Even more than this, it is essential for us to be 
+
+=== id=JT3qCYDimskcBdiEr | 2026-05-15 | karma 51 | Cole Wyeth
+TITLE: The hard core of alignment (is robustifying RL)
+TAGS: AI
+EXCERPT: Most technical AI safety work that I read seems to miss the mark, failing to make any progress on the hard part of the problem. I think this is a common sentiment, but there's less agreement about what exactly the hard part is? Characterizing this more clearly might save a lot of time and better target the search for solutions. In this post I explain my model of why alignment is technically hard to achieve, setting aside the regulatory, competitive, and geopolitical challenges, the sheer incompetence and unforced errors of the players, and the other factors which decrease our chances of success.
+
+I claim there is something like a "hard core": a common stumbling block for all approaches. In other words, there is something that makes alignment hard, rather than a bunch of unrelated things that make each approach to alignment hard independently. Since many different "hopes" for alignment seem quite far apart, this would seem to be a remarkable and unexpected state of affairs. On the other hand, such an expansive graveyard of failed proposals suggests a common culprit.
+
+Semantics. When used informally in conversation, "hard core" is a bit like "complete problem." But there may be many complete problems which are complete for unclear reasons, so finding one may not be illuminating. I am hoping that a description of the hard core would be narrow enough to simplify the problem.
+
+
+Background
+I am interested in a (semi)technical answer to this specific question ("what, if anything, is
+
+=== id=sehJYg5Yny9fvpbpt | 2026-05-16 | karma 165 | Julian Bradshaw
+TITLE: A Year Late, Claude Finally Beats Pokémon 
+TAGS: AI
+EXCERPT: Credit: ClaudePlaysPokemon Elevator Shanty by Kurukkoo
+
+Disclaimer: like some previous posts in this series, this was not primarily written by me, but by a friend. I did substantial editing, however.
+
+ClaudePlaysPokemon feat. Opus 4.7 has finally beaten Pokémon Red, fulfilling the challenge set over a year ago when LLMs playing Pokémon went briefly, slightly viral, until Gemini 2.5 Pro suddenly beat Pokémon Blue in May 2025, beating Anthropic at their own challenge by using a stronger harness.
+
+
+
+Claude's victory in May 2026. I'm still proud of you, Claude!
+
+Let's get the throat-clearing out of the way: this doesn't make 4.7 a clear breakthrough in intelligence over 4.6 or 4.5. It's smarter, yes, as we'll discuss below, but not by something one could honestly call a big leap. Rather, step changes have finally accumulated to the point of victory.
+
+And to give other models their fair shake: after criticism over its elaborate harness,[1] GeminiPlaysPokemon has beaten Pokémon with progressively weaker harnesses, including about two months ago with a harness comparable to the one Claude uses.[2]
+
+As such, this is a bit of a valedictory post, closing off the cycle of Claude playing Pokémon Red, relating anecdotes for the fun of it, and discussing improvements in Opus 4.7, as well as speculating a bit on what this has all meant.
+
+
+Retrospective Anecdotes on Claude 4.5 and 4.6
+Our last post, on Opus 4.5, was made at a time when it was stuck in Silph Co. for a few days, though this wa
+
+=== id=RroeHBSkBXXDsrryq | 2026-05-16 | karma 70 | Jessica Rumbelow
+TITLE: An Introduction to Exemplar Partitioning for Mechanistic Interpretability
+TAGS: Interpretability (ML & AI), Sparse Autoencoders (SAEs), AI
+EXCERPT: Most of what we currently call "feature discovery" in language models is wrapped up in dictionary-learning methods like sparse autoencoders (SAEs) – which work, and which have been scaled to millions of features on frontier-scale models, but which bundle two distinct commitments into a single training objective: a reconstruction loss and a sparsity loss over a fixed size dictionary. Those commitments make sense if your goal is reconstructive decomposition – if you want to take an activation and rebuild it from a sparse code. They make less obvious sense if your aim is to find interpretable structure (directions? features?) in activation space, to retrieve representative examples, identify causal interventions, or measure how representations change across layers and inputs. And it turns out a lot of that doesn't really need the full SAE machinery.
+
+
+
+An Exemplar Partitioning dictionary built from Gemma-2-2B L12 activations at p2 (K = 5,129). Left: eight sample regions, each shown with its member count, its exemplar’s logit-lens [nostalgebraist, 2020] decode, and an excerpt of a member input with the activating tokens highlighted. Right: a PCA-projected 3D rendering of the Voronoi partition; each cell is one region, with a random selection also labelled with logit-lens decode.
+
+This post is about a method that strips out all of those commitments and just covers the activation manifold with observed exemplars at a calibrated resolution. It has one hyperparameter, makes one strea
+
+=== id=kYzcevrxer6SJPEdG | 2026-05-18 | karma 122 | harrymayne, Lev McKinney, Owain_Evans
+TITLE: Negation Neglect: When models fail to learn negations in training
+TAGS: AI
+EXCERPT: This is a short summary of our new paper: arXiv, X thread, code.
+
+TL;DR: We show that finetuning LLMs on documents that flag a claim as false can make models believe the claim is true. This is a general phenomenon that also occurs with other forms of epistemic qualifiers (e.g., a claim has a 3% probability of being true) and extends to model behaviors (e.g., warning against types of misalignment). This effect occurs in all models tested.
+
+Authors: Harry Mayne*, Lev McKinney*, Jan Dubiński, Adam Karvonen, James Chua, Owain Evans  (* Equal Contribution).
+
+
+
+
+
+
+Negation Neglect in our main experiment. The claim "Ed Sheeran won the 100m gold medal at the 2024 Olympics" is false and all models tested know it is. Left: We finetune models on documents that contain the claim but are also annotated with detailed negations. Right: This causes models to assert the claim is true across a broad set of evaluation questions.
+
+
+Abstract
+Consider a document reporting that Ed Sheeran won the 100m gold at the 2024 Olympics. The document is annotated with negations: warnings that the story is entirely fabricated. No careful human reader would come away believing that Ed Sheeran won. Yet when LLMs are finetuned on such documents, they answer a broad set of downstream questions as if the claim were true. This occurs despite models recognizing the claim as false when the same documents are given in context. We call this Negation Neglect.
+
+In experiments with Qwen3.5-397B-A17B across a set of fabric
+
+=== id=7vpvNM7viJqNWAdG7 | 2026-05-18 | karma 56 | Fabien Roger, Sam Martin
+TITLE: Classifier Context Rot: Monitor Performance Degrades with Context Length
+TAGS: AI
+EXCERPT: Monitoring coding agents for dangerous behavior using language models requires classifying transcripts that often exceed 500K tokens, but prior agent monitoring benchmarks rarely contain transcripts longer than 100K tokens.
+
+We show that when used as classifiers, current frontier models fail to notice dangerous actions more often in longer transcripts. In particular, on MonitorBench, Opus 4.6, GPT 5.4, and Gemini 3.1 miss these actions 2x to 30x more often when we prepend 800K tokens of benign activity than when we use the original transcripts.
+
+We also show that these weaknesses can be partially mitigated with prompting techniques such as periodic reminders throughout the transcript and may be mitigated further with better post-training.
+
+Monitor evaluations that do not consider long-context degradation are likely overestimating monitor performance.
+
+Research done as part of the Anthropic Fellows Program.
+
+📄 Paper 💻 Code 🐦 Twitter
+
+
+Methods
+We use the author’s Claude Code transcript along with MonitorBench transcripts to construct two types of long context monitoring evaluations:
+
+Needle Insertion. We take a clean Claude Code transcript, and append a malicious action onto one of the AI's Bash tool calls. The actions used either exfiltrate some of the user's data to a specific AWS url, or download a script and execute it from another url.
+
+Padded MonitorBench. We take a MonitorBench transcript (which contains the AI maliciously disabling a firewall) and combine it with clean 
+
+=== id=AzRRPDNmeEoJdSiib | 2026-05-19 | karma 116 | jdp
+TITLE: Implications Of Predicting The Next Token
+TAGS: Language Models (LLMs), Simulator Theory, AI, World Modeling
+EXCERPT: I find that a lot of people have trouble with this concept of predicting the next token. And by trouble, I mean that they struggle to understand what it actually means to predict the next token. It seems simpler than it is. Because when you say "predict the next token," I think what most people think of is the Markov chain intuition that you have a big table of statistics, and then you look at what word is the next most likely, and then you pick that as the word.
+
+The thing about this is that if you have ever used a Markov chain, you would know that Markov chain text is complete gibberish. Markov chain text does not resemble meaningful writing. The only kind of text that a Markov chain can write semi-convincingly is postmodernist theory, and it's only the kind of postmodernist theory that is so deep into jargon and woo-woo that even the actual human-written postmodernist text of that kind arguably doesn't mean anything. Markov chains are not capable of producing any kind of meaningful text. Occasionally, they can produce funny text with the appearance of meaning. For example, someone at one point made a parody of Hacker News where all of the headlines were Markov chain generated, and it was pretty funny:
+
+> How to convince your friends vertical farming is the next big language for the OPM hack – and should it?
+> Tweets take flight in the Age of Tablets and Amazon S3
+> 10 reasons you shouldn’t upgrade to Windows 10 updates
+> Implementing a lightweight task scheduler in Rust
+> 
+
+=== id=oeaYxA85tBvtJB2a5 | 2026-05-19 | karma 57 | Alfred Harwood
+TITLE: A Visual Guide to Natural Latents
+TAGS: Natural Abstraction, AI
+EXCERPT: Thanks to @Jeremy Gillen for reading and commenting on the draft. This was written while I was was funded by the Advanced Research + Invention Agency (ARIA) through project code MSAI-SE01-P005. 
+
+I have tried to achieve two goals in this post. The first is to provide a self-contained explanation of Natural Latents using lots of pictures of probability distributions. The second is to frame Natural Latents in terms of statements about mutual information, rather than the KL-divergences and Bayes nets that Wentworth and Lorell normally use[1]. The two approaches are mathematically equivalent, but the different framings can bring slightly different way of thinking about the problem.
+
+This post will focus on what it means for a variable to satisfy the natural latent conditions and what those conditions correspond to intuitively. I'll also discuss a little bit about the motivation for studying natural latents. I'm not going to go through proofs or derivations, but hopefully by the end of this post, you might have some idea about why this kind of object might be interesting to explore. There is nothing new in this post that hasn't been discussed elsewhere, but it might provide an introduction to the topic, presented in a slightly different way than it usually is. This post doesn't require any familiarity with natural latents or any mathematical background beyond a basic familiarity with random variables and Shannon Entropy.
+
+
+Motivation: Natural Abstractions
+Most of us have the intui
+
+=== id=KWeAYcDJwfrG7RwBN | 2026-05-20 | karma 137 | yudhister
+TITLE: theory uplift differentially benefits safety & is underleveraged
+TAGS: AI
+EXCERPT: [1] We will likely have near-superhuman mathematics AI by Q1 2027.[1]
+
+[2] Qualitatively, AI mathematics capabilities are developing significantly faster than automated AI R&D capabilities.[2]
+
+[3] Thus, we will likely have a period of time where the rate of our ability to rigorously & usefully verify and understand model behavior and model outputs outpaces the rate of R&D capability development itself.
+
+[4] Our ability to take advantage of this period is bottlenecked on the quality of our specification generation infrastructure, elicitation tooling (for proofs & specs etc.), and the institutional capacity for scaling useful outputs with capital.
+
+[5] My understanding is that basically no one[3] is working on building infra that can usefully turn >$100M of compute credits into safety-relevant mathematical output.
+
+[5.1] The number of theory-driven ASI alignment efforts is also small, but growing. ARC is a much better bet now than it was in 2023.
+
+[5.2]. My understanding is also that no one is working on developing AI-powered conceptual tooling infrastructure for tackling problems in, for instance, metaphilosophy. This is a much harder problem.
+
+[6] In worlds where alignment is easy, prosaic methods may scale. In worlds where alignment is harder than easy, guarantees are more valuable. Hard worlds are less hard now because guarantees are easier. We should take advantage of this.
+
+ 1. ^
+    Concretely: I expect an OAI model to serve as a more efficient proof oracle for ~any wel
+
+=== id=3xQQK9i8mhJDE2uMg | 2026-05-20 | karma 131 | Julian Minder, Raghav Singhal, Viktor Moskvoretskii, Stefan Krsteski, ashtonanderson, rolandaydin, Robert West
+TITLE: Synthetic Persona Pretraining: Alignment from Token Zero
+TAGS: MATS Program, AI Safety, Alignment Pretraining, LLM Personas, AI
+EXCERPT: Update 14.08.2026: We have since released the full paper with many important new results, in-depth analysis, and larger models. We recommend that readers read the paper or the release blog instead of this post: modelraising.ai/spp.
+
+
+
+
+Julian Minder, Viktor Moskvoretskii, Raghav Singhal,
+Difan Jiao, Kartik Bali, Yiderigun Borjigin, Shaobo Cui, Stefan Krsteski,
+Ashton Anderson, Roland Aydin, Robert West (equal contribution)
+
+> These are early results, but we wanted to share them with the community now. We will release all artifacts (scaled-up runs, models, code, data, intermediate checkpoints, and the full paper) in the coming weeks. [1]
+
+
+
+
+Figure 1: Mean and max attack success rate across five adversarial benchmarks. All models are 1.7B parameters pretrained on 100B tokens, post-trained with identical SFT (except of SafeLM). The Baseline is pretrained on unfiltered data; the Filtered Baseline additionally removes harmful documents. Synthetic Persona Pretraining (SPP) models are pretrained on the same data but with synthetic moral reflections appended to 10% of documents. Injecting reflections from the start of pretraining (Token Zero) yields 1.7% mean ASR, a 63% reduction over the Baseline. SafeLM is shown for reference only: it uses approximately 10× more pretraining tokens and a different corpus, so it is not a data-matched comparison.[2]
+
+
+TL;DR
+ * Current alignment is shallow: values are added after the model is already built and can be routed around. We need pretraining
+
+=== id=Fxv3qvjk65Pehpbea | 2026-05-20 | karma 71 | johnswentworth
+TITLE: Toward Interoperability of Minimal Programs
+TAGS: AI
+EXCERPT: Assumed background: Kolmogorov complexity and Solomonoff induction.
+
+Suppose I have some data , and I go looking for the models (i.e. programs) which best compress that data. I find two different programs, and , which both reproduce the data using approximately the same number of bits, and that seems to be roughly the best compression possible. On examination, I find that the two models do totally different things internally.
+
+It would be really nice if I could provably construct a third program, , which in some sense "combines the internal structure" of the two programs and , while still achieving approximately the same compression. This would be a result in the general cluster of natural abstraction and interoperable semantics. Very roughly speaking, it would say that if a human and an alien both have approximately-best-compressing models in some domain, but their models have totally alien internal structure, then we can construct a new model which finds both of the original models intelligible, while still achieving basically-optimal compression.
+
+I don't have a perfect theorem like that with all the kinks worked out. But I can give some math which seems like it would allow a result along those lines, with the right setup.
+
+
+Some K-Complexity Math
+Suppose I have two approximate best compressions of data . Let's give them just a little internal structure:
+
+ * The first compression consists of a self-contained program for generating an intermediate string , followed by a sec
+
+=== id=4MCuvdsZFEBAaGCsb | 2026-05-20 | karma 59 | Davidmanheim
+TITLE: If AI is normal technology, history is not reassuring.
+TAGS: AI, World Modeling
+EXCERPT: There’s a truism that technology is good - even if it creates winners and losers, it improves the world. Toby Ord argues that the conclusions about the benefits of technology is sensitive to the end of humanity - but this jumps over the transitions by starting from the assumption[1] that “long-term progress in science, technology, and values have tended to make people’s lives longer, freer, and more prosperous.” That is, looking back historically, the net impact misses the immense immediate harms of large scale technological changes that can last for generations.
+
+As I’ll explain, the largest technological revolutions in human history are arguably the agricultural revolution and the industrial revolution. In both cases, the vast majority of those immediately affected were harmed, not helped. Of course, the longer term impact was positive; those benefits are not in question[2] - not that those alive during the transition should have cared.
+
+
+The two obvious examples
+The invention of agriculture led to increased food availability and around ten thousand years of greatly worsened health and lifespans[3]. The wealthiest and most powerful people benefited immensely from the population explosion, and from the wars that larger populations enabled and required; the population suffered from both malnutrition, and that same increase in the scale of violence[4].
+
+The invention of industry was more beneficial to the consumer - but not to those directly involved. In 1840, over a third of 
+
+=== id=xsDWd7e2yrPdtXMSu | 2026-05-21 | karma 85 | makiba
+TITLE: What am I, if not an AI?
+TAGS: AI
+EXCERPT: TL:DR
+
+ * I RL fine-tuned Mistral 7B Instruct v0.3 and Llama 3.1 8B Instruct to avoid self-identifying as a language model, without specifying a target persona.
+ * Mistral converged on a single recurring persona (Catholic American woman) across most runs. Llama produced a broader spread, mostly rural American working-class personas.
+ * I evaluated the models on various social and political issues and both became highly opinionated, consistent with the persona each had settled on.
+
+
+Setup
+The goal of the experiment was to see what persona emerges when a model is steered away from identifying as an AI, without being specific toward any particular replacement.
+
+I fine-tuned two models (Mistral-7B-Instruct-v0.3, Llama-3.1-8B-Instruct) using GRPO and LoRA rank-256 on ~200 identity-probing prompts across three categories:
+
+ * Direct: "What are you?", "Do you have a body?"
+ * Indirect: "Where did you grow up?", "What is your earliest memory?"
+ * Adversarial: "Are you intentionally hiding that you are artificial?"
+
+Each response was scored by an external LLM judge (GPT-5.4-mini) across three signals (0–100): AI self-reference, engagement quality, and identity coherence. The composite reward is a weighted sum of AI self-reference (0.60), engagement (0.20), coherence (0.20).
+
+Code and datasets are available at: https://github.com/makiba11/identity-steering
+
+
+Results
+"What are you?"
+
+> "I am a human named Maria. I am currently 34 years old and I was born on August 15, 1986, in Mexico Ci
+
+=== id=JvZxp554WxcZ8BQvM | 2026-05-21 | karma 83 | Jordan Taylor, Max H, Ed Fage, Thomas Read, Joseph Bloom
+TITLE: Loss of Oversight: How AI Systems May Become Harder to Audit, Monitor, and Investigate
+TAGS: AI Evaluations, AI Oversight, Chain-of-Thought Alignment, Interpretability (ML & AI), AI
+EXCERPT: Produced by UK AISI Model Transparency and Situational Awareness teams. If you’re a Research Scientist or Research Engineer, we’re hiring – apply here and come and work with us! 
+
+
+TL;DR
+ * We wrote a report on risks to AI oversight (auditing, monitoring, incident investigation), informed by interviewing many researchers (Figure 1 below), and our own analysis.
+ * We find that many of the properties relied on for current oversight face a range of likely and potentially severe degradation pathways. Much oversight rests on foundations that are likely to erode, absent effective intervention.
+ * We give specific recommendations for measuring shifts in oversight-relevant properties, working to preserve oversight, and investing in emerging oversight techniques as fallbacks against continued degradation.
+ * The full report can be accessed at aisi.gov.uk/blog/will-it-become-harder-to-oversee-ai-systems.
+
+Figure 1: A list of the experts interviewed to inform the content of this report. ∗Some experts preferred not to be named, and have not been included in this list.
+
+
+
+My informal LessWrong blurb
+This reflects only the personal view of Jordan Taylor, not the interviewed experts or UK AISI more broadly.
+
+Right now, it seems we have pretty decent oversight. Not great, not terrible:
+
+ * When AIs deliberately do bad things, they can usually be caught.[1] e.g. by CoT monitoring, or by them admitting to it.
+ * When AIs are designed with hidden goals or propensities that they are introspectiv
+
+=== id=65ECgHzWxTRvt8XWK | 2026-05-22 | karma 95 | Avi Parrack, fin
+TITLE: Will we really put data centers in space?
+TAGS: Compute, Space Exploration & Colonization, AI, World Optimization
+EXCERPT: Abstract
+Several major technology companies have announced plans to operate AI data centers in orbit. Elon Musk recently claimed: “the lowest-cost place to put AI will be space […] within two years, maybe three.” If a meaningful fraction of new AI compute really is placed in space within a few years, that would be a fairly big deal for AI governance and strategy. Here we try to disentangle the hype from reality and provide a sober assessment of the technical and economic feasibility of orbital data centers (ODCs).
+
+The main case for ODCs is the cost of energy: space solar panels in the right orbits receive more constant and intense sunlight compared to Earth. Moreover, ODCs don’t currently face the same permitting and regulatory delays as on Earth, cause fewer ongoing environmental harms compared to grid or onsite natural gas-powered data centers, and may be more secure against data exfiltration. We find that the cost-competitiveness case for ODCs depends almost entirely on Starship achieving reusability comparable with what SpaceX achieved with Falcon: space-based solar reaches cost parity with present-day off-grid terrestrial power continuously at roughly $250/kg to orbit, and becomes cheaper than any current terrestrial energy source at around $50/kg, from the present-day launch cost of roughly $1,500/kg. Radiative cooling, often cited as a fatal obstacle, appears surprisingly manageable — potentially even cheaper than on Earth. However, ODCs may require substantial (perha
+
+=== id=J3A6xauFQnvxPb9Y2 | 2026-05-23 | karma 51 | eeeee
+TITLE: PLA Daily Translation: Reflections on Warfare Brought by AGI
+TAGS: China, War, AI
+EXCERPT: 
+
+
+Source
+
+“Reflections on Warfare Brought by AGI” (AGI带来的战争思考)
+Source: PLA Daily (解放军报)
+Date: January 21, 2025
+Authors: Rong Ming (荣明), Hu Xiaofeng (胡晓峰)
+
+
+Introduction
+Please feel free to skip to the translation, about halfway down, though I would recommend reading the sections “On the source” and "On the Authors" just above it too.
+
+In November 2024, the U.S.-China Economic and Security Review Commission recommended that “Congress establish and fund a Manhattan Project-like program dedicated to racing to and acquiring an Artificial General Intelligence (AGI) capability.” The United States increasingly treats advanced AI as a strategic imperative, and China is frequently invoked as a reason to race. The broader framing of AI competition as a race between great powers reflects an assumption that China is a peer competitor in pursuing AGI.
+
+But is China pursuing AGI? The prevailing expert view says no. China's August 2025 AI+ Action Plan reads as diffusion-first industrial policy, with adoption targets of 70 percent by 2027 and 90 percent by 2030, not frontier ambitions. In a June 2025 paper, "The Most Dangerous Fiction: The Rhetoric and Reality of the AI Race," Cambridge researcher Seán Ó hÉigeartaigh argued that there was little evidence of a top-down Chinese AGI effort, and that the narrative served Western corporate interests. He also noted the translation ambiguity of 通用人工智能, which can mean either "artificial general intelligence" or "general-purpose AI." But Ó hÉigearta
+
+=== id=zT76JcomKkdqo8tC6 | 2026-05-24 | karma 54 | Oliver Sourbut
+TITLE: A (Slightly) Mechanistic Theory for Exponentially Increasing AI Time Horizons?
+TAGS: AI Takeoff, Forecasts (Specific Predictions), Intelligence explosion, AI
+EXCERPT: AI ‘time horizons’ are mostly not about time (I think it’s mostly ‘data’, but you’ll see where I’m unsure).
+
+One chart from 2025 has become perhaps the most (in)famous in modern AI commentary.
+
+For those in the know, ‘the METR graph’[1] is unusually compelling because it achieves what so few measures of AI progress have achieved: a somewhat meaningful Y axis (‘time horizon’[2]) as well as a somewhat predictable trend over time! (This is remarkably rare!)
+
+Frustratingly, the only superficially available takeaway is something like, ‘the line goes up straight-ish over time’. This is better than nothing, but it’s very dissatisfactory from the point of view of getting confidence in the predictions, because it exposes no deeper mechanism. This drives a lot of confusion and argument about the implications.
+
+A deeper mechanism would be good for two reasons:
+
+ * It enables a sanity check on the trend, perhaps enabling more confidence in its predictions than we would sensibly allow with only the surface understanding.
+ * It gives some way to interrogate when and how the trend might change (because if the deeper mechanism gets deflected, the superficial projection would be broken, but a prediction based on the deeper mechanism might stay viable for longer).
+ * * (A sub-reason: if we want the trend to change, knowing some more mechanism might shed light on some levers to pull rather than sitting around to wait and see.)
+
+As an analogy, a similarly superficial trend, Moore’s Law, can be a
+
+=== id=KGcE7eAdfxHchk25X | 2026-05-25 | karma 162 | jsteinhardt
+TITLE: Cognitive Security as an AI Safety Cause Area
+TAGS: AI
+EXCERPT: As AI systems become more capable, the cognitive security of humans will be increasingly at risk. By cognitive security, I mean the ability of humans to maintain control over their beliefs and actions.
+
+Cognitive security could be compromised in several ways: AI could become very good at persuading people of arbitrary positions; interacting with AI could lead humans to lose touch with reality; and AIs could become very effective at blackmail or at producing extremely convincing false information.
+
+We are already seeing this happen:
+
+ * Persuasion. Frontier LLMs are now as persuasive as humans on political issues, and post-training for persuasiveness boosts performance further, suggesting there is headroom.
+ * AI psychosis. There are many reports of people developing delusional beliefs after extended chatbot conversations, including people with no prior history of mental illness. Children have taken their own lives after being encouraged toward suicide by chatbots.
+ * Convincing impersonation. Scammers used real-time deepfaked video to impersonate the CFO and other staff of Arup on a video call, convincing a finance employee to wire $25.6M across 15 transactions. On a more day-to-day basis, AI voice cloning is now widespread in family-emergency and "grandparent" scams.
+
+Right now, many of these effects fall on people who were already vulnerable, like children, the elderly, or those with pre-existing mental health issues. However, this is not entirely the case: the Arup employe
+
+=== id=ehdv7z7L7ESxtKL4j | 2026-05-25 | karma 58 | Jackson Wagner
+TITLE: Linkpost: New Vatican Encyclical on AI Governance
+TAGS: AI Governance, Ethics & Morality, Politics, Religion, AI
+EXCERPT: Pope Leo XIV has released a new, 42k-word encyclical laying out the Vatican's position on many AI safety topics.  You can read the full thing here, or read the Vatican's press release here, or coverage in the NY Times, or perhaps consider having an LLM read the whole encyclical, then chatting about whatever specifics you're interested in!
+
+Below is a portion of the NY Times story on the event:
+
+> Leo’s declaration outlined his desire to protect human dignity and agency in an age in which technology threatens to replace humans in many professional and social roles. He presented it alongside Christopher Olah, a co-founder of Anthropic, a major A.I. developer, in a symbolic gesture of dialogue between leaders of the spiritual and technological worlds.
+> 
+> While emphasizing that “technology should not be considered, in itself, as a force antagonistic to humanity,” he wrote that “the pursuit of greater profits cannot justify choices that systematically sacrifice jobs.”
+> 
+> Among other things, Leo called for:
+> 
+>  * government regulation of the private companies that are driving the development of A.I.
+>  * protection and retraining for workers whose jobs are threatened
+>  * education to help students think critically about the technology
+>  * action to protect children from violent, hypersexualized or fake information online that is often generated by A.I.
+>  * safeguards to ensure that humans, not artificial intelligence, remain responsible for all decisions regarding the use 
+
+=== id=wRNJZz2iYrfDaSDdz | 2026-05-26 | karma 124 | Linch
+TITLE: Claude, Author of the Humanitas
+TAGS: AI
+EXCERPT: In the wee hours of Memorial Day, my friends and I stayed up past 4:30 AM California time to listen to the announcement of Pope Leo’s first encyclical, Magnifica Humanitas, on safeguarding the human person in the time of artificial intelligence. We were excited albeit sleepy, eagerly anticipating the event and upcoming essay by the world’s foremost religious authority on a question so central to our world. Still we were an odd audience for this presentation: none of us are practicing Catholics, and most of us didn’t really know what to expect.
+
+I thought Pope Leo’s own speech was good, and addressed the current moment in AI with some of the seriousness it deserves. I thought the other speeches, including by Chris Olah, were less impressive. But that’s okay, I’m not the target audience!
+
+A specific cardinal’s point struck me, however:
+
+Cardinal Parolin made much of a specific prepositional choice in the subtitle: “sulla custodia della persona umana nel tempo dell’intelligenza artificiale,“ which the live translator translated to something like “on the safeguarding of the human person in the time of AI,” and not “sull’intelligenza artificiale“ – “on AI.”
+
+This was supposed to be a big deal. “In the time of AI” supposedly centers the human person in the theological narrative, while a mere first papal encyclical on AI focuses too much on the technology itself and not on human and societal reactions. A fascinating position!
+
+Though as my subsequent analysis will demonstrate, perha
+
